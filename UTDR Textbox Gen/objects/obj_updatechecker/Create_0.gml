@@ -2,7 +2,7 @@
 ///@desc Update Check
 //if ( live_call() ) { return live_result; }
 TweenScript(SYSTEMUI, 0, 15, function() { intent_saf_request(SAF_REQUEST_GET_DIRECTORY); });
-if ( !global.pref.checkupdates ) { instance_destroy(); exit; }
+TweenScript(SYSTEMUI, 0, 2, function() { if ( !global.pref.checkupdates ) { instance_destroy(); exit; } });
 updateversion = {}; //The new update's info
 text = "[c_yellow]Checking for update... [spr_effects_icons,14]";
 text_y = 15;
