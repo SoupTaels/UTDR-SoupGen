@@ -2,7 +2,7 @@
 var get_ = async_load;
 switch ( get_[? "type"] ) {
 	case "saf_request_search_directory_accepted": {
-		android_path = async_load[? "path"];
+		android_path = get_[? "path"];
 		soup_store("android", $"{android_path}{PATHSEP}", , true);
 		var oLog = file_text_open_write($"{soup_checkout("android", false, true)}latest_soupy_run.soupy");
 		file_text_write_string(oLog, global.outputLog);
@@ -12,7 +12,7 @@ switch ( get_[? "type"] ) {
 	} break;
 	
 	case "saf_request_get_directory": {
-		android_path = async_load[? "path"];
+		android_path = get_[? "path"];
 		if ( android_path == "" ) { android_path = intent_saf_request(SAF_REQUEST_SEARCH_DIRECTORY); exit; }
 		soup_store("android", $"{android_path}{PATHSEP}", , true);
 		ui_loadprefs();
@@ -30,8 +30,8 @@ switch ( get_[? "type"] ) {
 	} break;
 	
 	case "MobileUtils_Gallery_Open": {
-		var result = async_load[? "path"], type = soup_checkout("asynctype", false, true), split_ = string_split(result, "/"), fname = split_[array_length(split_) - 1];
-		soup_store("path", result);
+		var result = get_[? "path"], type = soup_checkout("asynctype", false, true), fname = get_[? "filename"];
+		soup_store("path", result); soup_store("fname", fname);
 		switch ( type ) {
 			case "reference": {
 				MobileUtils_Vibrate_Shot(150); MobileUtils_Image_Resize(result, 640, 480);
@@ -44,15 +44,9 @@ switch ( get_[? "type"] ) {
 				MobileUtils_Vibrate_Shot(50);
 				if ( type == "face" && MobileUtils_Image_Height(result) > 70 && MobileUtils_Image_Width(result) > 70 ) { MobileUtils_Image_Resize(result, 70, 70); }
 				
-				var arr_ = [
-					new LuiText({ value: "What will be the name of this sprite?", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
-					new LuiText({ value: "Include \"_strip#\" if the image contains multiple frames.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
-					new LuiText({ value: "The name can't be blank, or be a duplicate of another sprite.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
-					new LuiText({ value: "No need to include file extensions(.png, .jpg, etc.).", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
-					new LuiInput({ value: "", placeholder: fname, height: 45, offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function (e_) { soup_store("newname", e_); }),
-				];
 				var func_ = function() {
-					var name_ = soup_checkout("newname").get();
+					var fname = soup_checkout("fname");
+					var name_ = ( fname == "gallery.jpg" ) ? soup_checkout("newname").get() : fname;
 					if ( string_lettersdigits(string_trim(name_)) == "" ) { soupy_message("The name can't be blank.", , , , , snd_error, fnt_abaddon, , true); MobileUtils_Vibrate_Shot(50); exit; }
 					else if ( get_icon(name_) != -1 ) { soupy_message("A icon sprite with this alias already exists.", , , , , snd_error, fnt_abaddon, , true); MobileUtils_Vibrate_Shot(50); exit; }
 					else { 
@@ -88,7 +82,19 @@ switch ( get_[? "type"] ) {
 						}
 					}
 				}
-				soupy_popup(arr_, func_, "Rename", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
+				
+				if ( fname == "gallery.jpg" ) {
+					var arr_ = [
+						new LuiText({ value: "What will be the name of this sprite?", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
+						new LuiText({ value: "Include \"_strip#\" if the image contains multiple frames.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
+						new LuiText({ value: "No other numbers in the filename besides strip number.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
+						new LuiText({ value: "The name can't be blank, or be a duplicate of another sprite.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
+						new LuiText({ value: "No need to include file extensions(.png, .jpg, etc.).", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, }),
+						new LuiInput({ value: "", placeholder: fname, height: 45, offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function (e_) { soup_store("newname", e_); }),
+					];
+					soupy_popup(arr_, func_, "Rename", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
+				}
+				else { func_(); }
 			} break;
 		}
 	} break;
