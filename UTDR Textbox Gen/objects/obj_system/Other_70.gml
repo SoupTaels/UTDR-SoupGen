@@ -54,7 +54,7 @@ switch ( get_[? "type"] ) {
 						switch ( type ) {
 							case "face": {
 								if ( get_face(name_) != -1 ) { soupy_message("A face sprite with this alias already exists.", , , , , snd_error, fnt_abaddon, , true); MobileUtils_Vibrate_Shot(50); exit; }
-								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"), result = external_ensure(myname_, $"{name_}.png", soup_checkout("path"), , false);
+								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"), result = external_ensure(myname_, ( fname == "gallery.jpg" ) ? $"{name_}.png" : name_, soup_checkout("path"), , false);
 								var element_ = soup_checkout("element_", , true);
 								if ( element_.getData("clear_") ) { FACE_CURRENT = result; FACE_ORIGINAL = FACE_CURRENT; } 
 								soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(myname_); 
@@ -64,14 +64,14 @@ switch ( get_[? "type"] ) {
 							
 							case "border": {
 								if ( get_border(name_) != -1 ) { soupy_message("A border sprite with this alias already exists.", , , , , snd_error, fnt_abaddon, , true); MobileUtils_Vibrate_Shot(50); exit; }
-								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, $"{name_}.png", soup_checkout("path"), 1, false); 
+								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, ( fname == "gallery.jpg" ) ? $"{name_}.png" : name_, soup_checkout("path"), 1, false); 
 								SYSTEMUI.spr_bord = result; SYSTEMUI.bord_name = myname_; SYSTEMUI.bord_prev = SYSTEMUI.spr_bord;
 								sfx_play(snd_updated); soup_checkout("datainputB", false, true).set(myname_); soup_checkout("dataimageB", false, true).set(result); soup_checkout("datafunc", false)();
 							} break;
 							
 							case "font": {
 								if ( get_font(name_) != -1 ) { soupy_message("A font sprite with this alias already exists.", , , , , snd_error, fnt_abaddon, , true); MobileUtils_Vibrate_Shot(50); exit; }
-								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, $"{name_}.png", soup_checkout("path"), 2, false); 
+								var myname_ = string_exclude(string_replace(string_replace(name_, "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, ( fname == "gallery.jpg" ) ? $"{name_}.png" : name_, soup_checkout("path"), 2, false); 
 								if ( result == -1 || result == "" ) { result = "fnt_determination"; myname_ = result; }
 								var element_ = soup_checkout("element_", , true);
 								var custom_ = element_.getData("customs");

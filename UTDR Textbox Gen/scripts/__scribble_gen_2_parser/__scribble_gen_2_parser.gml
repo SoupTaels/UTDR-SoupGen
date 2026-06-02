@@ -252,7 +252,7 @@ function __scribble_gen_2_parser()
             
             if (_in_tag)
             {
-                if (_glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE) || (_glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE_ALT)_in_tag = false;
+                if ( _glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE ) _in_tag = false;
                 continue;
             }
             
@@ -386,7 +386,7 @@ function __scribble_gen_2_parser()
         {
             #region Command tag handling
             
-            if (_glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE) || (_glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE_ALT)//If we've hit a command tag close character (usually ])
+            if ( _glyph_ord == SCRIBBLE_COMMAND_TAG_CLOSE ) //If we've hit a command tag close character (usually ])
             {
                 _tag_open_count--;
                 
