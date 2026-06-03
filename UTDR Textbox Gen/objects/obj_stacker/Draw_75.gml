@@ -3,7 +3,7 @@ var soupstack_count = array_length(soupstack_spr);
 if ( soupstack_count == 0 ) { instance_destroy(); exit; } //Cancel early if there's nothing to draw
 
 var soupstack_i = 0, sprH = sprite_get_height(soupstack_spr[0]) + soupstack_yoff, sprW = sprite_get_width(soupstack_spr[0]) + soupstack_xoff;
-var soupstack_width = sprW + ( soupstack_count * ( ( soupstack_i + soupstack_xoff ) * 2 ) ), soupstack_height = ( sprH * soupstack_scale ) * soupstack_count; //Calculate the surface size
+var soupstack_width = sprW + ( soupstack_count * ( ( soupstack_i + soupstack_xoff ) * 2 ) ), soupstack_height = ( sprH + soupstack_yoff ) * soupstack_count; //Calculate the surface size
 
 if ( !surface_exists(soupstack_surf) ) { soupstack_surf = surface_create(sprW, soupstack_height); } else { 
 	try { surface_resize(soupstack_surf, soupstack_width, soupstack_height); }
