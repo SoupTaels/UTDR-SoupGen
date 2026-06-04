@@ -22,6 +22,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				var get_ = pref_[$ "openresult"]; global.pref.openresult = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "bg3d"]; global.pref.bg3d = !is_undefined(get_) ? get_ : ( is_android() ? false : true );
 				var get_ = pref_[$ "showfps"]; global.pref.showfps = !is_undefined(get_) ? get_ : false;
+				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : false;
 			}
 		}
 	}
@@ -429,6 +430,9 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 	ui_mainfont = fnt_speech;
 	ui_refclr = $15101c; //Reference image color
 	ui_viewing = false; //Whether we're looking at the reference image
+	ui_finished = false; //Whether we finished recording the GIF
+	ui_finished_y = -100; //UI animation
+	ui_preview = false; //Whether we're previewing animated dialogue
 	
 	#region Main Menu Buttons
 		var i = 0, spr_ = spr_border_octagon, x_ = 320, y_ = 12, clr_ = ui_accentcolor, padd_ = 14;
@@ -1006,6 +1010,11 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
+				new LuiText({ value: "Confirm Export:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Preview the animated dialogue\nbefore exporting on finish?\nOnly applies to [c_cyan]animated exports[/].", true, , true),
+				new LuiToggleSwitch({ value: global.pref.confirmexport, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "confirmexport").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.save_pref(); }),
+			]),
+			
+			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Show Result:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Show your generated dialogue\nonce export is done?", true, , true),
 				new LuiToggleSwitch({ value: global.pref.openresult, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "openresult").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.save_pref(); }),
 			]),
@@ -1085,8 +1094,9 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				
 		///@desc Toggle between different exporting types and export the dialogue
 		ui_export = function(type_ = 0, fmax_ = 180, delay_ = 60, quant_ = 1, xoff_ = 0, yoff_ = 0) {
-			soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; 
+			if ( !ui_preview && !ui_finished ) { soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; }
 			if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_equip);
+
 					
 			switch ( type_ ) {
 				case 0: { screenshot = true; screenshot_stacked = false; } break; //Take single screenshot, no typewriter

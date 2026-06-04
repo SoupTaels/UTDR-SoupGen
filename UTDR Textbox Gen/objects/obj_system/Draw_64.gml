@@ -265,14 +265,44 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 #region Generating Text
 	if ( !ui_visible ) { 
 		if ( !ui_viewing ) {
-			var gen_ = scribble("[rainbow][wave]Generating...!").scale(4).align(fa_center, fa_middle).draw(320, 210); 
-			draw_format("center", "center", fnt_determination, c_yellow);
-			if ( record.enabled && record.type == 0 ) {
-				draw_text(320, 260, $"(Page: {dial_text_page} | Timer: {record.frames}/ {record.framesmax})"); //Show current page and timer
-			}
-			else { draw_text_transformed(320, 260, $"(Page: {dial_text_page + 1}/ {dial_text_page_c})", 2, 2, 0); } //Show current page and total page count
+			if ( !ui_finished ) { //Generating Text
+				var gen_ = scribble(ui_preview ? "[wheel][c_gray]Previewing": "[rainbow][wave]Generating...!").scale(4).align(fa_center, fa_middle).draw(320, 210); 
+				draw_format("center", "center", fnt_determination, c_yellow);
+				if ( record.enabled && record.type == 0 ) {
+					draw_text(320, 260, $"(Page: {dial_text_page} | Timer: {record.frames}/ {record.framesmax})"); //Show current page and timer
+				}
+				else { draw_text_transformed(320, 260, $"(Page: {dial_text_page + 1}/ {dial_text_page_c})", 2, 2, 0); } //Show current page and total page count
 		
-			draw_format("right", , fnt_determination); draw_text(635, 5, $"(Right-Click or Double-press ESC to cancel)"); //Cancel text
+				draw_format("right", , fnt_determination); draw_text(635, 5, $"(Right-Click or Double-press ESC to cancel)"); //Cancel text
+			}
+			else { //Preview Export Options
+				var finish_ = scribble("[region,export]Soupy Export!![/region]\n[region,preview]Preview Again[/region]\n[region,cancel]Cancel Export.[/region]")
+				.scale(2).align(fa_center, fa_middle).line_height(50).allow_glyph_data_getter().padding(20, 10, 20, 10);
+				
+				var detect_ = finish_.region_detect(320, ui_finished_y, mouse_x_gui, mouse_y_gui);
+				if ( detect_ != undefined && is_undefined(soup_checkout("hover", false)) ) { soup_store("hover"); sfx_play(snd_sel_switch); finish_.region_set_active(detect_, c_yellow, 1); }
+				else if ( detect_ == undefined ) { finish_.region_set_active(undefined, c_yellow, 0); soup_checkout("hover"); }
+				
+				if ( mouse_pressed ) {
+					switch ( detect_ ) {
+						case "export": {
+							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)();
+						} break;
+						case "preview": {
+							ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); 
+						} break;
+						case "cancel": {
+							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); 
+						} break;
+					}
+					sfx_play(snd_select);
+				}
+
+				var bbox_ = finish_.get_bbox(320, ui_finished_y);
+				draw_sprite_stretched(spr_border_undertale_outlined, 0, bbox_.left, bbox_.top, bbox_.width, bbox_.height);
+				
+				finish_.draw(320, ui_finished_y);
+			}
 		}
 		else { 
 			if ( blink() ) { var y_ = ( global.pref.sizematters && global.pref.sizematterstop ) ? 430 : 0; draw_sprite_stretched(spr_border_undertale_outlined, 0, 470, 5 + y_, 165, 35); draw_format("right", , fnt_determination); draw_text(625, 15 + y_, $"(Click to go back)"); }

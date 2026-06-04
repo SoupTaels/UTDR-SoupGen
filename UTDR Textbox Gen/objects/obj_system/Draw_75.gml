@@ -66,9 +66,10 @@ if ( screenshot || record.enabled ) {
 			} }
 			else { soup_checkout("export dialogue"); soupy_message("The export operation was canceled.", , 350, , , snd_cancel, , function(){ TweenScript(SYSTEMUI, 0, 2, function(){ soup_store_clear(); }); }); if ( record.enabled ) { record.id_ = gif_save(record.id_, $"{directory_get_temporary_path()}soupytemp.gif"); file_delete($"{directory_get_temporary_path()}soupytemp.gif"); } }
 			
+			soup_checkout("previewcancel", , true); soup_checkout("lastpage", , true);
 			surface_free(screenshot_surf); screenshot_surf = -1; delete screenshot_surf; if ( buffer_exists(record.id_) ) { buffer_delete(record.id_); delete record.id_; }
 			with ( record ) { frames = 0; framesmax = 0; enabled = false; id_ = -1; }
-			with ( SYSTEMUI ) { typist_reset(); file_newname = ""; screenshot = false; screenshot_stacked = false; dial_text_gif = false; dial_wrap_count = 1; spr_bord = bord_prev; dial_text_page = 0; bord_box_visible = true; ui_tab = soup_checkout("tablast", , true); ui_visible = true; ui_reset(); }
+			with ( SYSTEMUI ) { ui_finished = false; ui_preview = false; ui_finished_y = -100; typist_reset(); file_newname = ""; screenshot = false; screenshot_stacked = false; dial_text_gif = false; dial_wrap_count = 1; spr_bord = bord_prev; dial_text_page = 0; bord_box_visible = true; ui_tab = soup_checkout("tablast", , true); ui_visible = true; ui_reset(); }
 			exit;
 		});
 		soup_store("finishfunc", finish_func, true, true);
@@ -76,7 +77,7 @@ if ( screenshot || record.enabled ) {
 	
 	#region Cancel Early
 		if ( soup_store_undefined("doublepress") ) { soup_store("doublepress", 0, , true); }
-		if ( keyboard_check_pressed(vk_escape) || mouse_pressed_right ) {
+		if ( keyboard_check_pressed(vk_escape) || mouse_pressed_right || !is_undefined(soup_checkout("previewcancel", false, true)) ) {
 			if ( soup_checkout("doublepress", false, true) < 1 ) { global.soupstore_global[$ "doublepress"]++; soupy_alarm_set("doublepress", "timer", 15); sfx_play(snd_bump); } else { if ( instance_exists(obj_stacker) ) { obj_stacker.abort = true; instance_destroy(obj_stacker); } finish_func(, , true); soup_store("doublepress", 0, , true); exit; }
 		}
 		soupy_alarm("doublepress", 15);
@@ -97,11 +98,11 @@ if ( screenshot || record.enabled ) {
 		}
 	}
 	else if ( record.enabled ) {
-		var record_func = method({ record, screenshot_surf, screenshot_back, x_, y_, w_, h_, typist }, function(init_ = false) { if ( init_ ) { record.id_ = gif_open(w_, h_, screenshot_back); typist.reset(); } else { var debug = gif_add_surface(record.id_, screenshot_surf, 2, x_, y_, record.quant); } });
+		var record_func = method({ record, screenshot_surf, screenshot_back, x_, y_, w_, h_, typist, ui_finished, ui_preview }, function(init_ = false) { if ( init_ ) { record.id_ = gif_open(w_, h_, screenshot_back); typist.reset(); } else { if ( !ui_finished && !ui_preview ) { var debug = gif_add_surface(record.id_, screenshot_surf, 2, x_, y_, record.quant); } } });
 		if ( record.type == 0 ) { //No typing animation
 			if ( record.frames == 0 ) { record_func(true); record.frames++; sfx_play(snd_equip); exit; } //Enable GIF recording
 			else { 
-				if ( record.frames < record.framesmax ) { record_func(); record.frames++; exit; } else { finish_func(); exit; } //Add frames to the GIF until we reach our target time
+				if ( record.frames < record.framesmax ) { record_func(); record.frames++; exit; } else {  if ( !global.pref.confirmexport ) { finish_func(); } else {  if ( !ui_finished ) { ui_finished = true; ui_preview = false; sfx_play(snd_dimbox); TweenFire("?", SYSTEMUI, "$30", "~oback", "ui_finished_y>", 190); } } exit; } //Add frames to the GIF until we reach our target time
 			}
 		}
 		else { //Typing animation
@@ -110,7 +111,7 @@ if ( screenshot || record.enabled ) {
 			if ( state_ < 1 || ( state_ >= 1 && record.frames < record.delay ) ) { record_func(); } //If we're still typing, keep recording
 			if ( state_ >= 1 ) { //If we stopped typing
 				if ( record.frames < record.delay ) { record.frames++; exit; } //Delay before moving on
-				else { if ( dial_text_page < dial_text_page_c - 1 ) { record.frames = 0; point_visible = false; typist_reset(); dial_text_page++; sfx_play(snd_equip); exit; } else { finish_func(); } } //Either go to the next page or stop recording
+				else { if ( dial_text_page < dial_text_page_c - 1 ) { record.frames = 0; point_visible = false; typist_reset(); dial_text_page++; sfx_play(snd_equip); exit; } else { if ( !global.pref.confirmexport ) { finish_func(); } else { if ( !ui_finished ) { ui_finished = true; ui_preview = false; sfx_play(snd_dimbox); TweenFire("?", SYSTEMUI, "$30", "~oback", "ui_finished_y>", 190); } } } } //Either go to the next page or stop recording
 			}
 		}
 	}

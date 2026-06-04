@@ -16,6 +16,7 @@ pref = {
 	randomclr: true, //Whether the UI should randomize its color on startup
 	bg3d: is_android() ? false : true, //Whether to enable the 3D background
 	showfps: false, //Whether to show an FPS counter
+	confirmexport: false, //Whether to press confirm to export once dialogue is finished
 }
 #region Add External Faces
 	faces_dict = {};
