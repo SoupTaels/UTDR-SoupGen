@@ -1145,7 +1145,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 #endregion
 
 #region First Time
-	var txt_ = $"Ayy! Welcome to [wheel][c_gold]UTDR SoupGen![/]|I see that it's your first time booting this up.|I would recommend [c_yellow]reading the|[c_yellow]help guide before you continue[/].|SoupGen got a [slant]lot[/] of power to it compared|to your average UTDR textbox generator,|so do familarize yourself with what all you can do!| |With that being said, [wave][c_lime]I hope you enjoy|this beta release!| |Once you're done, just press ESC for export options!{is_android() ? "| |You're using the Android version!|SoupGen was not optimized for phones,|but plenty of work has gone into making the experience similar|to PCs. You may still struggle in some places tho, sorry!" : ""}";
+	var txt_ = $"Ayy! Welcome to [wheel][c_gold]UTDR SoupGen![/]|I see that it's your first time booting this up.|I would recommend [c_yellow]reading the|[c_yellow]help guide before you continue[/].|SoupGen got a [slant]lot[/] of power to it compared|to your average UTDR textbox generator,|so do familarize yourself with what all you can do!| |With that being said, [wave][c_lime]I hope you enjoy|this release!| |Once you're done, just press ESC for export options!{is_android() ? "| |You're using the Android version!|SoupGen was not optimized for phones,|but plenty of work has gone into making the experience similar|to PCs. You may still struggle in some places tho, sorry!" : ""}";
 	
 	save_pref = function () {
 		var data_ = json_stringify(global.pref);
