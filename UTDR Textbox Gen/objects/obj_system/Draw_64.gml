@@ -289,7 +289,7 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)();
 						} break;
 						case "preview": {
-							ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); 
+							typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); 
 						} break;
 						case "cancel": {
 							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); 

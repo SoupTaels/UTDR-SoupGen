@@ -156,7 +156,7 @@
 										if ( string_lettersdigits(dial_text) == "" ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
 										quant_ = clamp(quant_, 0, 3);
 						
-										with ( SYSTEMUI ) { dial_text_page = real(page_ - 1); soup_store("lastpage", dial_text_page, , true); ui_export(typewrite ? 1 : 2, timer_, delay_, quant_); bord_box_visible = vis_; bord_out = out_; }
+										with ( SYSTEMUI ) { dial_text_page = real(page_ - 1); ui_export(typewrite ? 1 : 2, timer_, delay_, quant_); bord_box_visible = vis_; bord_out = out_; }
 										mainfunc(); maincan.destroy();
 									}),
 								);

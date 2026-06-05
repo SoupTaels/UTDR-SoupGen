@@ -1094,7 +1094,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				
 		///@desc Toggle between different exporting types and export the dialogue
 		ui_export = function(type_ = 0, fmax_ = 180, delay_ = 60, quant_ = 1, xoff_ = 0, yoff_ = 0) {
-			if ( !ui_preview && !ui_finished ) { soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; }
+			if ( !ui_preview && !ui_finished ) { soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; soup_store("lastpage", dial_text_page, , true); }
 			if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_equip);
 
 					
