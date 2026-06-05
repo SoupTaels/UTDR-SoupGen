@@ -30,6 +30,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 					soupy_lui.style.color_secondary = ui_accentcolor;
 					soupy_lui.updateMainUiSurface();
 					soup_checkout("datamainuicolor", false, true).setColor(ui_accentcolor);
+					soup_checkout("datagifcolor", false, true).setColor(screenshot_back);
 					var i = 0, count_ = array_length(butt);
 					repeat ( count_ ) { 
 						butt[i].data.color = ui_accentcolor; if ( butt[i].data.color_butt != c_yellow ) { butt[i].data.color_butt = ui_accentcolor; }
