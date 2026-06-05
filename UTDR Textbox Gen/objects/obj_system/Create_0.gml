@@ -23,6 +23,18 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				var get_ = pref_[$ "bg3d"]; global.pref.bg3d = !is_undefined(get_) ? get_ : ( is_android() ? false : true );
 				var get_ = pref_[$ "showfps"]; global.pref.showfps = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : false;
+				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
+				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : false; dial_point_auto = global.pref.autopoint;
+				var get_ = pref_[$ "themeclr"]; global.pref.themeclr = !is_undefined(get_) ? get_ : c_orange; if ( !global.pref.randomclr && is_android() ) { 
+					ui_accentcolor = global.pref.themeclr;
+					soupy_lui.style.color_secondary = ui_accentcolor;
+					soupy_lui.updateMainUiSurface();
+					soup_checkout("datamainuicolor", false, true).setColor(ui_accentcolor);
+					var i = 0, count_ = array_length(butt);
+					repeat ( count_ ) { 
+						butt[i].data.color = ui_accentcolor; if ( butt[i].data.color_butt != c_yellow ) { butt[i].data.color_butt = ui_accentcolor; }
+					i++; }
+				}
 			}
 		}
 	}
@@ -83,7 +95,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 	dial_updatet = 0; //Dialogue update timer
 	dial_updatet_max = 45; //Dialogue update timer delay
 	dial_text_outline = c_black; //Dialogue Outline Color
-	dial_point_auto = false; //Whether to automatically add points
+	dial_point_auto = global.pref.autopoint; //Whether to automatically add points
 	dial_point_chr = "*"; //Dialogue Point Character
 	dial_point_clr = c_white; dial_point_clr_anim = c_white; dial_point_clr_anim_alpha = 0; //Dialogue Point Clr and flash color
 	dial_auto_wrap = true; //Whether to automatically wrap dialogue to new lines
@@ -156,7 +168,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 			with ( obj_mini ) { if ( page == other.dial_text_page ) { active = true; TweenFire("$13", $"~{smooth ? "oquad" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
-		typist_reset = function () { dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
+		typist_reset = function () { dial_face_xoff_static = dial_face_xoff_static_orig; dial_face_yoff_static = dial_face_yoff_static_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
 			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 1, };
@@ -208,6 +220,14 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 					if ( icon_ != -1 ) { SYSTEMUI.dial_indicator = icon_; SYSTEMUI.dial_indicator_index = index_; SYSTEMUI.dial_indicator_spd = spd_; SYSTEMUI.dial_indicator_anim = anim_; exit; } 
 				}
 			});
+			
+			var func_ = function(_, param) { //Change the positioning of the dialogue portrait
+				var xoff = ( array_length(param) > 0 && real_ext(param[0]) != "" ? real_ext(param[0]) : 0 );
+				var yoff = ( array_length(param) > 1 && real_ext(param[1]) != "" ? real_ext(param[1]) : 0 );
+				dial_face_xoff_static = xoff; dial_face_yoff_static = yoff;
+			}
+			scribble_typists_add_event("offset_portrait", func_); scribble_typists_add_event("offset_p", func_); scribble_typists_add_event("offset_face", func_);
+			
 			var func_ = function(_, param) { var value_ = real_ext(param[0]); bord_spd = value_ == "" ? 0 : value_; } 
 			scribble_typists_add_event("border_speed", func_); scribble_typists_add_event("border_spd", func_); //Change the animation speed of borders
 			scribble_typists_add_event("finish", function(_, param) { typist.skip(); }); //Finish all the text immediately
@@ -406,6 +426,8 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 	dial_face_angle = 0; //Dialogue Face Rotation
 	dial_face_alpha = 1; //Dialogue Face Alpha
 	dial_face_xoff = 0; dial_face_yoff = 0; //Dialogue Face X & Y offset, for animation
+	dial_face_xoff_static = 0; dial_face_yoff_static = 0; //Dialogue Face X & Y offset not for animation
+	dial_face_xoff_static_orig = 0; dial_face_yoff_static_orig = 0;
 	dial_face_anim = 2; //How many letters should pass before animating the face?
 	
 	dial_face_alpha_orig = dial_face_alpha;  //Original alpha to revert back to
@@ -414,12 +436,12 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 
 #region Engine UI
 	fader = 1; TweenFire("$10", "+10", "fader>", 0); //Black overlay
-	ui_accentcolor = global.pref.randomclr ? make_color_hsv(irandom(255), irandom_range(150, 230), 255) : c_orange;
+	ui_accentcolor = global.pref.randomclr ? make_color_hsv(irandom(255), irandom_range(150, 230), 255) : global.pref.themeclr;
 	ui_tab = 0; //Current Tab (0 - Dialogue, 1 - Face, 2 - Border, 3 - About)
 	screenshot = false; //Screenshot task
 	screenshot_stacked = false; //Whether dialogue exports are stacked
 	screenshot_surf = -1; //Screenshot surface
-	screenshot_back = c_lime; //Color for GIF background clearing
+	screenshot_back = global.pref.gifbgclr; //Color for GIF background clearing
 	record = { enabled: false, type: 0, frames: 0, framesmax: 0, id_: -1, quant: 1, delay: 60, }; //Whether to record, the type of recording(0 - static, 1 - wait for dialogue to finish), and how long to record for
 	ui_visible = true; //Whether the UI should be visible
 	ui_effoff = 0; //Effects array offset 
@@ -597,6 +619,20 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 					new LuiText({ value: "Opacity:", width: 85, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the alpha of every dialogue portrait.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[effect,fade,#,frames]", true, , true),
 					new LuiSlider({ value: dial_face_alpha, min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 1, rounding: false, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_face_alpha); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 						var value_ = real(e_.get()); SYSTEMUI.dial_face_alpha = value_; SYSTEMUI.dial_face_alpha_orig = SYSTEMUI.dial_face_alpha; soup_checkout("dataimage", false, true).angle = value_;
+					}),
+				]),
+				
+				new LuiRow().setFlexGrow(1).centerContent().addContent([ 
+					new LuiText({ value: "X Off:", width: 65, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the X position for\nevery dialogue portrait.", true, , true),
+					new LuiInput({ value: dial_face_xoff_static, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).bindVariable(self, "dial_face_xoff_static").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+						var get_ = e_.get(), value_ = real_ext(get_ == "" ? 0 : get_), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_face_xoff_static = index_; SYSTEMUI.dial_face_xoff_static_orig = index_;
+					}),
+				]),
+				
+				new LuiRow().setFlexGrow(1).centerContent().addContent([ 
+					new LuiText({ value: "Y Off:", width: 65, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the Y position for\nevery dialogue portrait.", true, , true),
+					new LuiInput({ value: dial_face_yoff_static, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).bindVariable(self, "dial_face_yoff_static").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+						var get_ = e_.get(), value_ = real_ext(get_ == "" ? 0 : get_), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_face_yoff_static = index_; SYSTEMUI.dial_face_yoff_static_orig = index_;
 					}),
 				]),
 					
@@ -814,7 +850,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Auto Asterisk:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add asterisks\nat the start of text.\nTurning this off means [c_yellow]you'll have\nto manually add asterisks yourself.", true, , true),
-				new LuiToggleSwitch({ value: dial_point_auto, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_point_auto"),
+				new LuiToggleSwitch({ value: dial_point_auto, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_point_auto").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { global.pref.autopoint = e_.get(); SYSTEMUI.save_pref(); }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
@@ -972,7 +1008,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				new LuiText({ value: "GIF BG Color:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the [c_lime]green screen[/] for GIFs.\nGIFs don't support transparency, so this is needed.", true, , true),
 				new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_gifcolor),
 				new LuiImage({ value: spr_pixel, maintain_aspect: false, color: screenshot_back }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datagifcolor", e_, , true); }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
-				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.screenshot_back = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_lime ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_lime); SYSTEMUI.screenshot_back = c_lime; sfx_play(snd_hurtpowerful); }),
+				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.screenshot_back = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); global.pref.gifbgclr = screenshot_back; save_pref(); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_lime ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_lime); SYSTEMUI.screenshot_back = c_lime; sfx_play(snd_hurtpowerful); }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
@@ -1029,13 +1065,56 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				new LuiToggleSwitch({ value: global.pref.killaudio, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "killaudio").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.save_pref(); }),
 			]),
 			
-			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "Random Theme:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("[wave][rainbow]Let's have a little fun!\n[/]Randomizes the UI theme on startup.", true, , true),
-				new LuiToggleSwitch({ value: global.pref.randomclr, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "randomclr").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.save_pref(); }),
+			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Choosing a color
+				new LuiText({ value: "UI Color:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the UI.\nDisables [c_yellow]Random Theme[/].", true, , true),
+				new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_uicolor),
+				new LuiImage({ value: spr_pixel, maintain_aspect: false, color: ui_accentcolor }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datamainuicolor", e_, , true); }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
+				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+					e_.set(spr_pixel); 
+					global.pref.randomclr = false; 
+					SYSTEMUI.ui_accentcolor = e_.color_blend; 
+					global.pref.themeclr = SYSTEMUI.ui_accentcolor;
+					SYSTEMUI.soupy_lui.style.color_secondary = SYSTEMUI.ui_accentcolor;
+					SYSTEMUI.soupy_lui.updateMainUiSurface();
+					var i = 0, count_ = array_length(SYSTEMUI.butt);
+					repeat ( count_ ) { 
+						SYSTEMUI.butt[i].data.color = SYSTEMUI.ui_accentcolor; if ( SYSTEMUI.butt[i].data.color_butt != c_yellow ) { SYSTEMUI.butt[i].data.color_butt = SYSTEMUI.ui_accentcolor; }
+					i++; }
+					audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); SYSTEMUI.save_pref(); 
+				}).addEvent(LUI_EV_CLICK_R, function(e_) { 
+					if ( e_.color_blend == c_orange ) { exit; } 
+					e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); 
+					e_.setColor(c_orange); 
+					SYSTEMUI.ui_accentcolor = c_orange; sfx_play(snd_hurtpowerful);
+					global.pref.randomclr = false; 
+					SYSTEMUI.soupy_lui.style.color_secondary = SYSTEMUI.ui_accentcolor;
+					SYSTEMUI.soupy_lui.updateMainUiSurface();
+					var i = 0, count_ = array_length(butt);
+					repeat ( count_ ) { 
+						butt[i].data.color = ui_accentcolor; if ( butt[i].data.color_butt != c_yellow ) { butt[i].data.color_butt = ui_accentcolor; }
+					i++; }
+					global.pref.themeclr = SYSTEMUI.ui_accentcolor; SYSTEMUI.save_pref(); 
+				}),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "3D BG:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Enable the 3D background?", true, , true),
+				new LuiText({ value: "Random Theme:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("[wave][rainbow]Let's have a little fun!\n[/]Randomizes the UI theme on startup.\nYou can also randomize the color by\njust repeatedly toggling this switch.", true, , true),
+				new LuiToggleSwitch({ value: global.pref.randomclr, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "randomclr").addEvent(LUI_EV_VALUE_UPDATE, function(e_) {
+					ui_accentcolor = global.pref.randomclr ? make_color_hsv(irandom(255), irandom_range(150, 230), 255) : global.pref.themeclr;
+					global.pref.themeclr = ui_accentcolor;
+					soupy_lui.style.color_secondary = ui_accentcolor;
+					soupy_lui.updateMainUiSurface();
+					soup_checkout("datamainuicolor", false, true).setColor(ui_accentcolor);
+					var i = 0, count_ = array_length(butt);
+					repeat ( count_ ) { 
+						butt[i].data.color = ui_accentcolor; if ( butt[i].data.color_butt != c_yellow ) { butt[i].data.color_butt = ui_accentcolor; }
+					i++; }
+					save_pref();
+				}),
+			]),
+			
+			new LuiRow().setFlexGrow(1).centerContent().addContent([
+				new LuiText({ value: "3D BG:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Enable the 3D background?\nMight cause some performance\nissues on some devices.", true, , true),
 				new LuiToggleSwitch({ value: global.pref.bg3d, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "bg3d").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.save_pref(); }),
 			]),
 			
@@ -1140,18 +1219,20 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 #region Error Handling
 	errname = $"{directory_get_temporary_path()}error_log.soupy";
 
-	exception_unhandled_handler(function(err_) {
-		var errlog = $"Error: {err_.longMessage}\nStack Trace: {err_.stacktrace}";
-		show_debug_message($"--------------------------------------------------------------\nAn error has occured: {errlog}\n--------------------------------------------------------------\n\n");
+	if ( !is_android() ) {
+		exception_unhandled_handler(function(err_) {
+			var errlog = $"Error: {err_.longMessage}\nStack Trace: {err_.stacktrace}";
+			show_debug_message($"--------------------------------------------------------------\nAn error has occured: {errlog}\n--------------------------------------------------------------\n\n");
 			
-		//Write the exception struct to a file
-		var buff = buffer_create(string_byte_length(errlog), buffer_grow, 1); //Create a buffer with the size of the error message string, fixed with an aligment of 1
-		buffer_write(buff, buffer_text, errlog); //Save the json to the new buffer..
-		buffer_save(buff, errname); //Save the buffer to a new file of specified name
-		buffer_delete(buff); //Delete buffer to prevent memory leaks
+			//Write the exception struct to a file
+			var buff = buffer_create(string_byte_length(errlog), buffer_grow, 1); //Create a buffer with the size of the error message string, fixed with an aligment of 1
+			buffer_write(buff, buffer_text, errlog); //Save the json to the new buffer..
+			buffer_save(buff, errname); //Save the buffer to a new file of specified name
+			buffer_delete(buff); //Delete buffer to prevent memory leaks
 		
-		game_restart_alt();
-	});
+			game_restart_alt();
+		});
+	}
 #endregion
 
 #region First Time

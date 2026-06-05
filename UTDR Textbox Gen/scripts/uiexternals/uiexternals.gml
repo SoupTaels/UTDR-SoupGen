@@ -9,14 +9,15 @@ pref = {
 	anyborder: false, //Whether to allow any arbitrary border
 	hidemessages: false, //Whether to hide output sucess message
 	checkupdates: true, //Check for updates?
-	parsestart: global.altchar.start_, //Start alt command 
-	parseend: global.altchar.end_, //End alt command 
 	showref: true, //Whether to show the reference image on export
 	openresult: true, //Whether to show your generated result
 	randomclr: true, //Whether the UI should randomize its color on startup
 	bg3d: is_android() ? false : true, //Whether to enable the 3D background
 	showfps: false, //Whether to show an FPS counter
 	confirmexport: false, //Whether to press confirm to export once dialogue is finished
+	autopoint: false, //Whether auto-asterisk is enabled
+	themeclr: c_orange, //UI theme color
+	gifbgclr: c_lime, //GIF BG color
 }
 #region Add External Faces
 	faces_dict = {};

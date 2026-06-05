@@ -47,7 +47,7 @@ if ( dial_text_outline != -1 && !string_search(dial_font, "outline", true) ) { d
 #endregion
 
 #region Fullscreen, Effects
-	//if ( keyboard_check_pressed(vk_f2) ) { event_perform(ev_create, 0); }
+	if ( keyboard_check_pressed(vk_f2) && !is_android() ) { game_restart_alt(); }
 	if ( mouse_pressed || mouse_pressed_right ) {
 		var clr_ = make_color_hsv(irandom(255), 255, 255);
 		instance_create_depth(mouse_x_gui, mouse_y_gui, -1, obj_particle, { sprite_index: spr_spark, image_speed: 0.50, follow: true, offx: -15, image_blend: clr_, });

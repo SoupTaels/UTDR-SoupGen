@@ -1,7 +1,6 @@
 //Whether to automatically initialize Scribble Deluxe when your game boots. Set this macro to
 //`true` if you don't want to make initialization manually. If you set this function to `false`
 //then you will need to call `scribble_initialize()` before calling other Scribble Deluxe functions.
-global.altchar = { start_: "<", end_: ">" };
 
 #macro SCRIBBLE_INITIALIZE_ON_BOOT  true
 
@@ -171,11 +170,9 @@ global.altchar = { start_: "<", end_: ">" };
 
 //Character used to open a command tag. First 127 ASCII chars only.
 #macro SCRIBBLE_COMMAND_TAG_OPEN  ord("[")
-#macro SCRIBBLE_COMMAND_TAG_OPEN_ALT  ord(global.altchar.start_)
 
 //Character used to close a command tag. First 127 ASCII chars only.
 #macro SCRIBBLE_COMMAND_TAG_CLOSE  ord("]")
-#macro SCRIBBLE_COMMAND_TAG_CLOSE_ALT  ord(global.altchar.end_)
 
 //Character used to delimit a command parameter inside a command tag. First 127 ASCII chars only.
 #macro SCRIBBLE_COMMAND_TAG_ARGUMENT  ord(",")

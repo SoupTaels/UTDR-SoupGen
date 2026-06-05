@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.0.4" //Current game version
+	#macro GAME_VERSION "1.0.5" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -372,13 +372,13 @@ function ui_manage() {
 			
 	#region Clear Page Face
 		var resettime = 60;
-		if ( bord_visible && FACE_CURRENT != -1 && ( range_within(mouse_x_gui, 40, 174) && range_within(mouse_y_gui, 323, 480) ) && mouse_check_right ) { //Hovering over the dialogue portrait
+		if ( bord_visible && FACE_CURRENT != -1 && ( range_within(mouse_x_gui, 40 + dial_face_xoff_static, 174 + dial_face_xoff_static) && range_within(mouse_y_gui, 323 + dial_face_yoff_static, 480 + dial_face_yoff_static) ) && mouse_check_right ) { //Hovering over the dialogue portrait
 			if ( variable_instance_get(obj_system, "within_hoverindex") != undefined && !within_hoverindex ) && ( variable_instance_get(obj_system, "within_hoverindex2") != undefined && !within_hoverindex2 ) {
 				soupy_alarm("removeface", resettime);
 				soupy_alarm_run("removeface", 1, function () { FACE_CURRENT = -1; FACE_ORIGINAL = -1; FACE_PREVIOUS = -1; sfx_play(snd_hurtpowerful); }); //Timer to clear face
 
-				draw_sprite_stretched_ext(spr_border_undertale, 0, 40, 323, 134, 136, c_red, 0.7); //BG
-				var ringcalc = map_value(soupy_alarm_get("removeface", "timer", false), 0, resettime, 0, 360), textx = 110, texty = 390; //Turn the values of a timer into a range of degrees
+				draw_sprite_stretched_ext(spr_border_undertale, 0, 40 + dial_face_xoff_static, 323 + dial_face_yoff_static, 134, 136, c_red, 0.7); //BG
+				var ringcalc = map_value(soupy_alarm_get("removeface", "timer", false), 0, resettime, 0, 360), textx = 110 + dial_face_xoff_static, texty = 390 + dial_face_yoff_static; //Turn the values of a timer into a range of degrees
 				var updatering = CleanRing(textx, texty, 20, 30, 360, ringcalc) //Update text ring
 													.Blend(c_red, 1)
 													.Draw();
@@ -390,13 +390,13 @@ function ui_manage() {
 	#endregion
 			
 	#region Quick Index & Sprite Switching 
-		if ( UI_MESSAGE && bord_visible && ( range_within(mouse_x_gui, 20, 180) && range_within(mouse_y_gui, 300, 480) ) ) { //Hovering over the dialogue portrait
+		if ( UI_MESSAGE && bord_visible && ( range_within(mouse_x_gui, 20 + dial_face_xoff_static, 180 + dial_face_xoff_static) && range_within(mouse_y_gui, 300 + dial_face_yoff_static, 480 + dial_face_yoff_static) ) ) { //Hovering over the dialogue portrait
 			#region Back Index
-				if ( FACE_INDEX > 0 && FACE_CURRENT != -1 ) { 
+				if ( FACE_SPEED == 0 && FACE_INDEX > 0 && FACE_CURRENT != -1 ) { 
 					if ( variable_instance_get(obj_system, "within_hoverindex") == undefined ) { variable_instance_set(obj_system, "within_hoverindex", false); }
 					if ( variable_instance_get(obj_system, "yscale_index") == undefined ) { variable_instance_set(obj_system, "yscale_index", 1); }
 					
-					var x_ = 110, y_ = 325, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 20, y_ + 10);
+					var x_ = 110 + dial_face_xoff_static, y_ = 325 + dial_face_yoff_static, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 20, y_ + 10);
 					if ( within_ ) {
 						if ( !within_hoverindex ) { within_hoverindex = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) {  sfx_play(snd_bump, 0, , 1.3); FACE_INDEX = approach(FACE_INDEX, 0, 1); yscale_index = 0.5; } //Pressed
@@ -409,11 +409,11 @@ function ui_manage() {
 				else { variable_instance_set(obj_system, "within_hoverindex", false); }
 			#endregion
 			#region Forward Index
-				if ( FACE_INDEX < sprite_get_number(FACE_CURRENT) - 1 && FACE_CURRENT != -1 ) {
+				if ( FACE_SPEED == 0 && FACE_INDEX < sprite_get_number(FACE_CURRENT) - 1 && FACE_CURRENT != -1 ) {
 					if ( variable_instance_get(obj_system, "within_hoverindex2") == undefined ) { variable_instance_set(obj_system, "within_hoverindex2", false); }
 					if ( variable_instance_get(obj_system, "yscale_index2") == undefined ) { variable_instance_set(obj_system, "yscale_index2", 1); }
 					
-					var x_ = 110, y_ = 457, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 20, y_ + 10);
+					var x_ = 110 + dial_face_xoff_static, y_ = 457 + dial_face_yoff_static, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 20, y_ + 10);
 					if ( within_ ) {
 						if ( !within_hoverindex2 ) { within_hoverindex2 = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) {  sfx_play(snd_bump, 0, , 1.3); FACE_INDEX = approach(FACE_INDEX, sprite_get_number(FACE_CURRENT) - 1, 1); yscale_index2 = 0.5; } //Pressed
@@ -440,7 +440,7 @@ function ui_manage() {
 			if ( variable_instance_get(obj_system, "within_hover3") == undefined ) { variable_instance_set(obj_system, "within_hover3", false); }
 			if ( variable_instance_get(obj_system, "yscale_3") == undefined ) { variable_instance_set(obj_system, "yscale_3", 1); }
 		
-			var x_ = 320, y_ = 473, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 25);
+			var x_ = 320, y_ = 473, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 50);
 			if ( within_ ) {
 				if ( !within_hover3 ) { within_hover3 = true; sfx_play(snd_sel_switch); } //Hover
 				if ( mouse_pressed ) {  sfx_play(snd_enc1, 0, , bord_visible ? 0.7 : 1.3); bord_visible = !bord_visible; yscale_3 = 0.5; } //Pressed
@@ -453,7 +453,7 @@ function ui_manage() {
 			
 	#region Create Mini Face
 		if ( UI_MESSAGE ) {
-			var xx_ = 632, yy_ = 470, within_ = range_within(mouse_x_gui, xx_ - 40, xx_ + 20) && range_within(mouse_y_gui, yy_ - 40, yy_ + 20);
+			var xx_ = 632, yy_ = 470, within_ = range_within(mouse_x_gui, xx_ - 60, xx_ + 20) && range_within(mouse_y_gui, yy_ - 60, yy_ + 20);
 			if ( variable_instance_get(obj_system, "within_mini") == undefined ) { variable_instance_set(obj_system, "within_mini", false); }
 			if ( variable_instance_get(obj_system, "within_mini_off") == undefined ) { variable_instance_set(obj_system, "within_mini_off", false); }
 			if ( within_ ) {

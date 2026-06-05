@@ -1,5 +1,5 @@
 ///@desc Draw Dialogue Things
-if ( live_call() ) { return live_result; } 
+//if ( live_call() ) { return live_result; } 
 if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } //Prevents the stack export from going out of bounds
 #region UI Borders and Buttons
 	if ( ui_visible ) {
@@ -25,11 +25,11 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } /
 			var i = 0, count_ = array_length(butt);
 			repeat ( count_ ) { 
 				butt[i].update();
-	
+				
 				 if ( !butt[i].data.centered ) {
 					 var result = butt[i].button.get_bbox(butt[i].data.x, butt[i].data.y);
 					 var calc_x = centerizer(result.width, count_, 320, 12);
-					butt[i].data.x = calc_x[i]; butt[i].data.centered = true;
+					butt[i].data.x = calc_x[i]; butt[i].data.centered = true; 
 				 }
 			i++; }
 		#endregion
@@ -78,8 +78,8 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } /
 					}
 				#endregion
 				
-				if ( FACE_USING && ( !dial_text_gif || ( dial_text_gif && typist.get_state() >= 0.01 * typist_spd ) ) ) { draw_sprite_ensure(FACE_CURRENT, FACE_INDEX, bordx + ( 74 + offset_ ) + dial_face_xoff, bordy + ( 76 + offset_ ) + dial_face_yoff, dial_face_xscale + dial_face_xscale_off, dial_face_yscale + dial_face_yscale_off, dial_face_angle, dial_face_clr, dial_face_alpha); } //Dialogue Face
-				if ( ( FACE_USING && ( !dial_text_gif || ( dial_text_gif && typist.get_state() >= 0.01 * typist_spd ) ) ) && dial_point_clr_anim_alpha > 0 ) { gpu_set_fog(true, dial_point_clr_anim, -16000, 16000); draw_sprite_ensure(FACE_CURRENT, FACE_INDEX, bordx + ( 74 + offset_ ) + dial_face_xoff, bordy + ( 76 + offset_ ) + dial_face_yoff, dial_face_xscale + dial_face_xscale_off, dial_face_yscale + dial_face_yscale_off, dial_face_angle, c_white, dial_point_clr_anim_alpha); gpu_set_fog(false, 0, 0, 0); } //Dialogue Face Flashing
+				if ( FACE_USING && ( !dial_text_gif || ( dial_text_gif && typist.get_state() >= 0.01 * typist_spd ) ) ) { draw_sprite_ensure(FACE_CURRENT, FACE_INDEX, ( bordx + ( 74 + offset_ ) + dial_face_xoff ) + dial_face_xoff_static, ( bordy + ( 76 + offset_ ) + dial_face_yoff ) + dial_face_yoff_static, dial_face_xscale + dial_face_xscale_off, dial_face_yscale + dial_face_yscale_off, dial_face_angle, dial_face_clr, dial_face_alpha); } //Dialogue Face
+				if ( ( FACE_USING && ( !dial_text_gif || ( dial_text_gif && typist.get_state() >= 0.01 * typist_spd ) ) ) && dial_point_clr_anim_alpha > 0 ) { gpu_set_fog(true, dial_point_clr_anim, -16000, 16000); draw_sprite_ensure(FACE_CURRENT, FACE_INDEX, ( bordx + ( 74 + offset_ ) + dial_face_xoff ) + dial_face_xoff_static, ( bordy + ( 76 + offset_ ) + dial_face_yoff ) + dial_face_yoff_static, dial_face_xscale + dial_face_xscale_off, dial_face_yscale + dial_face_yscale_off, dial_face_angle, c_white, dial_point_clr_anim_alpha); gpu_set_fog(false, 0, 0, 0); } //Dialogue Face Flashing
 			#endregion
 
 			#region Dialogue Text
@@ -240,7 +240,7 @@ if ( ui_tab == 0 && ui_visible ) { ui_manage(); } //Menu handler
 	if ( ui_visible && file_dragging && UI_MESSAGE ) { //Receive signal for file dragging
 		//Portrait
 		if ( bord_visible ) {
-			draw_sprite_stretched_ext(spr_border_dashed, 0, 40, 323, 134, 136, c_yellow, 0.5 + abs(sin(current_time/300)) * 0.5);
+			draw_sprite_stretched_ext(spr_border_dashed, 0, 40 + dial_face_xoff_static, 323 + dial_face_yoff_static, 134, 136, c_yellow, 0.5 + abs(sin(current_time/300)) * 0.5);
 			draw_format("center", "center", fnt_speech, c_yellow);
 			draw_text(108, 390, "Drag your\nsprite here\nto change\nthe dialogue\nportrait!\n(.PNG ONLY)");
 		
@@ -276,6 +276,7 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 				draw_format("right", , fnt_determination); draw_text(635, 5, $"(Right-Click or Double-press ESC to cancel)"); //Cancel text
 			}
 			else { //Preview Export Options
+				if ( ui_finished_y == -100 ) { exit; }
 				var finish_ = scribble("[region,export]Soupy Export!![/region]\n[region,preview]Preview Again[/region]\n[region,cancel]Cancel Export.[/region]")
 				.scale(2).align(fa_center, fa_middle).line_height(50).allow_glyph_data_getter().padding(20, 10, 20, 10);
 				

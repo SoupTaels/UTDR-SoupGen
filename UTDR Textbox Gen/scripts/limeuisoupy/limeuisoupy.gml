@@ -165,6 +165,7 @@ function soupy_color_picker_gradient() { soupy_color_picker(SYSTEMUI.dial_gradie
 function soupy_color_picker_highlight() { soupy_color_picker(SYSTEMUI.dial_highlight, "datahighlight"); }
 function soupy_color_picker_underline() { soupy_color_picker(SYSTEMUI.dial_underline, "dataunderline"); }
 function soupy_color_picker_striket() { soupy_color_picker(SYSTEMUI.dial_striket, "datastriket"); }
+function soupy_color_picker_uicolor() { soupy_color_picker(SYSTEMUI.ui_accentcolor, "datamainuicolor"); }
 
 function soupy_ui_credits() {
 	var arr_ = [];

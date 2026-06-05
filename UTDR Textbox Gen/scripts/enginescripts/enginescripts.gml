@@ -405,6 +405,7 @@ function string_upper_first(_str) {
 
 ///@desc Game restarting using game_change
 function game_restart_alt() {
+	if ( is_android() ) { exit; }
 	if ( game_is_compiled() ) { //If we're not running the game from the IDE
 		var params = "";
 		var count = parameter_count();

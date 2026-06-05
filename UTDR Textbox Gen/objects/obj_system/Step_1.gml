@@ -178,10 +178,10 @@
 	#region Quick Exports
 		if ( keyboard_check(vk_control) && !ui_paused && !screenshot && !record.enabled ) {
 			var valid_ = false;
-			if ( keyboard_check_pressed(ord("Q")) ) { ui_export(); valid_ = true; } //Static
-			if ( keyboard_check_pressed(ord("W")) ) { ui_export(1); valid_ = true; } //Typewriter
-			if ( keyboard_check_pressed(ord("E")) ) { ui_export(3); valid_ = true; } //Stack
-			if ( keyboard_check_pressed(ord("R")) ) { ui_export(2); valid_ = true; } //Animated
+			if ( keyboard_check_pressed(ord("Q")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(); valid_ = true; } //Static
+			if ( keyboard_check_pressed(ord("W")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(1); valid_ = true; } //Typewriter
+			if ( keyboard_check_pressed(ord("E")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } if ( dial_text_page_c <= 1 ) { soupy_message("You must have more than one page.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(3); valid_ = true; } //Stack
+			if ( keyboard_check_pressed(ord("R")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(2); valid_ = true; } //Animated
 			if ( keyboard_check_pressed(ord("1")) ) { ui_updateref(); } //Update Ref
 			if ( keyboard_check_pressed(ord("2")) ) { var func_ = ui_viewing ? ui_unviewref : ui_viewref; func_(); if ( ui_viewing ) { sfx_play(snd_enc1); } } //View Ref
 			if ( valid_ ) { bord_box_visible = true; bord_out = true; }
