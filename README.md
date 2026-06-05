@@ -7,6 +7,7 @@
 <p align="center">Available for Windows and Android natively, but also runs just fine on Linux and Mac through Wine and Whisky.</p>
 <p align="center"><a href="https://github.com/SoupTaels/UTDR-Textbox-Soup/releases">Get the latest release/ download here!</a></p>
 <p align="center"><a href="https://rentry.co/utdrsoupguides">Help guide is hosted here!</a></p>
+<p align="center"><a href="https://rentry.co/utdrsoupguides#alternatives-to-consider">Alternatives to consider</a></p>
 <hr />
 <p align="center">This project could use your help in order to make it cross-platform! If you know Javascript and GameMaker and isn't utilizing AI, then <a href="https://rentry.co/utdrsoupguides#wasnt-there-gonna-be-an-online-version-what-happened-to-that">see this!</a></p>
 <hr />
