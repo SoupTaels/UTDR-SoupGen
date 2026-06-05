@@ -14,7 +14,7 @@
 &nbsp;
 &nbsp;
 <p align="center">Have you always wanted to make really cool UTDR animations, but found making a typewriter to be exhausting work? Or perhaps you're a comic maker that finds making panels to be time-consuming due to needing to line up sprites perfectly? Are old, bulky servers slowing you down from making your AUs? Well that's where SoupGen comes in! SoupGen is a lot more powerful than the leading dialogue generator, especially with the introduction of <i><b>Typewriter Mode!</b></i></p>
-<p align="center"><i>Note: Despite how the marketing comes across, SoupGen isn't meant to replace every other textbox generator. I am just providing another option. Check out the alternatives to consider above.</i></p>
+<p align="center"><i>Note: Despite how the marketing comes across, SoupGen isn't meant to replace every other textbox generator. I am just providing another option. I mean no ill-intent!! Check out the alternatives to consider above.</i></p>
 <h1 align="center">Features:</h1>
 <p align="center"><img src="https://files.catbox.moe/qc9hes.gif" style="display:block; margin:auto;"></p>
 <p align="center">Lots of exporting options, including...:</p>
