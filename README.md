@@ -18,20 +18,20 @@
 <h1 align="center">Features:</h1>
 <p align="center"><img src="https://files.catbox.moe/qc9hes.gif" style="display:block; margin:auto;"></p>
 <p align="center">Lots of exporting options, including...:</p>
-<p align="center"><img src="https://files.catbox.moe/k67zc0.gif" style="display:block; margin:auto;"></p> <p align="center"><img src="https://files.catbox.moe/lg7o7d.gif"></p>
+<p align="center"><img src="https://files.catbox.moe/l6hzvw.gif" style="display:block; margin:auto;"></p> <p align="center"><img src="https://files.catbox.moe/xxwe8j.gif"></p>
 <p align="center">Just export and watch as your dialogue plays out in front of you! Don't like what you see, or you found an error somewhere? Quickly cancel and make changes as you see fit, then try again!</p>
 <hr />
 <p align="center"><img src="https://files.catbox.moe/xfqn9w.gif" style="display:block; margin:auto;"></p>
 <p align="center">Tons of colors and effect presets! Want more effects? How about effects that affect the dialogue portrait? Typewriter mode gotchu covered. Typewriter mode is where the real power of my dialogue generator comes into play!</p>
-<p align="center"><img src="https://files.catbox.moe/yblp0q.gif" style="display:block; margin:auto;"></p>
-<p align="center"><img src="https://files.catbox.moe/vckc4f.gif" style="display:block; margin:auto;"></p>
+<p align="center"><img src="https://files.catbox.moe/64k6lv.gif" style="display:block; margin:auto;"></p>
+<p align="center"><img src="https://files.catbox.moe/facbt6.gif" style="display:block; margin:auto;"></p>
 <hr />
-<p align="center"><img src="https://files.catbox.moe/nkz7cf.gif" style="display:block; margin:auto;"></p>
+<p align="center"><img src="https://files.catbox.moe/ba8eag.gif" style="display:block; margin:auto;"></p>
 <p align="center">Custom sprites AND dialogue boxes. Simply drag a sprite onto your desired drop zone and the tool will see if it exists within its database(Included Files). If it doesn't exist, then it'll be added as a new sprite! There's that, as well as...</p>
-<p align="center"><img src="https://github.com/user-attachments/assets/bb504172-a99b-46c1-aab8-bb12907e57c7" style="display:block; margin:auto;"></p>
+<p align="center"><img src="https://files.catbox.moe/t2eu4p.png" style="display:block; margin:auto;"></p>
 <p align="center">Custom fonts?! No way. No way!</p>
 <hr />
-<p align="center"><img src="https://files.catbox.moe/g089fh.png" style="display:block; margin:auto;"></p>
+<p align="center"><img src="https://files.catbox.moe/gl0wd0.gif" style="display:block; margin:auto;"></p>
 <p align="center">Live-updating text. Icons within dialogue! You can even add your own custom icons too. For example, the tool includes Tenna's funnytext.</p>
 <p align="center"><img src="https://github.com/user-attachments/assets/f1e7a6bd-4b67-4d74-899d-aa2f4ceb1ff9" style="display:block; margin:auto;"></p>
 <p align="center">And that only scratches the surface. Play around with the settings to tune your dialogue scenes to your liking! Don't like any of this? Well fork this repo and make your own changes! The world is your oyster. The beauty of open-source projects is community.</p>
