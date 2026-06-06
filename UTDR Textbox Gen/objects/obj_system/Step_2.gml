@@ -28,3 +28,10 @@
 	
 	if ( mouse_pressed && ui_viewing ) { ui_unviewref(); }
 #endregion
+
+#region Windows Taskbar
+	if ( is_android() ) { exit; }
+	
+	if ( screenshot_stacked || ( record.enabled && record.type == 1 ) ) { window_progress(ui_preview ? window_progress_paused : window_progress_normal, dial_text_page + 1, dial_text_page_c); }
+	else if ( record.enabled && record.type == 0 ) { window_progress(ui_preview ? window_progress_paused : window_progress_normal, record.frames, record.framesmax); }
+#endregion

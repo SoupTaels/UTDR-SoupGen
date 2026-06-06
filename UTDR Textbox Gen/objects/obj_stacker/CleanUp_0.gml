@@ -21,4 +21,6 @@ if ( !abort ) {
 		else { file_copy(soupstack_path, $"{soupstack_fname}_.png"); MobileUtils_Share_Open("Here's your good soup!", "image/png", $"{soupstack_fname}_.png"); }
 	}
 	clipboard_set_text(soupstack_path);
+	if ( !is_android() ) { var temp = sprite_add(soupstack_path, 0, 0, 0, 0, 0); clipboard_set_sprite(temp); sprite_delete(temp); }
+	window_progress(window_progress_none); window_flash(window_flash_tray, 3, 350);
 }

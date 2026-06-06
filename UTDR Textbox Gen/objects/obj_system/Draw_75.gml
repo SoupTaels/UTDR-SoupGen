@@ -63,8 +63,10 @@ if ( screenshot || record.enabled ) {
 					else { file_copy(fpath_final, $"{fname}_.{gif_ ? "gif" : "png"}"); MobileUtils_Share_Open("Here's your good soup!", gif_ ? "image/gif" : "image/png", $"{fname}_.{gif_ ? "gif" : "png"}"); }
 				}
 				clipboard_set_text(fpath_final);
+				if ( !gif_ && !is_android() ) { var temp = sprite_add(fpath_final, 0, 0, 0, 0, 0); clipboard_set_sprite(temp); sprite_delete(temp); }
+				window_progress(window_progress_none); window_flash(window_flash_tray, 3, 350);
 			} }
-			else { soup_checkout("export dialogue"); soupy_message("The export operation was canceled.", , 350, , , snd_cancel, , function(){ TweenScript(SYSTEMUI, 0, 2, function(){ soup_store_clear(); }); }); if ( record.enabled ) { record.id_ = gif_save(record.id_, $"{directory_get_temporary_path()}soupytemp.gif"); file_delete($"{directory_get_temporary_path()}soupytemp.gif"); } }
+			else { soup_checkout("export dialogue"); window_progress(window_progress_error, 1, 1); soupy_message("The export operation was canceled.", , 350, , , snd_cancel, , function(){ window_progress(window_progress_none); TweenScript(SYSTEMUI, 0, 2, function(){ soup_store_clear(); }); }); if ( record.enabled ) { record.id_ = gif_save(record.id_, $"{directory_get_temporary_path()}soupytemp.gif"); file_delete($"{directory_get_temporary_path()}soupytemp.gif"); } }
 			
 			soup_checkout("previewcancel", , true); soup_checkout("lastpage", , true);
 			surface_free(screenshot_surf); screenshot_surf = -1; delete screenshot_surf; if ( buffer_exists(record.id_) ) { buffer_delete(record.id_); delete record.id_; }

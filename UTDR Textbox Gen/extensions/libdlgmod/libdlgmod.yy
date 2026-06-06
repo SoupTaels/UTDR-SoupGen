@@ -123,7 +123,7 @@
   "packageId":"",
   "parent":{
     "name":"Samuel Venable",
-    "path":"folders/Extensions/Samuel Venable.yy",
+    "path":"folders/Extensions/Windows Specific/Samuel Venable.yy",
   },
   "productId":"ACBD3CFF4E539AD869A0E8E3B4B022DD",
   "resourceType":"GMExtension",

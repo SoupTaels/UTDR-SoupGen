@@ -1,7 +1,7 @@
 ///@desc Init
 //if ( live_call() ) { return live_result; } 
 android_path = ""; //Safe path to save stuff in
-if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
+if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else { instance_create_depth(0, 0, -2, obj_windows_icon); }
 #region Loading Preferences
 	ui_loadprefs = function () { 
 			if ( file_exists(PREF_SOUP) ) {
@@ -27,14 +27,14 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); }
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : false; dial_point_auto = global.pref.autopoint;
 				var get_ = pref_[$ "themeclr"]; global.pref.themeclr = !is_undefined(get_) ? get_ : c_orange; if ( !global.pref.randomclr && is_android() ) { 
 					ui_accentcolor = global.pref.themeclr;
-					soupy_lui.style.color_secondary = ui_accentcolor;
-					soupy_lui.updateMainUiSurface();
 					soup_checkout("datamainuicolor", false, true).setColor(ui_accentcolor);
 					soup_checkout("datagifcolor", false, true).setColor(screenshot_back);
 					var i = 0, count_ = array_length(butt);
 					repeat ( count_ ) { 
 						butt[i].data.color = ui_accentcolor; if ( butt[i].data.color_butt != c_yellow ) { butt[i].data.color_butt = ui_accentcolor; }
 					i++; }
+					soupy_lui.style.color_secondary = ui_accentcolor;
+					soupy_lui.updateMainUiSurface();
 				}
 			}
 		}

@@ -51,7 +51,7 @@
   "packageId":"",
   "parent":{
     "name":"ExecuteShellSimple",
-    "path":"folders/Extensions/ExecuteShellSimple.yy",
+    "path":"folders/Extensions/Windows Specific/ExecuteShellSimple.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

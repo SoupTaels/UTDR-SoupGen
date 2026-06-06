@@ -81,7 +81,7 @@
   "packageId":"",
   "parent":{
     "name":"File Dropper",
-    "path":"folders/Extensions/File Dropper.yy",
+    "path":"folders/Extensions/Windows Specific/File Dropper.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",
