@@ -25,6 +25,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : false; dial_point_auto = global.pref.autopoint;
+				var get_ = pref_[$ "macros"]; global.pref.macros = !is_undefined(get_) ? get_ : { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }; 
 				var get_ = pref_[$ "themeclr"]; global.pref.themeclr = !is_undefined(get_) ? get_ : c_orange; if ( !global.pref.randomclr && is_android() ) { 
 					ui_accentcolor = global.pref.themeclr;
 					soup_checkout("datamainuicolor", false, true).setColor(ui_accentcolor);
@@ -387,10 +388,9 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 					default: { return "Testing suite ID not found."; }
 				}
 			});
-			scribble_add_macro("choicer", function() { //Bring up choices
-				
-				return "";
-			}); 
+			
+			var func_ = function(m_ = "") { return global.pref.macros[$ m_] ?? ""; } //Return a macro from the global preference macro struct
+			scribble_add_macro("macro", func_); scribble_add_macro("mac", func_); scribble_add_macro("mc", func_); 
 		#endregion
 	#endregion
 #endregion
@@ -527,6 +527,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 				.ContextMenuAddItem(QuillContextMenuItem("Clear All", method(self, soupy_context_clear), "soupy_clear").SetShortcut("Ctrl+S"))
 				.ContextMenuAddItem(QuillContextMenuSeparator())
 				.ContextMenuAddItem(QuillContextMenuItem("Insert Page", method(self, soupy_context_page), "soupy_page").SetShortcut("Ctrl+D"))
+				.ContextMenuAddItem(QuillContextMenuItem("Add As Macro", method(self, soupy_context_macro), "soupy_macro").SetShortcut("Ctrl+P"))
 				.on_blur();
 			#endregion
 	#endregion
@@ -1142,6 +1143,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			]),
 			
 			new LuiHorizontalRule({ height: 5, }),
+			new LuiButton({ text: "Text Macros", height: 40, }).addEvent(LUI_EV_CLICK, soupy_ui_textmacros),
 			new LuiButton({ text: "Help Guide", height: 40, }).addEvent(LUI_EV_CLICK, function() { soupy_url("https://rentry.co/utdrsoupguides", , , 0); }),
 			new LuiButton({ text: "So Soupy!!", height: 40, }).addEvent(LUI_EV_CLICK, function() { soupy_url("https://www.youtube.com/watch?v=zbClYRnQQJ0", , , 0); }),
 			new LuiButton({ text: "Credits", height: 40, }).addEvent(LUI_EV_CLICK, soupy_ui_credits),

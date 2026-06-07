@@ -427,10 +427,11 @@ function LuiMain() : LuiBase() constructor {
 					draw_set_color(self.style.color_text);
 					draw_set_halign(fa_left);
 					draw_set_valign(fa_top);
-					draw_text(_mouse_x + _padding_text, _mouse_y + _padding_text, _element.tooltip);
+					if ( _element.tooltip_wrap == -1 ) { draw_text(_mouse_x + _padding_text, _mouse_y + _padding_text, _element.tooltip); }
+					else { draw_text_ext(_mouse_x + _padding_text, _mouse_y + _padding_text, _element.tooltip, _element.tooltip_wrap, 30); }
 				}
 				else {
-					var tooltip_ = scribble(_element.tooltip).starting_format(_element.tooltip_font ?? self.style.font_default, self.style.color_text);
+					var tooltip_ = scribble(_element.tooltip).starting_format(_element.tooltip_font ?? self.style.font_default, self.style.color_text).wrap(_element.tooltip_wrap);
 					var _width = tooltip_.get_width() + _padding_text*2;
 					var _height = tooltip_.get_height() + _padding_text*2;
 					var _xx = !_element.tooltip_center ? ( device_mouse_x_to_gui(0) + _padding ) : ( ( device_mouse_x_to_gui(0) - _width/ 2) );

@@ -18,6 +18,7 @@ pref = {
 	autopoint: false, //Whether auto-asterisk is enabled
 	themeclr: c_orange, //UI theme color
 	gifbgclr: c_lime, //GIF BG color
+	macros: { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }, //Macros for reusable text
 }
 #region Add External Faces
 	faces_dict = {};

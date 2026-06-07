@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.0.6" //Current game version
+	#macro GAME_VERSION "1.0.7" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -40,9 +40,9 @@ function scribble_alignment(halign_ = 0, valign_ = 0) {
 	function on_leave_() { if ( SYSTEMUI.ui_tab != id_ ) { TweenFire("~ocirc", "$15", "yoff>", 0); text = text_static; color_butt = SYSTEMUI.ui_accentcolor; } window_set_cursor(cr_default); }
 	function on_click_() { if ( SYSTEMUI.ui_tab != id_ ) { sfx_play(snd_select); SYSTEMUI.ui_tab = id_; on_reset_(); } else { sfx_play(snd_bump, , , random_range(0.8, 1.2)); } }
 	function on_hover_() { window_set_cursor(cr_drag); }
-	function on_reset_() { 
+	function on_reset_(update_ = true) { 
 		if ( !instance_exists(SYSTEMUI) ) { exit; }
-		SYSTEMUI.ui_reset();
+		SYSTEMUI.ui_reset(update_);
 		
 		var i = 0;
 		repeat ( array_length(SYSTEMUI.butt) ) { with ( SYSTEMUI.butt[i].data ) { if ( SYSTEMUI.ui_tab != id_ ) { TweenFire("~ocirc", "$15", "yoff>", 0); text = text_static; color_butt = SYSTEMUI.ui_accentcolor; } else { TweenFire("~ocirc", "$15", "yoff>", 5); text = $"[c_yellow][wheel]{text_static}"; color_butt = c_yellow; } } i++; }
@@ -58,6 +58,30 @@ function scribble_alignment(halign_ = 0, valign_ = 0) {
 		var txt_ = textinput.GetValue(), cursor_ = textinput.GetCaret() + 1, insert_ = "[/page]";
 		txt_ = string_insert(insert_, txt_, cursor_); textinput.SetValue(txt_);
 		sfx_play(snd_bump); dial_updatet = 1; textinput.SetCaret(( cursor_ + string_length(insert_) ) - 1); 
+	}
+	
+	///@desc Adds textbox contents as a new macro
+	function soupy_context_macro() { 
+		var txt_ = textinput.GetValue();
+		
+		var arr_ = [
+			new LuiText({ value: "Add textbox contents as a new macro for reuse?", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+			new LuiText({ value: "See all your macros in the Extras tab! Scroll to the bottom.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+			new LuiText({ value: "Labels must be uniquely named.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+			new LuiInput({ height: 40, placeholder: "Label (ex: uty_clover, wavyrainbow, soupytext, etc.)", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("label", e_, , true); }),
+			new LuiButton({ text: "Add new macro!", height: 40, }).addEvent(LUI_EV_CLICK, function () { 
+				var result = soup_checkout("label", false, true).get();
+				if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid label.", , 270, , , snd_error, , , true); exit; }
+				
+				var available = is_undefined(global.pref.macros[$ result]), text_ = SYSTEMUI.textinput.GetValue();
+				if ( string_trim(string_lettersdigits(text_)) == "" ) { soupy_message("Your textbox doesn't have|any text to add!", , 270, , , snd_error, , , true); exit; }
+				
+				if ( available ) { sfx_play(snd_sparkle2); sfx_play(snd_chest); global.pref.macros[$ result] = text_; SYSTEMUI.save_pref(); soup_checkout("mainui", , true).destroy(); SYSTEMUI.ui_paused = false; }
+				else { soupy_message("A macro with this|label already exists.", , 270, , , snd_error, , , true); }
+			}),
+		];
+		
+		var mainui = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon); soup_store("mainui", mainui, , true);
 	}
 #endregion
 
@@ -181,6 +205,7 @@ function ui_manage() {
 			}
 			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("S")) ) { soupy_context_clear(); } //Clear All
 			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("D")) ) { soupy_context_page(); } //Insert Page Break
+			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("P")) ) { soupy_context_macro(); } //Insert Page Break
 		}
 	#endregion
 

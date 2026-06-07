@@ -220,3 +220,40 @@ function soupy_ui_credits() {
 	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
 	soupy_popup([ maincan, ], , "What lovely people!", , 460, , snd_chest, fnt_abaddon, , , 40); //Credits with clickable text links
 }
+
+function soupy_ui_textmacros() {
+	var arr_ = [];
+	
+	array_push(arr_, new LuiText({ value: "Macros are reusable text and commands that can be used by doing", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_yellow, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "[macro, (label)] somewhere in the textbox!", truncate: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_yellow, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "Macros are a savable preference, meaning they're all saved on file!", truncate: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_lime, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "Click on a macro to delete it.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "Right-click to clear the main textbox and edit macro.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "Want to add a new macro? Add some text to the main textbox,", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "right-click or double-tap, then \"Add as Macro\".",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	
+	var hist_ = struct_get_names(global.pref.macros), hist_len = array_length(hist_), hist_i = 0;
+	if ( hist_len > 0 ) {
+		repeat ( hist_len ) {
+		var cur_ = hist_[hist_i];
+			array_push(arr_, new LuiText({ value: cur_, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setTooltip(global.pref.macros[$ cur_], true, , true, 600).setPadding(5)
+			.addEvent(LUI_EV_CLICK, function(element_) { var label_ = element_.get(); if ( is_android() ) { clipboard_set_text(global.pref.macros[$ label_]); } struct_remove(global.pref.macros, label_); SYSTEMUI.save_pref(); sfx_play(snd_throw); SYSTEMUI.ui_paused = false; soup_checkout("mainui", , true).destroy(); })
+			.addEvent(LUI_EV_CLICK_R, function(element_) { 
+				SYSTEMUI.textinput.SetValue(global.pref.macros[$ element_.get()]); SYSTEMUI.dial_updatet = 1; 
+				struct_remove(global.pref.macros, element_.get()); SYSTEMUI.save_pref(); sfx_play(snd_equip);
+				SYSTEMUI.ui_paused = false; SYSTEMUI.ui_tab = 0; on_reset_(false); soup_checkout("mainui", , true).destroy(); })
+			.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_red; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+			.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); }));
+		hist_i++; }
+	}
+	else {
+		array_push(arr_, new LuiText({ value: "(No macros found.)", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_gray, xoff: 0, y: 10 }));
+	}
+	
+	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
+	var mainui = soupy_popup([ maincan, ], , "Go Back", , 460, , snd_chest, fnt_abaddon, , , 40); soup_store("mainui", mainui, , true);
+}
