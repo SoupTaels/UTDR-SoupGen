@@ -1214,6 +1214,12 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			else { soup_store("asynctype", "reference", , true); TweenScript(id, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 		}
 		
+		ui_mini = function () {
+			if ( instance_exists(obj_mini) ) { with ( obj_mini ) {  
+				if ( SYSTEMUI.dial_text_page == page ) { alpha = 1; active = false; }
+			} }
+		}
+		
 		ui_viewref = function() { TweenDestroy(SYSTEMUI); TweenFire("?", SYSTEMUI, "$15", TPCol("ui_refclr>"), c_white); SYSTEMUI.ui_visible = false; SYSTEMUI.soupy_lui.hide(); SYSTEMUI.ui_viewing = true; soup_store("bordvis", SYSTEMUI.bord_visible, , true); SYSTEMUI.bord_visible = true; }
 		ui_unviewref = function() { TweenDestroy(SYSTEMUI); TweenFire("?", SYSTEMUI, "$15", TPCol("ui_refclr>"), $15101c); SYSTEMUI.ui_visible = true; SYSTEMUI.ui_viewing = false; SYSTEMUI.bord_visible = soup_checkout("bordvis", , true); mouse_clear(mb_left); SYSTEMUI.soupy_lui.show(); sfx_play(snd_enc1); }
 	#endregion

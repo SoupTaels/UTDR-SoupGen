@@ -736,7 +736,7 @@ pref = {
 			new LuiText({ value: "You can drag a face sprite on here too, btw! New sprites are\nimmediately added.", auto_width: false, auto_height: false, color: c_gray, text_halign: fa_center, text_valign: fa_middle, }),
 			new LuiButton({ text: "Let's get soupy!!", height: 35, }).setData("xx", x_).setData("yy", y_).setData("id_", id_).addEvent(LUI_EV_CLICK, function(element_) {
 				var txt_ = soup_checkout("minitext", false), spr_ = get_face(soup_checkout("minisprite", false)), index_ = soup_checkout("miniindex", false), font_ = soup_checkout("minifont", false);
-				if ( string_lettersdigits(txt_) == "" ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
+				//if ( string_lettersdigits(txt_) == "" ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
 				if ( spr_ == -1 ) { SYSTEMUI.ui_paused = false; soupy_message("Make sure your face sprite|is a valid sprite.", "Go Back", 300, , , snd_error, , , true); exit; }
 				if ( string_lettersdigits(font_) == "" ) { font_ = "fnt_determination"; }
 									
