@@ -173,7 +173,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 		typist_reset = function () { dial_face_xoff_static = dial_face_xoff_static_orig; dial_face_yoff_static = dial_face_yoff_static_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
-			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 1, };
+			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 0, };
 			typist.ease(typist_ease.type, typist_ease.x, typist_ease.y, typist_ease.xscale, typist_ease.yscale, typist_ease.angle, typist_ease.alpha);
 		#endregion
 	#endregion
@@ -592,7 +592,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			var panel_ = new LuiContainer().setPadding(0).addContent([
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image index
 					new LuiText({ value: "Talk Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes how often portraits animate\nbased on how many letters needs to\nbe revealed.", true, , true),
-					new LuiInput({ value: dial_face_anim, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(floor(SYSTEMUI.dial_face_anim)); })
+					new LuiInput({ value: dial_face_anim, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(floor(SYSTEMUI.dial_face_anim)); })
 					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var result = e_.get(); SYSTEMUI.dial_face_anim = real(result == "" ? 2 : result); }),
 				]),
 				
@@ -612,14 +612,14 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 					
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image angle
 					new LuiText({ value: "Angle:", width: 65, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the angle of every dialogue portrait.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[effect,rotate,#,frames,issmooth]", true, , true),
-					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 360, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_face_angle); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 360, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_face_angle); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 						var value_ = real(e_.get()); SYSTEMUI.dial_face_angle = value_; SYSTEMUI.dial_face_angle_orig = SYSTEMUI.dial_face_angle; soup_checkout("dataimage", false, true).angle = value_;
 					}),
 				]),
 					
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image alpha
 					new LuiText({ value: "Opacity:", width: 85, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the alpha of every dialogue portrait.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[effect,fade,#,frames]", true, , true),
-					new LuiSlider({ value: dial_face_alpha, min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 1, rounding: false, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_face_alpha); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+					new LuiSlider({ value: dial_face_alpha, min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 1, rounding: false, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_face_alpha); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 						var value_ = real(e_.get()); SYSTEMUI.dial_face_alpha = value_; SYSTEMUI.dial_face_alpha_orig = SYSTEMUI.dial_face_alpha; soup_checkout("dataimage", false, true).angle = value_;
 					}),
 				]),
@@ -689,7 +689,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image index
 				new LuiText({ value: "Image Index:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the image number of the\ndialogue border.", true, , true),
-				new LuiInput({ value: bord_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(floor(SYSTEMUI.bord_index)); })
+				new LuiInput({ value: bord_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(floor(SYSTEMUI.bord_index)); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 					var result = e_.get(); SYSTEMUI.bord_index = real(result == "" ? 0 : result);
 					soup_checkout("dataimageB", false, true).setSubimg(SYSTEMUI.bord_index);
@@ -698,7 +698,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image speed
 				new LuiText({ value: "Image Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the animation speed of the\ndialogue border.", true, , true),
-				new LuiInput({ value: bord_spd, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.bord_spd); })
+				new LuiInput({ value: bord_spd, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.bord_spd); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 					var spr_ = soup_checkout("dataimageB", false, true), value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; spr_.imgspd = index_; SYSTEMUI.bord_spd = index_;
 				}),
@@ -706,7 +706,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image scale
 				new LuiText({ value: "Scale:", width: 65, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the scale of dialogue borders.\nOnly applies to [c_yellow]custom dialogue borders[/].", true, , true),
-				new LuiInput({ value: bord_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.bord_scale); })
+				new LuiInput({ value: bord_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.bord_scale); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 					var spr_ = soup_checkout("dataimageB", false, true), value_ = real_ext(e_.get()), index_ = value_ == "" ? 2 : value_; SYSTEMUI.bord_scale = index_;
 				}),
@@ -735,25 +735,25 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image scale
 				new LuiText({ value: "Text X Off:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Offset dialogue text on the x axis.\nEspecially useful for [c_yellow][slant]arbitrary borders[/].", true, , true),
-				new LuiInput({ value: dial_text_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_text_xoff); })
+				new LuiInput({ value: dial_text_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_xoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_text_xoff = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image scale
 				new LuiText({ value: "Text Y Off:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Offset dialogue text on the y axis.\nEspecially useful for [c_yellow][slant]arbitrary borders[/].", true, , true),
-				new LuiInput({ value: dial_text_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_text_yoff); })
+				new LuiInput({ value: dial_text_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_yoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_text_yoff = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image scale
 				new LuiText({ value: "Border X Off:", width: 150, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Offset [c_yellow][slant]arbitrary borders[/] on the x axis.", true, , true),
-				new LuiInput({ value: bord_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.bord_xoff); })
+				new LuiInput({ value: bord_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.bord_xoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.bord_xoff = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image scale
 				new LuiText({ value: "Border Y Off:", width: 150, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Offset [c_yellow][slant]arbitrary borders[/] on the y axis.", true, , true),
-				new LuiInput({ value: bord_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.bord_yoff); })
+				new LuiInput({ value: bord_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.bord_yoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.bord_yoff = index_; }),
 			]),
 			
@@ -804,13 +804,13 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Text Scale:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the scale of dialogue text.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[scale,#][/].", true, , true),
-				new LuiInput({ value: dial_text_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_text_scale); })
+				new LuiInput({ value: dial_text_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_scale); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 2 : value_; SYSTEMUI.dial_text_scale = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Text Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the typewriter's text speed.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[speed,#][/].", true, , true),
-				new LuiInput({ value: typist_spd, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.typist_spd); })
+				new LuiInput({ value: typist_spd, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.typist_spd); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0.5 : value_; SYSTEMUI.typist_spd = index_; SYSTEMUI.typist_spd_orig = SYSTEMUI.typist_spd; typist.in(SYSTEMUI.typist_spd, SYSTEMUI.typist_smooth); }),
 			]),
 			
@@ -830,7 +830,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Line Spacing:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the gap between lines of dialogue.\nIs the line gap too big/ small for your font?\nChange this setting to your liking!\nUse [c_red]-1[/] or leave blank to reset.", true, , true),
-				new LuiInput({ value: dial_text_line_spacing, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_text_line_spacing); })
+				new LuiInput({ value: dial_text_line_spacing, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_line_spacing); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? -1 : value_; SYSTEMUI.dial_text_line_spacing = index_; }),
 			]),
 			
@@ -918,17 +918,17 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Text Smoothing:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes how much text is visible while\ntyping out. Higher numbers will allow more\ntext to be visible as it fades in.", true, , true),
-				new LuiInput({ value: typist_smooth, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.typist_smooth); })
+				new LuiInput({ value: typist_smooth, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.typist_smooth); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.typist_smooth = index_; typist.in(SYSTEMUI.typist_spd, SYSTEMUI.typist_smooth); }),
 			]),
 			
 			new LuiButton({ text: "Edit Font Separation", height: 40, }).addEvent(LUI_EV_CLICK, external_edit_fonts),
-			new LuiButton({ text: "Typewriter Animation Builder", height: 40, }).addEvent(LUI_EV_CLICK, external_edit_typew).setTooltip("Edit how the typewriter types out characters.\nBefore editing, set [c_yellow]text smoothing[/] to\na value [c_cyan]greater than 0[/]. Experiment with the\ntext smoothing value while editing this.", true, , true),
+			new LuiButton({ text: "Typewriter Animation Builder", height: 40, }).addEvent(LUI_EV_CLICK, external_edit_typew).setTooltip("Edit how the typewriter types out characters.\nBefore editing, set [c_yellow]text smoothing[/] to\na value [c_cyan]greater than 0[/].\nSomewhere around 15 should be good.\nExperiment with the\ntext smoothing value while editing this.", true, , true),
 
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Indicator Sprite:", width: 160, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator sprite used\nwhen dialogue has ended.\n[c_yellow]Leave blank or -1 for no indicator.", true, , true),
-				new LuiInput({ value: dial_indicator, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator); })
+				new LuiInput({ value: dial_indicator, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) {
 					var value_ = e_.get(), face_ = get_face(value_), bord_ = get_border(value_), icon_ = get_icon(value_);
 					if ( face_ == -1 && bord_ == -1 && icon_ == -1 ) { SYSTEMUI.dial_indicator = -1; soup_checkout("dataindic", false, true).set(SYSTEMUI.dial_indicator); }
@@ -944,43 +944,43 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Image Index:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's image index.", true, , true),
-				new LuiInput({ value: dial_indicator_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_index); })
+				new LuiInput({ value: dial_indicator_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_index); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_indicator_index = index_; soup_checkout("dataindic", false, true).setSubimg(index_); }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Image Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's image speed.", true, , true),
-				new LuiInput({ value: dial_indicator_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_index); })
+				new LuiInput({ value: dial_indicator_index, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_index); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_indicator_spd = index_; soup_checkout("dataindic", false, true).imgspd = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Image Scale:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's image scale.", true, , true),
-				new LuiInput({ value: dial_indicator_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_scale); })
+				new LuiInput({ value: dial_indicator_scale, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_scale); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1 : value_; SYSTEMUI.dial_indicator_scale = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Image XOff:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's x offset.", true, , true),
-				new LuiInput({ value: dial_indicator_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_xoff); })
+				new LuiInput({ value: dial_indicator_xoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_xoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_indicator_xoff = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Image YOff:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's y offset.", true, , true),
-				new LuiInput({ value: dial_indicator_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_yoff); })
+				new LuiInput({ value: dial_indicator_yoff, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_yoff); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 0 : value_; SYSTEMUI.dial_indicator_yoff = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Blink Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's blinking speed.\nMeasured in milliseconds.", true, , true),
-				new LuiInput({ height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_blink); })
+				new LuiInput({ height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_blink); })
 				.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 300 : value_; SYSTEMUI.dial_indicator_blink = index_; soup_checkout("dataindic", false, true).blink = index_; }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([ //Sprite image angle
 					new LuiText({ value: "Image Angle:", width: 120, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the indicator's angle.", true, , true),
-					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 360, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_CREATE, function(e_) { e_.set(SYSTEMUI.dial_indicator_angle); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
+					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 360, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_indicator_angle); }).addEvent(LUI_EV_VALUE_UPDATE, function(e_) { 
 						var value_ = real(e_.get()); SYSTEMUI.dial_indicator_angle = value_; soup_checkout("dataindic", false, true).angle = value_;
 					}),
 				]),

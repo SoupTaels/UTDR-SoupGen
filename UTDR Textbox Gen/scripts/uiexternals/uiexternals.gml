@@ -761,6 +761,7 @@ pref = {
 			var tween = TweenFire("?", SYSTEMUI, "$90", "#3", "@continue", func_);
 			soup_store("dataease_tween", tween); func_();
 		}
+		soup_store("dataease_tween func", easeExample);
 		var dataarr = [
 			new LuiText({ value: "Edit how the typewriter makes text appear!", text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }),
 			new LuiText({ value: "Instead of characters appearing instantly, you can give characters\nan easing animation to truly customize dialogue to your liking!", text_halign: fa_center, text_valign: fa_middle, color: c_gray, font: fnt_determination, }),
@@ -867,7 +868,7 @@ pref = {
 				
 				var tween = e_.getData("tween"); tween(true);
 				SYSTEMUI.typist_ease = { type: soup_checkout("dataeasetype"), x: soup_checkout("dataease_x"), y: soup_checkout("dataease_y"), xscale: soup_checkout("dataease_xs"), yscale: soup_checkout("dataease_ys"), angle: soup_checkout("dataease_angle"), alpha: soup_checkout("dataease_alpha"), };
-				with ( SYSTEMUI ) { typist.ease(typist_ease.type, typist_ease.x, typist_ease.y, typist_ease.xscale, typist_ease.yscale, typist_ease.angle, typist_ease.alpha); }
+				with ( SYSTEMUI ) { if ( typist_smooth == 0 ) { typist_smooth = 15; typist.in(typist_spd, typist_smooth); } typist.ease(typist_ease.type, typist_ease.x, typist_ease.y, typist_ease.xscale, typist_ease.yscale, typist_ease.angle, typist_ease.alpha); }
 				sfx_play(snd_chest); soup_checkout("datatypewriteredit_func")();
 			}),
 		];
@@ -877,7 +878,7 @@ pref = {
 		
 		soup_store("dataeasetype", -1); 
 		soup_store("datatypewriteredit_func", function() { soup_checkout("datatypewriteredit").destroy(); soup_store_clear(); SYSTEMUI.ui_paused = false; });
-		var maincan = soupy_popup(dataarr, function() { soup_store_clear(); SYSTEMUI.ui_paused = false; }, "Nevermind", , , , , , , 2); soup_store("datatypewriteredit", maincan); 
+		var maincan = soupy_popup(dataarr, function() { soup_checkout("dataease_tween func")(true); soup_store_clear(); SYSTEMUI.ui_paused = false; }, "Nevermind", , , , , , , 2); soup_store("datatypewriteredit", maincan); 
 	}
 #endregion
 
