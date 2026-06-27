@@ -66,7 +66,7 @@ function LuiImageButton(_params = {}) : LuiImage(_params) constructor {
 													_blend_color, self.alpha);
 				}
 				else {
-					draw_sprite_ext(self.value, self.subimg, self.x + self.width/2, self.y + self.height/2, self.xscale, self.yscale, self.angle ?? 0, _blend_color, self.alpha);
+					draw_sprite_ext(self.value, self.subimg, round(self.x + self.width/2), round(self.y + self.height/2), self.xscale, self.yscale, self.angle ?? 0, _blend_color, self.alpha);
 				}
 			}
 		}

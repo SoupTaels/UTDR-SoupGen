@@ -110,13 +110,13 @@ function LuiText(_params = {}) : LuiBase(_params) constructor {
 		if self.value != "" {
 			if ( !self.scribble_ ) { 
 				if !self.scale_to_fit {
-					self._drawTruncatedText(_txt_x + self.xoff, _txt_y + self.yoff, self.value, self.width, self.scale_x, self.scale_y, self.truncate);
+					self._drawTruncatedText(round(_txt_x + self.xoff), round(_txt_y + self.yoff), self.value, self.width, self.scale_x, self.scale_y, self.truncate);
 				} else {
 					var _text = self.value;
 					var _xscale = self.width / string_width(_text);
 					var _yscale = self.height / string_height(_text);
 					var _scale = min(_xscale, _yscale);
-					draw_text_ext_transformed(_txt_x + self.xoff, _txt_y + self.yoff, _text, self.wrapsep, self.wraplimit, _scale * self.scale_x, _scale * self.scale_y, 0);
+					draw_text_ext_transformed(round(_txt_x + self.xoff), round(_txt_y + self.yoff), _text, self.wrapsep, self.wraplimit, _scale * self.scale_x, _scale * self.scale_y, 0);
 				}
 			}
 			else {
@@ -125,7 +125,7 @@ function LuiText(_params = {}) : LuiBase(_params) constructor {
 				.scale(( scale_x + scale_y )/ 2)
 				.starting_format(self.font ?? self.style.font_default, self.color ?? ( !self.deactivated ? self.style.color_text : merge_color(self.style.color_text, c_black, 0.5) ))
 				.wrap(self.wraplimit)
-				.draw(_txt_x + self.xoff, _txt_y + self.yoff);
+				.draw(round(_txt_x + self.xoff), round(_txt_y + self.yoff));
 			}
 		}
 	}
