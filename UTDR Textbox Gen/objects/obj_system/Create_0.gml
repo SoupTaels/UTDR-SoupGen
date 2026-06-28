@@ -83,6 +83,8 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 	
 		scribble_glyph_set("fnt_sans", all, SCRIBBLE_GLYPH.Y_OFFSET, 1); scribble_glyph_set("fnt_sans", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_sans_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, 0); scribble_glyph_set("fnt_sans_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
+		scribble_glyph_set("fnt_sans_alt", all, SCRIBBLE_GLYPH.Y_OFFSET, 1); scribble_glyph_set("fnt_sans_alt", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
+		scribble_glyph_set("fnt_sans_alt_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, 0); scribble_glyph_set("fnt_sans_alt_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_papyrus", all, SCRIBBLE_GLYPH.Y_OFFSET, -1); scribble_glyph_set("fnt_papyrus", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_papyrus_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, -2); scribble_glyph_set("fnt_papyrus_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_determination", all, SCRIBBLE_GLYPH.X_OFFSET, 0); scribble_glyph_set("fnt_determination", "!", SCRIBBLE_GLYPH.X_OFFSET, 1);
