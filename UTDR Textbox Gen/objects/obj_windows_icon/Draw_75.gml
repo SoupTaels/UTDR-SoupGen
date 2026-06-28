@@ -1,4 +1,5 @@
 ///@desc 
+if ( !global.pref.soupyicon ) { exit; }
 if ( !surface_exists(surf) ) { exit; }
 surface_set_target(surf);
 draw_clear_alpha(c_black, 0);

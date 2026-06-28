@@ -18,6 +18,7 @@ pref = {
 	autopoint: false, //Whether auto-asterisk is enabled
 	themeclr: c_orange, //UI theme color
 	gifbgclr: c_lime, //GIF BG color
+	soupyicon: true, //Whether to enable dynamic icon changing
 	macros: { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }, //Macros for reusable text
 }
 #region Add External Faces
@@ -457,45 +458,48 @@ pref = {
 		var options_ = [], options_names = struct_get_names(global.faces_dict), options_len = array_length(options_names), options_i = 0;
 		repeat ( options_len ) { //Add available characters to an array
 			var cur_ = options_names[options_i], isnew_ = global.faces_dict[$ cur_][$ "NEW SPRITE"];
+			var face_ = struct_get_names(global.faces_dict[$ cur_]); face_ = face_[irandom(array_length(face_) - 1)];
 			array_push(options_, 
-				new LuiText({ value: isnew_ != undefined && isnew_ ? $"{string_upper_first(cur_)} (NEW!)" : string_upper_first(cur_), id_: cur_, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: ( get_face(cur_) != -1 ? c_cyan : c_white ), }).setPadding(5).setData("chara", cur_).setTooltip(get_face(cur_) != -1 ? $"[{cur_},0,0.15] [rainbow]Unique and recent!" : "", true, , true)
-				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
-				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_yellow; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
-				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = get_face(element_.params.id_) != -1 ? c_cyan : c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
-				.addEvent(LUI_EV_CLICK, function(element_) { //Once clicked on, create new scroll panel and populate it with face sprites
-					var get_ = soup_checkout("scrollmain", false); soup_checkout("scrollsub", false).destroy(); 
-					global.faces_dict[$ element_.params.id_][$ "NEW SPRITE"] = false; sfx_play(snd_select);
-					//Exit early if the sprite already exists(for external sprites added through drag & drop)
-					var early_ = get_face(element_.params.id_); if ( sprite_exists(early_) ) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = early_; FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.params.id_); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(early_); soup_checkout("datafunc", false)(); exit; }
+				new LuiRow().setFlexGrow(1).centerContent().setData("name", cur_).addContent([
+					new LuiText({ value: isnew_ != undefined && isnew_ ? $"{string_upper_first(cur_)} (NEW!)" : string_upper_first(cur_), id_: cur_, font: fnt_speech, text_halign: fa_center, auto_height: false, height: 70, text_valign: fa_middle, color: ( get_face(cur_) != -1 ? c_cyan : c_white ), }).setPadding(5).setData("chara", cur_).setTooltip(get_face(cur_) != -1 ? $"[{cur_},0,0.15] [rainbow]Unique and recent!" : "", true, , true)
+						.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
+						.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_yellow; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+						.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = get_face(element_.params.id_) != -1 ? c_cyan : c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+						.addEvent(LUI_EV_CLICK, function(element_) { //Once clicked on, create new scroll panel and populate it with face sprites
+							var get_ = soup_checkout("scrollmain", false); soup_checkout("scrollsub", false).destroy(); 
+							global.faces_dict[$ element_.params.id_][$ "NEW SPRITE"] = false; sfx_play(snd_select);
+							//Exit early if the sprite already exists(for external sprites added through drag & drop)
+							var early_ = get_face(element_.params.id_); if ( sprite_exists(early_) ) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = early_; FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.params.id_); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(early_); soup_checkout("datafunc", false)(); exit; }
 					
-					var spr_ = [], cur_ = element_.getData("chara"), spr_exp = struct_get_names(global.faces_dict[$ cur_]), spr_len = array_length(spr_exp), spr_i = 0; //Folders filled with sprites will have their sprites shown here
-					repeat ( spr_len ) {
-						var exp_ = spr_exp[spr_i], finalname = $"spr_{cur_}_{exp_}", myspr = get_face(finalname);
-						if ( exp_ != "NEW SPRITE" ) {
-							array_push(spr_, new LuiImageButton({ value: myspr, draw_normal: true, }).setSize(sprite_get_width(myspr), sprite_get_height(myspr)).setData("face", myspr).setData("facename", finalname).setFlexAlignSelf(flexpanel_align.center).setTooltip($"{finalname}\n[face,{finalname}]", true)
-							.setData("inputsoup_", element_.getData("inputsoup_")).setData("inputglobal_", element_.getData("inputglobal_")).setData("imagesoup_", element_.getData("imagesoup_")).setData("imageglobal_", element_.getData("imageglobal_")).setData("clear_", element_.getData("clear_"))
-							.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = element_.getData("face"); FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.getData("facename")); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(element_.getData("face")); soup_checkout("datafunc", false)(); })
-							.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { if ( sprite_get_number(element_.get()) > 1 ) { element_.imgspd = 0.15; } }).addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.imgspd = 0; element_.subimg = 0; })
-							);
-						}
-					spr_i++; }
+							var spr_ = [], cur_ = element_.getData("chara"), spr_exp = struct_get_names(global.faces_dict[$ cur_]), spr_len = array_length(spr_exp), spr_i = 0; //Folders filled with sprites will have their sprites shown here
+							repeat ( spr_len ) {
+								var exp_ = spr_exp[spr_i], finalname = $"spr_{cur_}_{exp_}", myspr = get_face(finalname);
+								if ( exp_ != "NEW SPRITE" ) {
+									array_push(spr_, new LuiImageButton({ value: myspr, draw_normal: true, }).setSize(sprite_get_width(myspr), sprite_get_height(myspr)).setData("face", myspr).setData("facename", finalname).setFlexAlignSelf(flexpanel_align.center).setTooltip($"{finalname}\n[face,{finalname}]", true)
+									.setData("inputsoup_", element_.getData("inputsoup_")).setData("inputglobal_", element_.getData("inputglobal_")).setData("imagesoup_", element_.getData("imagesoup_")).setData("imageglobal_", element_.getData("imageglobal_")).setData("clear_", element_.getData("clear_"))
+									.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = element_.getData("face"); FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.getData("facename")); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(element_.getData("face")); soup_checkout("datafunc", false)(); })
+									.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { if ( sprite_get_number(element_.get()) > 1 ) { element_.imgspd = 0.15; } }).addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.imgspd = 0; element_.subimg = 0; })
+									);
+								}
+							spr_i++; }
 					
-					#region Sort Names Alphabetically
-						array_sort(spr_, function(arrcur_, arrnext_) {
-							if ( string_lower(arrcur_.value) < string_lower(arrnext_.value) ) { return -1; }
-							else if ( string_lower(arrcur_.value) > string_lower(arrnext_.value) ) { return 1; }
-							else { return 0; }
-						});
-					#endregion
-					get_.addContent(new LuiScrollPanel({ height: 400, scroll_pin_edge_offset:10, sprite_panel: false, sound_right: snd_throw, }).addContent(spr_).addEvent(LUI_EV_CREATE, function(element_) { soup_store("scrollsub", element_); })); //Add new panel and stash it so we can destroy it later
-				})
+							#region Sort Names Alphabetically
+								array_sort(spr_, function(arrcur_, arrnext_) {
+									if ( string_lower(arrcur_.value) < string_lower(arrnext_.value) ) { return -1; }
+									else if ( string_lower(arrcur_.value) > string_lower(arrnext_.value) ) { return 1; }
+									else { return 0; }
+								});
+							#endregion
+							get_.addContent(new LuiScrollPanel({ height: 400, scroll_pin_edge_offset:10, sprite_panel: false, sound_right: snd_throw, }).addContent(spr_).addEvent(LUI_EV_CREATE, function(element_) { soup_store("scrollsub", element_); })); //Add new panel and stash it so we can destroy it later
+						}), new LuiImage({ value: get_face(cur_, face_), draw_normal: true, width: 70, height: 70 }),
+				])
 			);
 		options_i++; }
 		
 		#region Sort Names Alphabetically
 			array_sort(options_, function(arrcur_, arrnext_) {
-				if ( string_lower(arrcur_.value) < string_lower(arrnext_.value) ) { return -1; }
-				else if ( string_lower(arrcur_.value) > string_lower(arrnext_.value) ) { return 1; }
+				if ( string_lower(arrcur_.getData("name")) < string_lower(arrnext_.getData("name")) ) { return -1; }
+				else if ( string_lower(arrcur_.getData("name")) > string_lower(arrnext_.getData("name")) ) { return 1; }
 				else { return 0; }
 			});
 		#endregion

@@ -23,6 +23,7 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 				var get_ = pref_[$ "bg3d"]; global.pref.bg3d = !is_undefined(get_) ? get_ : ( is_android() ? false : true );
 				var get_ = pref_[$ "showfps"]; global.pref.showfps = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : false;
+				var get_ = pref_[$ "soupyicon"]; global.pref.soupyicon = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : false; dial_point_auto = global.pref.autopoint;
 				var get_ = pref_[$ "macros"]; global.pref.macros = !is_undefined(get_) ? get_ : { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }; 
@@ -1113,6 +1114,11 @@ if ( is_android() ) { instance_create_depth(0, 0, -2, obj_exportandroid); } else
 					i++; }
 					save_pref();
 				}),
+			]),
+			
+			new LuiRow().setFlexGrow(1).centerContent().addContent([
+				new LuiText({ value: "Dynamic Icon:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Should the icon change based\non your theme color?", true, , true),
+				new LuiToggleSwitch({ value: global.pref.soupyicon, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "soupyicon").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { window_reset_icon(); SYSTEMUI.save_pref(); }),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
