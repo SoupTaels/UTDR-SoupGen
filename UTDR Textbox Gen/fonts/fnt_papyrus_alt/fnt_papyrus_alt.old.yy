@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fnt_papyrus",
+  "%Name":"fnt_papyrus_alt",
   "AntiAlias":0,
   "applyKerning":1,
   "ascender":13,
@@ -117,7 +117,7 @@
   "last":0,
   "lineHeight":18,
   "maintainGms1Font":false,
-  "name":"fnt_papyrus",
+  "name":"fnt_papyrus_alt",
   "parent":{
     "name":"Fonts",
     "path":"folders/Fonts.yy",

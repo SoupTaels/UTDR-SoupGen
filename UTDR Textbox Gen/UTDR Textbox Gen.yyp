@@ -796,6 +796,7 @@
     {"id":{"name":"fnt_fibberish","path":"fonts/fnt_fibberish/fnt_fibberish.yy",},},
     {"id":{"name":"fnt_karenfat","path":"fonts/fnt_karenfat/fnt_karenfat.yy",},},
     {"id":{"name":"fnt_nes","path":"fonts/fnt_nes/fnt_nes.yy",},},
+    {"id":{"name":"fnt_papyrus_alt","path":"fonts/fnt_papyrus_alt/fnt_papyrus_alt.yy",},},
     {"id":{"name":"fnt_papyrus","path":"fonts/fnt_papyrus/fnt_papyrus.yy",},},
     {"id":{"name":"fnt_pixel","path":"fonts/fnt_pixel/fnt_pixel.yy",},},
     {"id":{"name":"fnt_sans_alt","path":"fonts/fnt_sans_alt/fnt_sans_alt.yy",},},
