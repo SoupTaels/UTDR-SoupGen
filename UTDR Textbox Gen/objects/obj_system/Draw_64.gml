@@ -28,7 +28,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } /
 				
 				 if ( !butt[i].data.centered ) {
 					 var result = butt[i].button.get_bbox(butt[i].data.x, butt[i].data.y);
-					 var calc_x = centerizer(result.width, count_, 320, 12);
+					 var calc_x = centerizer(result.width, count_, 320, !is_android() ? 12 : 0);
 					butt[i].data.x = calc_x[i]; butt[i].data.centered = true; 
 				 }
 			i++; }
