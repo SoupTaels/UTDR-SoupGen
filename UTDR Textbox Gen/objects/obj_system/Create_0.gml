@@ -251,7 +251,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			});
 			scribble_typists_add_event("speed_pop", function(_, param) { typist_spd = typist_spd_orig; }); //Changes the typist speed back to the default
 			scribble_typists_add_event("nametag", function(_, param) { dial_nametag = ( array_length(param) > 0 ? param[0] : "" ); }); //Change name tag
-			scribble_typists_add_event("choicer", function(_, param) { //Open a choice menu [choicer,option1,option2,option3,option4,startat,sprite,index,scale,angle,r,g,b]
+			scribble_typists_add_event("choicer", function(_, param) { //Open a choice menu [choicer,option1,option2,option3,option4,startat,sprite,index,scale,angle,r,g,b,deltarunelike]
 				FACE_CURRENT = -1; FACE_ORIGINAL = -1;
 				TweenFire("$30", "~oback", "dial_choices_scaleoff", 0, 1);
 				var choice1 = ( array_length(param) > 0 ? param[0] : "" ), choice2 = ( array_length(param) > 1 ? param[1] : "" )
@@ -272,6 +272,8 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				
 				var getclr = real_ext(array_length(param) > 9 ? param[9] : "255"), getclr2 = real_ext(array_length(param) > 10 ? param[10] : "0"), getclr3 = real_ext(array_length(param) > 11 ? param[11] : "0");
 				dial_choices_ico_clr = make_color_rgb(getclr != "" ? getclr : 255, getclr2 != "" ? getclr2 : 255, getclr3 != "" ? getclr3 : 255);
+				
+				var value_ = real_ext(( array_length(param) > 12 ? param[12] : dial_choices_deltarunelike )); dial_choices_deltarunelike = value_ == "" ? 0 : value_;
 			});
 			var func_ = function(_, param) { var value_ = real_ext(( array_length(param) > 0 ? param[0] : "0" )); dial_choices_menu = value_ == "" ? 0 : value_; }
 			scribble_typists_add_event("choicer_select", func_); scribble_typists_add_event("choicer_option", func_); scribble_typists_add_event("choicer_on", func_);//Select a choice
@@ -388,6 +390,8 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 					case "stack": { return "[repeat,test[newl][/page]test2[newl][/page]test3[newl][/page]test4[newl][/page]test5[newl][/page]test6[newl][/page]test7[newl][/page]test8[newl][/page]test9,5]"; break; }
 					//Test overloading the dialogue stack
 					case "overload": { return "[test,stack][/page][test,stack]"; break; }
+					//Test dialogue choices
+					case "choicer": { return "[choicer,Test Option,Test Option 2,Test Option 3,Test Option 4][newl][wait,2][newl][choicer_on,1][wait][newl][choicer_on,2][wait][newl][choicer_on,3][wait][newl][choicer_on,4][wait,2][newl][choicer_on,0][wait]"; break; }
 					
 					case "basic": { return "Test text 1, 2, 3.[newl]Test text 4, 5, 6.[newl]Test text 7, 8, 9.[/page][c_red]Test text 1, 2, 3.[newl]Test text 4, 5, 6.[newl]Test text 7, 8, 9."; break; }
 					default: { return "Testing suite ID not found."; }
@@ -410,6 +414,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	dial_choices_ico_clr = c_white; //Image blend
 	dial_choices_menu = 0; //Current selected option
 	dial_choices_scaleoff = 0; //Scaling animation
+	dial_choices_deltarunelike = false; //Whether to make the choicer act more like Deltarune's choicer
 #endregion
 
 #region Dialogue Shadow
@@ -857,6 +862,11 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
 				new LuiText({ value: "Right-To-Left:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether dialogue should be read right-to-left.", true, , true),
 				new LuiToggleSwitch({ value: dial_rtl, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_rtl"),
+			]),
+			
+			new LuiRow().setFlexGrow(1).centerContent().addContent([
+				new LuiText({ value: "Deltarune Choicer:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether the typewriter choicer\nshould act similarly to Deltarune's.\nThis value can be [rainbow]changed dynamically[/]\nif using\n[c_yellow][[choicer,1,2,3,4,startat,icon,frame,scale,angle,r,g,b,DELTARUNE-LIKE][/].", true, , true),
+				new LuiToggleSwitch({ value: dial_choices_deltarunelike, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_choices_deltarunelike").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { if ( dial_choices_deltarunelike ) { sfx_play(snd_chest); } }),
 			]),
 			
 			new LuiHorizontalRule({ height: 5, }),
