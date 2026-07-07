@@ -1,6 +1,10 @@
 <p align="center"><img src="https://files.catbox.moe/1o2oj2.png" style="display:block; margin:auto; width:300px"></p>
 <hr />
-<h1 align="center"><img src="https://files.catbox.moe/ath3jh.png" style="display:block; margin:auto;"> <img src="https://files.catbox.moe/9l8b2v.png" style="display:block; margin:auto;"> UTDR SoupGen <img src="https://files.catbox.moe/6kttry.png" style="display:block; margin:auto;"> <img src="https://files.catbox.moe/tuckng.png" style="display:block; margin:auto;"></h1>
+<h1 align="center"><img src="https://files.catbox.moe/ath3jh.png" style="display:block; margin:auto;"> <img src="https://files.catbox.moe/9l8b2v.png" style="display:block; margin:auto;"> UTDR SoupGen <img src="https://files.catbox.moe/6kttry.png" style="display:block; margin:auto;"> <img src="https://files.catbox.moe/tuckng.png" style="display:block; margin:auto;">
+
+![GitHub Repo stars](https://img.shields.io/github/stars/SoupTaels/UTDR-SoupGen)
+
+</h1>
 <p align="center"><i><b>An insanely customizable, flexible, and soupy OFFLINE Undertale & Deltarune dialogue textbox generator! Made in <a href="https://gamemaker.io/en">GameMaker</a> and powered by <a href="https://www.jujuadams.com/Scribble/#/latest/">Scribble</a>.</b></i></p>
 <p align="center"><img src="https://github.com/user-attachments/assets/0c837117-2d38-4894-ba07-0f245c1d8b21" style="display:block; margin:auto;"></p>
 <p align="center"><img src="https://files.catbox.moe/jew38r.png" style="display:block; margin:auto;"></p>
