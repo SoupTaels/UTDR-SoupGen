@@ -23,6 +23,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				var get_ = pref_[$ "bg3d"]; global.pref.bg3d = !is_undefined(get_) ? get_ : ( is_android() ? false : true );
 				var get_ = pref_[$ "showfps"]; global.pref.showfps = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : false;
+				var get_ = pref_[$ "pausesymbols"]; global.pref.pausesymbols = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "soupyicon"]; global.pref.soupyicon = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : false; dial_point_auto = global.pref.autopoint;
@@ -141,6 +142,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 		typist.in(typist_spd, typist_smooth);
 		typist.function_per_char(function(_element, _position, _typist) { //Function to run per character
 			if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } //Prevents the stack export from going out of bounds
+			
 			#region Auto Asterisks
 				var mychr = chr(_element.get_glyph_data(_position - 1).unicode); //Get the currently revealed character
 				var mychr2 = chr(_element.get_glyph_data(_position).unicode); //Get the next character
@@ -163,6 +165,16 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 					if ( anim_timer > dial_face_anim ) { anim_timer = 0; dial_miniface_index[dial_wrap_count - 1]++; }
 				}
 			#endregion
+			
+			#region Delay on symbols
+				if ( !global.pref.pausesymbols ) { exit; }
+				var str = ",<.>/?;:'\"[{]}\\|`~!@#$%^&*()_-+=";
+				var i = 0, len = string_length(str);
+				repeat ( len ) {
+					var cur = string_char_at(str, i);
+					if ( mychr == cur ) { typist.pause(); TweenScript(self, 0, 30, function () { SYSTEMUI.typist.unpause(); }); }
+				i++; }
+			#endregion
 		});
 		typist.function_on_complete(function() { //Function to run once the dialogue is complete
 			if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } //Prevents the stack export from going out of bounds
@@ -172,7 +184,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			typist_spd = typist_spd_orig; //Switch back to the original typewriter speed
 			
 			if ( !instance_exists(obj_mini) ) { exit; }
-			with ( obj_mini ) { if ( page == other.dial_text_page ) { active = true; TweenFire("$13", $"~{smooth ? "oquad" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
+			with ( obj_mini ) { if ( page == other.dial_text_page ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
 		typist_reset = function () { dial_face_xoff_static = dial_face_xoff_static_orig; dial_face_yoff_static = dial_face_yoff_static_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
@@ -489,7 +501,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 
 	#region Textbox
 		quill_change = false; //QuillMulti()
-		textinput = QuillMulti(, "(Click here to start typing!)\n(Your raw text input lives here. Processed output is below.)\n(Click on the quick buttons above to quickly insert text colors\n and effects. Try highlighting portions of texts!)\n(All done? Just press ESC for export options!)\n \n   (Happy generating and make sure to eat some good soup!!)")
+		textinput = QuillMulti(, "(Click here to start typing!)\n(Your raw text input lives here. Processed output is below.)\n(Click on the quick buttons above to quickly insert text\n colors and effects. Try highlighting portions of texts!)\n(All done? Just press ESC for export options!)\n(Want a background for your exports? Add a reference image\n in the Extras tab!)\n \n   (Happy generating and make sure to eat some good soup!!)")
 			.SetInputMode(QUILL_TEXTMODE_TEXT).SetWrap(false).AllowActions(false).SetResizable(false).SetUseOverlayEditor(false)
 			.SetTabInserts(true).SetTabUsesSpaces(false).SetTabSpaces(4)
 			.SetCaretBlink(false).SetCaretFade(true).SetCaretFadeTime(250).SetCaretRepeatRate(10)
@@ -850,12 +862,12 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "Auto Wrap:", width: 100, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically wrap text to a new line\nif the text width exceeds the dialogue box.\nTurning this off means [c_yellow]you'll have to manually\nadd newline literals(\\n or [[newl] yourself.", true, , true),
+				new LuiText({ value: "Auto Wrap:", width: 100, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically wrap text to a new line\nif the text width exceeds the dialogue box.\nTurning this off means you'll have to manually\nadd newline literals(\"\\n\") or \"[newl]\" yourself.", true),
 				new LuiToggleSwitch({ value: dial_auto_wrap, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_auto_wrap"),
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "Auto Page:", width: 100, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add new pages when\nyour text overflows the dialogue box.\n[c_yellow]This [c_red]disables[c_yellow] vertical text alignments if it's off.[c_white]\nPage created this way will [c_yellow]not start with\nan asterisk if auto-asterisk is on.", true, , true),
+				new LuiText({ value: "Auto Page:", width: 100, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add new pages when\nyour text overflows the dialogue box.\n[c_yellow]This [c_red]disables[c_yellow] vertical text alignments if it's on.[c_white]\nPage created this way will [c_yellow]not start with\nan asterisk if auto-asterisk is on.", true, , true),
 				new LuiToggleSwitch({ value: dial_auto_page, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_auto_page"),
 			]),
 			
@@ -865,13 +877,18 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			]),
 			
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "Deltarune Choicer:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether the typewriter choicer\nshould act similarly to Deltarune's.\nThis value can be [rainbow]changed dynamically[/]\nif using\n[c_yellow][[choicer,1,2,3,4,startat,icon,frame,scale,angle,r,g,b,DELTARUNE-LIKE][/].", true, , true),
+				new LuiText({ value: "Deltarune Choicer:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether the typewriter choicer\nshould act similarly to Deltarune's.\nThis value can be [rainbow]changed dynamically[/] if using\n[c_yellow][[choicer,1,2,3,4,startat,icon,frame,scale,angle,r,g,b,DELTARUNE-LIKE][/].", true, , true),
 				new LuiToggleSwitch({ value: dial_choices_deltarunelike, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_choices_deltarunelike").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { if ( dial_choices_deltarunelike ) { sfx_play(snd_chest); } }),
+			]),
+			
+			new LuiRow().setFlexGrow(1).centerContent().addContent([
+				new LuiText({ value: "Symbols Delay:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Always add a delay to the typewriter\nwhen encountering symbols?\nThis may get in the way when it comes\nto characters that talk in\nunconventional ways.", true, , true),
+				new LuiToggleSwitch({ value: global.pref.pausesymbols, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "pausesymbols").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { global.pref.pausesymbols = e_.get(); SYSTEMUI.save_pref(); }),
 			]),
 			
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiRow().setFlexGrow(1).centerContent().addContent([
-				new LuiText({ value: "Auto Asterisk:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add asterisks\nat the start of text.\nTurning this off means [c_yellow]you'll have\nto manually add asterisks yourself.", true, , true),
+				new LuiText({ value: "Auto Asterisk:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add asterisks\nat the start of text.\nTurning this off means [c_yellow]you'll have\nto manually add asterisks yourself.\n[/]Recommended off.", true, , true),
 				new LuiToggleSwitch({ value: dial_point_auto, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_point_auto").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { global.pref.autopoint = e_.get(); SYSTEMUI.save_pref(); }),
 			]),
 			
@@ -1051,7 +1068,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiText({ value: "Quick Ref Shortcuts:", auto_width: false, auto_height: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setPadding(10),
 			new LuiText({ value: "Update Ref: CTRL+1 | View Ref: CTRL+2", auto_width: false, auto_height: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setPadding(3),
-			new LuiButton({ text: "Update Reference Image", height: 40, }).addEvent(LUI_EV_CLICK, function () { SYSTEMUI.ui_updateref(); }),
+			new LuiButton({ text: "Update Reference Image", height: 40, }).addEvent(LUI_EV_CLICK, function () { SYSTEMUI.ui_updateref(); }).setTooltip("Adds an image to be shown\nwhen exporting dialogue.\nIdeally a resolution of 640x480."),
 			new LuiButton({ text: "View Reference Image", height: 40, }).addEvent(LUI_EV_CLICK, function () { SYSTEMUI.ui_viewref(); }),
 			
 			new LuiHorizontalRule({ height: 5, }),
@@ -1227,14 +1244,15 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 		ui_updateref = function() {
 			if ( sprite_exists(global.refimg) ) { sprite_delete(global.refimg); global.refimg = -1; }
 			if ( !is_android() ) {
-				var fname = $"reference{PATHSEP}reference_image.png", fnamedebug = string_replace(fname, $"reference{PATHSEP}", "");
-				 if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); }
+				var fname = $"reference{PATHSEP}reference_image.png", fnamedebug = string_replace(fname, $"reference{PATHSEP}", ""), enabler = false;
+				 if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); enabler = true; }
 				else {
 					var result = get_open_filename_ext("Image File (.png, .jpg, .gif)|*.png;*.jpg;*.jpeg;*.gif", "", directory_get_pictures_path(), "Select a sprite to import.");
 					if ( result == -1 || result == "" ) { sfx_play(snd_error); exit; }
-					else { global.refimg = sprite_add_ext(result, 1, 0, 0, true); show_debug_message($"Added \"{filename_name(result)}\" from {result}!"); }
+					else { global.refimg = sprite_add_ext(result, 1, 0, 0, true); show_debug_message($"Added \"{filename_name(result)}\" from {result}!"); enabler = true; }
 				}
 				sfx_play(snd_updated); ui_refclr = c_white; TweenFire("?", SYSTEMUI, "$30", "+60", TPCol("ui_refclr>"), $15101c);
+				if ( enabler ) { if ( !global.pref.sizematters ) { global.pref.sizematters = true; sfx_play(snd_bump, , , 1.3); }; }
 			}
 			else { soup_store("asynctype", "reference", , true); TweenScript(id, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 		}

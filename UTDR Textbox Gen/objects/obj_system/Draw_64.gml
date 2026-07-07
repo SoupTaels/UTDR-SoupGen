@@ -1,5 +1,5 @@
 ///@desc Draw Dialogue Things
-//if ( live_call() ) { return live_result; } 
+if ( live_call() ) { return live_result; } 
 if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } //Prevents the stack export from going out of bounds
 #region UI Borders and Buttons
 	if ( ui_visible ) {
@@ -98,7 +98,6 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } /
 							#region Effects with Regions
 								var regions_ = scrib_dial.region_get_bboxes(), regions_len = array_length(regions_), regions_i = 0;
 								if ( regions_len > 0 ) { //Found some regions?
-									if ( mouse_pressed_right ) { show_debug_message(regions_); }
 									repeat ( regions_len ) { //Loop through all regions
 										var cur_ = regions_[regions_i]; //Get current region
 										switch ( cur_.name ) {
@@ -124,7 +123,6 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } /
 												if ( !record.enabled || ( record.enabled && typist.get_position() > cur_.start_glyph ) ) { draw_sprite_stretched_ext(spr_pixel, 0, myx_, myy_, w_, h_, dial_striket, 1); }
 											} break;
 										}
-										//if ( mouse_pressed_right ) { show_debug_message(); }
 									regions_i++; }
 								}
 							#endregion
@@ -316,18 +314,19 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 				else if ( detect_ == undefined ) { finish_.region_set_active(undefined, c_yellow, 0); soup_checkout("hover"); }
 				
 				if ( mouse_pressed ) {
+					var sfx_ = false;
 					switch ( detect_ ) {
 						case "export": {
-							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)();
+							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)(); sfx_ = true;
 						} break;
 						case "preview": {
-							typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); 
+							if ( instance_exists(obj_mini) ) { with ( obj_mini ) { alpha = 0; } } typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); sfx_ = true;
 						} break;
 						case "cancel": {
-							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); 
+							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); sfx_ = true;
 						} break;
 					}
-					sfx_play(snd_select);
+					if ( sfx_ ) { sfx_play(snd_select); }
 				}
 
 				var bbox_ = finish_.get_bbox(320, ui_finished_y);

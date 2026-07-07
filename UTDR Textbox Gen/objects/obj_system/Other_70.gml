@@ -37,7 +37,7 @@ switch ( get_[? "type"] ) {
 				MobileUtils_Vibrate_Shot(150); MobileUtils_Image_Resize(result, 640, 480);
 				global.refimg = sprite_add_ext(result, 1, 0, 0, true);
 				sfx_play(snd_updated); ui_refclr = c_white; TweenFire("?", SYSTEMUI, "$30", "+60", TPCol("ui_refclr>"), $15101c);
-				soup_checkout("asynctype", , true);
+				soup_checkout("asynctype", , true); if ( !global.pref.sizematters ) { global.pref.sizematters = true; sfx_play(snd_bump, , , 1.3); }
 			} break;
 			
 			default: {
