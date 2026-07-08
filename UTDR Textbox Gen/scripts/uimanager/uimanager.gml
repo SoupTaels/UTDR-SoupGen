@@ -87,7 +87,7 @@ function scribble_alignment(halign_ = 0, valign_ = 0) {
 #endregion
 
 function TextChange(txt, point) : UndoableChange() constructor { //Handle undo/ redoing changes
-	live_auto_call
+	//live_auto_call
 	prev_txt = SYSTEMUI.dial_text; //Store previous/ inital text
 	point_prev = SYSTEMUI.textinput.GetCaret(); //Get previous point
 	mytxt = txt; //Get our new text
@@ -157,7 +157,7 @@ function soupy_url(path_, args_ = "", act_ = "", cmd_ = 5) {
 
 ///@desc Manages state for UI tabs.
 function ui_manage() {
-	live_auto_call 
+	//live_auto_call 
 	#region Update Text
 		var update_text = function() { //Update text function
 			undo_stack_begin_move(); 
@@ -217,7 +217,7 @@ function ui_manage() {
 					if ( variable_instance_get(obj_system, "within_hover4") == undefined ) { variable_instance_set(obj_system, "within_hover4", false); }
 					if ( variable_instance_get(obj_system, "yscale_4") == undefined ) { variable_instance_set(obj_system, "yscale_4", 1); }
 		
-					var x_ = 10, y_ = 400, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 5);
+					var x_ = 10, y_ = 400, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 40) && range_within(mouse_y_gui, y_ - 30, y_ + 30);
 					if ( within_ ) {
 						if ( !within_hover4 ) { within_hover4 = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) { if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_bump, , 0.7, 1.5); sfx_play(snd_throw); dial_text_page = approach(dial_text_page, 0, 1); yscale_4 = 0.5; } //Pressed
@@ -241,7 +241,7 @@ function ui_manage() {
 					if ( variable_instance_get(obj_system, "within_hover5") == undefined ) { variable_instance_set(obj_system, "within_hover5", false); }
 					if ( variable_instance_get(obj_system, "yscale_5") == undefined ) { variable_instance_set(obj_system, "yscale_5", 1); }
 		
-					var x_ = 630, y_ = 400, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 5);
+					var x_ = 630, y_ = 400, within_ = range_within(mouse_x_gui, x_ - 40, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 30);
 					if ( within_ ) {
 						if ( !within_hover5 ) { within_hover5 = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) { if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_bump, , 0.7, 1.5); sfx_play(snd_throw); dial_text_page = approach(dial_text_page, dial_text_page_c, 1); yscale_5 = 0.5; } //Pressed
