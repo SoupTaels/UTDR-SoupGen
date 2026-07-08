@@ -168,7 +168,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			
 			#region Delay on symbols
 				if ( !global.pref.pausesymbols ) { exit; }
-				var str = ",<.>/?;:'\"[{]}\\|`~!@#$%^&*()_-+=";
+				var str = ",<.>/?;:[{]}\\|`~!@#$%^&*()_-+=";
 				var i = 0, len = string_length(str);
 				repeat ( len ) {
 					var cur = string_char_at(str, i);
