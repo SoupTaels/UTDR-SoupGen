@@ -342,7 +342,7 @@ pref = {
 
 #region Functions
 	///@desc Returns an external sprite or adds it if it doesn't already exist
-	function external_ensure(name_, fname_, fpath_, type_ = 0, allowmultiple_ = true) {
+	function external_ensure(name_, fname_, fpath_, type_ = 0, allowmultiple_ = true, showmsg_ = true) {
 		if ( filename_ext(fpath_) != ".png" && !is_android() ) { soupy_message($"\"{fname_}\"|is not allowed to be loaded.|File must be a PNG format.", , 320, , , snd_error, , , true); return -1; }
 		
 		switch ( type_ ) {
@@ -357,6 +357,7 @@ pref = {
 							self[$ "NEW SPRITE"] = true; //Mark the sprite as new
 							self[$ name_] = { sprite: sprite_add_ext(fpath_, imgnum, 0, 0, true), expression: finalname, name: fpath_, } //Add sprite and data
 							if ( allowmultiple_ ) { TweenScript(SYSTEMUI, 0, 1, soup_store, "allowmultiple"); }
+							if ( !showmsg_ ) { TweenScript(SYSTEMUI, 0, 1, soup_store, "showmsg"); }
 							with ( self[$ name_] ) { 
 								self[$ "destroy"] = function () { sprite_delete(sprite); delete sprite; sprite = -1; show_debug_message($"External face \"{name}\" was destroyed and freed from memory successfully!"); } //Add a destroy func so we don't get memory leaks
 							
@@ -459,7 +460,7 @@ pref = {
 		var options_ = [], options_names = struct_get_names(global.faces_dict), options_len = array_length(options_names), options_i = 0;
 		repeat ( options_len ) { //Add available characters to an array
 			var cur_ = options_names[options_i], isnew_ = global.faces_dict[$ cur_][$ "NEW SPRITE"];
-			var face_ = struct_get_names(global.faces_dict[$ cur_]); face_ = face_[irandom(array_length(face_) - 1)];
+			var face_ = struct_get_names(global.faces_dict[$ cur_]); face_ = face_[irandom_range(0, array_length(face_) - 1)];
 			array_push(options_, 
 				new LuiRow().setFlexGrow(1).centerContent().setData("name", cur_).addContent([
 					new LuiText({ value: isnew_ != undefined && isnew_ ? $"{string_upper_first(cur_)} (NEW!)" : string_upper_first(cur_), id_: cur_, font: fnt_speech, text_halign: fa_center, auto_height: false, height: 70, text_valign: fa_middle, color: ( get_face(cur_) != -1 ? c_cyan : c_white ), }).setPadding(5).setData("chara", cur_).setTooltip(get_face(cur_) != -1 ? $"[{cur_},0,0.15] [rainbow]Unique and recent!" : "", true, , true)
@@ -525,8 +526,12 @@ pref = {
 				.addEvent(LUI_EV_CLICK, function(element_) { 
 					sfx_play(snd_equip); 
 					if ( !is_android() ) { 
-						var result = get_open_filename_ext("Image File (.PNG Only)|*.png", "", directory_get_pictures_path(), "Select a sprite to import."), myname_;
-						if ( result == -1 || result == "" ) { result = -1; myname_ = ""; } else { myname_ = string_exclude(string_replace(string_replace(filename_name(result), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, , SYSTEMUI.ui_tab == 0 ? true : false); }
+						var result = get_open_filename_ext("Image File (.PNG Only) or Zip|*.png;*.zip", "", directory_get_pictures_path(), "Select a sprite to import."), myname_, myext_ = filename_ext(result);
+						if ( result == -1 || result == "" || myext_ == ".zip" ) { 
+							var bulk = zip_unzip_async(result, filename_path(result));
+							soup_store("bulkload", { id: bulk, fpath: result, fext: myext_, fname: filename_name(result), finalpath: string_replace(result, ".zip", ""), }, , true);
+							sfx_play(snd_chest); result = -1; myname_ = "";
+						} else { myname_ = string_exclude(string_replace(string_replace(filename_name(result), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, , SYSTEMUI.ui_tab == 0 ? true : false); }
 						if ( element_.getData("clear_") ) { FACE_CURRENT = result; FACE_ORIGINAL = FACE_CURRENT; } 
 						soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(myname_); 
 						soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(result);
@@ -894,6 +899,27 @@ pref = {
 		soup_store("dataeasetype", -1); 
 		soup_store("datatypewriteredit_func", function() { soup_checkout("datatypewriteredit").destroy(); soup_store_clear(); SYSTEMUI.ui_paused = false; });
 		var maincan = soupy_popup(dataarr, function() { soup_checkout("dataease_tween func")(true); soup_store_clear(); SYSTEMUI.ui_paused = false; }, "Nevermind", , , , , , , 2); soup_store("datatypewriteredit", maincan); 
+	}
+	
+	///@desc Show error message for sprites that couldn't be loaded
+	function external_error() {
+		if ( global.outputLogSkipped == "" ) { exit; }
+		var result = string_split(global.outputLogSkipped, "|"), result_len = array_length(result), result_i = 0, arr_ = [];
+		repeat ( result_len ) {
+			var cur_ = result[result_i];
+			array_push(arr_,  new LuiText({ value: cur_, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }));
+		result_i++; }
+	
+		array_push(arr_,  new LuiText({ value: "These sprites were not loaded due to\neither incorrect filenames or file structure.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }));
+		array_push(arr_,  new LuiText({ value: "If you need help, please refer to the SoupGen guide. (Click me!)", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 })
+			.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_select); soupy_url("https://rentry.co/utdrsoupguides", , , 0); })
+			.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_gold; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+			.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+		);
+	
+		var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
+		soupy_popup([ maincan, ], , "Oh no!", , 460, , snd_error, fnt_abaddon, SYSTEMUI.ui_paused, 0, 40);
+		global.outputLogSkipped = "";
 	}
 #endregion
 

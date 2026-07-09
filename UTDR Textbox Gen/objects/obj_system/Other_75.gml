@@ -10,7 +10,24 @@ var errorfunc = function (txt_, w_ = undefined) { soupy_message(txt_, , w_, , , 
 #region Dropping Files
 	if ( UI_MESSAGE ) {
 		if ( async_result[?"event_type"] == "file_drop" && fpath != undefined ) {
-			if ( bord_visible && ( range_within(mouse_x_gui, 0, 174) && range_within(mouse_y_gui, 323, 480) ) ) { //Hovering over the dialogue portrait
+			if ( fext == ".zip" ) { //Bulk load face sprites
+				var arr_ = [
+					new LuiText({ value: "Bulk import .zip of face sprites?", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+					new LuiText({ value: "These sprites will also be added for auto-loading.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+					new LuiButton({ text: "Let's get soupy!!", height: 35, font: fnt_abaddon, }).setData("filedata", { fpath, fext, fname, }).addEvent(LUI_EV_CLICK, function(e_) {
+						SYSTEMUI.ui_paused = false; SYSTEMUI.file_dragging = false;
+						
+						var data = e_.getData("filedata");
+						var bulk = zip_unzip_async(data.fpath, filename_path(data.fpath));
+						soup_store("bulkload", { id: bulk, fpath: data.fpath, fext: data.fext, fname: data.fname, finalpath: string_replace(data.fpath, ".zip", ""), }, , true);
+						sfx_play(snd_equip);
+						
+						soup_checkout("bulkimport").destroy();
+					}),
+				];
+				var maincan = soupy_popup(arr_, function(){ SYSTEMUI.file_dragging = false; }, "Cancel", , , , snd_dimbox, fnt_abaddon); soup_store("bulkimport", maincan); 
+			}
+			else if ( bord_visible && ( range_within(mouse_x_gui, 0, 174) && range_within(mouse_y_gui, 323, 480) ) ) { //Hovering over the dialogue portrait
 				if ( fext == ".png" ) {
 					if ( struct_exists(global.faces_dict_alt, finalname) ) { FACE_CURRENT = get_face(finalname); FACE_ORIGINAL = FACE_CURRENT; FACE_INTERNAL = finalname; sfx_play(snd_bump, , 0.7, 1.5); sfx_play(snd_sparkle); } //If this sprite already exists within our face dictonary, just set the current page's face to that
 					else {

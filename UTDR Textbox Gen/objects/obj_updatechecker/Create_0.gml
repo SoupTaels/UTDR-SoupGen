@@ -39,7 +39,7 @@ if ( os_is_network_connected(true) ) {
 					new LuiText({ value: "Would you like to update now?", font: fnt_abaddon, }),
 					new LuiButton({ text: "Time for some new soup!", height: 35, font: fnt_abaddon, }).setData("link", updateversion.game_page).addEvent(LUI_EV_CLICK, function(e_) { soupy_url(e_.getData("link"), , , 0); }),
 				];
-				soupy_popup(arr_, , "Gotta generate smth rq.", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
+				soupy_popup(arr_, function() { TweenScript(SYSTEMUI, 0, 3, function(){ if ( SYSTEMUI.ui_paused ) { SYSTEMUI.ui_paused = false; } }); }, "Gotta generate smth rq.", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
 				instance_destroy();
 				exit;
 			}

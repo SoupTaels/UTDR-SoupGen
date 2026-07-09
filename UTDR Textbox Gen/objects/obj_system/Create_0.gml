@@ -1307,21 +1307,5 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 #endregion
 
 #region Errors with Auto-loading
-	if ( global.outputLogSkipped != "" ) {
-		var result = string_split(global.outputLogSkipped, "|"), result_len = array_length(result), result_i = 0, arr_ = [];
-		repeat ( result_len ) {
-			var cur_ = result[result_i];
-			array_push(arr_,  new LuiText({ value: cur_, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }));
-		result_i++; }
-	
-		array_push(arr_,  new LuiText({ value: "These sprites were not loaded due to\neither incorrect filenames or file structure.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }));
-		array_push(arr_,  new LuiText({ value: "If you need help, please refer to the SoupGen guide. (Click me!)", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 })
-			.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_select); soupy_url("https://rentry.co/utdrsoupguides", , , 0); })
-			.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_gold; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
-			.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
-		);
-	
-		var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
-		soupy_popup([ maincan, ], , "Oh no!", , 460, , snd_error, fnt_abaddon, global.pref.firsttime ? true : false, 0, 40); 
-	}
+	external_error();
 #endregion
