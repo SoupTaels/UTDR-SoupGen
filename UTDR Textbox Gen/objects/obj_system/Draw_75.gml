@@ -89,15 +89,15 @@ if ( screenshot || record.enabled ) {
 	if ( screenshot ) { 
 		if ( !screenshot_stacked ) { screenshot = false; finish_func(false); exit; }
 		else {
-			if ( dial_text_page < dial_text_page_c ) { //Create sprite from surface, then push them to the stack
+			if ( dial_text_page <= dial_text_page_c - 1 ) { //Create sprite from surface, then push them to the stack
 				ui_mini();
 				with ( obj_stacker ) {
 					if ( soupstack_path == "" ) { var fpath_final = $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}{folder}{PATHSEP}{fname}_.png"; soupstack_path = fpath_final; soupstack_fname = fname; soupstack_folder = folder; }
 					array_push(soupstack_spr, sprite_create_from_surface(other.screenshot_surf, x_, y_, w_, h_, false, false, 0, 0));
 				}
-				dial_text_page++; sfx_play(snd_equip2); 
+				dial_text_page++; sfx_play(snd_equip2);
 			}
-			else { finish_func(false, true); screenshot = false; instance_destroy(obj_stacker); exit; }
+			else { dial_text_page = 0; finish_func(false, true); screenshot = false; screenshot_stacked = false; instance_destroy(obj_stacker); exit; }
 		}
 	}
 	else if ( record.enabled ) {

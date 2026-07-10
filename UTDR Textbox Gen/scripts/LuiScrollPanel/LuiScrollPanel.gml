@@ -94,7 +94,7 @@ function LuiScrollPanel(_params = {}) : LuiBase(_params) constructor {
 				self.scroll_target_offset_y += self.style.scroll_step * _wheel;
 			}
 			// Touch compatibility //???// (WIP)
-			if self.drag_start_y == -1 && mouse_check_button_pressed(mb_left) {
+			if self.drag_start_y == -1 && mouse_check_button(mb_left) {
 				self.drag_start_y = device_mouse_y_to_gui(0);
 			}
 		}

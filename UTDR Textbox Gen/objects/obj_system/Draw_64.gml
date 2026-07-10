@@ -1,6 +1,12 @@
 ///@desc Draw Dialogue Things
-if ( live_call() ) { return live_result; } 
-if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 ) { exit; } //Prevents the stack export from going out of bounds
+//if ( live_call() ) { return live_result; } 
+if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot_stacked && screenshot ) { //Prevents the stack export from going out of bounds
+	ui_tab = 0; 
+	ui_reset(); 
+	soupy_alarm("failsafe", 15);
+	soupy_alarm_run("failsafe", 0, function(){ sfx_play(snd_sparkle); with ( SYSTEMUI ) { ui_finished = false; ui_preview = false; ui_finished_y = -100; typist_reset(); file_newname = ""; screenshot = false; screenshot_stacked = false; dial_text_gif = false; dial_wrap_count = 1; spr_bord = bord_prev; dial_text_page = 0; bord_box_visible = true; ui_tab = soup_checkout("tablast", , true); ui_visible = true; ui_reset(); } });
+	exit; 
+}
 #region UI Borders and Buttons
 	if ( ui_visible ) {
 		#region No 3D BG
@@ -320,7 +326,7 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)(); sfx_ = true;
 						} break;
 						case "preview": {
-							if ( instance_exists(obj_mini) ) { with ( obj_mini ) { alpha = 0; } } typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -100; dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); sfx_ = true;
+							if ( instance_exists(obj_mini) ) { with ( obj_mini ) { alpha = 0; } } typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -window_get_height(); dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); sfx_ = true;
 						} break;
 						case "cancel": {
 							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); sfx_ = true;

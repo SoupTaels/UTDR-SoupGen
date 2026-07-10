@@ -854,6 +854,7 @@ function LuiBase(_params = {}) constructor {
 	    // Recursively update depth_array for all children
 	    for (var i = 0, n = array_length(self.content); i < n; i++) {
 	        var _element = self.content[i];
+			if ( !is_array(self.depth_array) ) { self.depth_array = [self.z]; }
 	        _element.depth_array = array_concat(self.depth_array, [_element.z]);
 	        // Recursively update children's children
 	        _element.setDepth(_element.z); // Reuse setDepth to update children
@@ -1487,6 +1488,7 @@ function LuiBase(_params = {}) constructor {
 			// Init depth
 			_element.nesting_level = self.nesting_level + 1;
 			_element.z = global.lui_max_z++;
+			if ( !is_array(self.depth_array) ) { exit; }
 			_element.depth_array = array_concat(self.depth_array, [_element.z]);
 			
 			// Inherit variables

@@ -458,7 +458,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 #endregion
 
 #region Engine UI
-	fader = 1; TweenFire("$10", "+10", "fader>", 0); //Black overlay
+	fader = 1; TweenFire("$10", "fader>", 0); //Black overlay
 	ui_accentcolor = global.pref.randomclr ? make_color_hsv(irandom(255), irandom_range(150, 230), 255) : global.pref.themeclr;
 	ui_tab = 0; //Current Tab (0 - Dialogue, 1 - Face, 2 - Border, 3 - About)
 	screenshot = false; //Screenshot task
@@ -478,6 +478,10 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	ui_finished = false; //Whether we finished recording the GIF
 	ui_finished_y = -100; //UI animation
 	ui_preview = false; //Whether we're previewing animated dialogue
+	if ( !is_android() ) { var tinysoup = "icons\\tinysoupy.png"; if ( file_exists(tinysoup) ) { widget_set_icon(tinysoup); } file_dropper_init(); }
+	undo_stack_create(); //History of undo changes
+	scribble_font_set_default("fnt_determination_nomono");
+	instance_create_depth(0, 0, -2, obj_updatechecker);
 	
 	#region Main Menu Buttons
 		var i = 0, spr_ = spr_border_octagon, x_ = 320, y_ = 12, clr_ = ui_accentcolor, padd_ = 14;
@@ -497,6 +501,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			with ( butt[i++].data ) { self[$ "on_hover"] = method(self, on_hover_); self[$ "on_enter"] = method(self, on_enter_a); self[$ "on_leave"] = method(self, on_leave_); self[$ "on_click"] = function () { soup_store("androidexport", , , true); } }
 		}
 		call_later(1, time_source_units_frames, on_reset_); //Reset all buttons on start
+		call_later(1, time_source_units_frames, function() { if ( !is_android() ) { window_progress(window_progress_none); } });
 	#endregion
 
 	#region Textbox
@@ -552,6 +557,8 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				.ContextMenuAddItem(QuillContextMenuSeparator())
 				.ContextMenuAddItem(QuillContextMenuItem("Select All", method(self, function () { textinput.SelectAll(); sfx_play(snd_enc1); }), "soupy_select").SetShortcut("Ctrl+A"))
 				.ContextMenuAddItem(QuillContextMenuItem("Clear All", method(self, soupy_context_clear), "soupy_clear").SetShortcut("Ctrl+S"))
+				.ContextMenuAddItem(QuillContextMenuItem("Undo", method(self, undo_stack_undo), "soupy_undo").SetShortcut("Ctrl+Z"))
+				.ContextMenuAddItem(QuillContextMenuItem("Redo", method(self, undo_stack_redo), "soupy_redo").SetShortcut("Shift+Ctrl+Z"))
 				.ContextMenuAddItem(QuillContextMenuSeparator())
 				.ContextMenuAddItem(QuillContextMenuItem("Insert Page", method(self, soupy_context_page), "soupy_page").SetShortcut("Ctrl+D"))
 				.ContextMenuAddItem(QuillContextMenuItem("Add As Macro", method(self, soupy_context_macro), "soupy_macro").SetShortcut("Ctrl+P"))
@@ -1186,6 +1193,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			
 			new LuiHorizontalRule({ height: 5, }),
 			new LuiButton({ text: "Text Macros", height: 40, }).addEvent(LUI_EV_CLICK, soupy_ui_textmacros),
+			new LuiButton({ text: "Icon Dictionary", height: 40, }).addEvent(LUI_EV_CLICK, soupy_ui_icons),
 			new LuiButton({ text: "Help Guide", height: 40, }).addEvent(LUI_EV_CLICK, function() { soupy_url("https://rentry.co/utdrsoupguides", , , 0); }),
 			new LuiButton({ text: "So Soupy!!", height: 40, }).addEvent(LUI_EV_CLICK, function() { soupy_url("https://www.youtube.com/watch?v=zbClYRnQQJ0", , , 0); }),
 			new LuiButton({ text: "Credits", height: 40, }).addEvent(LUI_EV_CLICK, soupy_ui_credits),
@@ -1220,7 +1228,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 		ui_export = function(type_ = 0, fmax_ = 180, delay_ = 60, quant_ = 1, xoff_ = 0, yoff_ = 0) {
 			if ( !ui_preview && !ui_finished ) { soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; soup_store("lastpage", dial_text_page, , true); }
 			if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_equip);
-
+			soupy_alarm_set("failsafe", "timer", 15);
 					
 			switch ( type_ ) {
 				case 0: { screenshot = true; screenshot_stacked = false; } break; //Take single screenshot, no typewriter

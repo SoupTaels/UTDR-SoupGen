@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.1.0" //Current game version
+	#macro GAME_VERSION "1.2.0" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -188,6 +188,16 @@ function ui_manage() {
 					keyboard_string = "";
 				}
 				if ( keyboard_check(vk_anykey) ) { dial_updatet = dial_updatet_max; upd_ = true; }
+				
+				#region Bring Up Context Menu
+					if ( textinput.GetSelection().has_selection ) {
+						if ( !mouse_check ) {
+							soupy_alarm("contextmenu", 15);
+							if ( soupy_alarm_moment("contextmenu", 0) ) { sfx_play(snd_select); soup_store("rightclick", , , true); }
+						}
+					}
+					else { soupy_alarm_set("contextmenu", "timer", 15); }
+				#endregion
 			}
 					
 			if ( keyboard_check_pressed(vk_anykey) ) { //Typing sounds
@@ -206,7 +216,7 @@ function ui_manage() {
 			}
 			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("S")) ) { soupy_context_clear(); } //Clear All
 			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("D")) ) { soupy_context_page(); } //Insert Page Break
-			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("P")) ) { soupy_context_macro(); } //Insert Page Break
+			if ( keyboard_check(vk_control) && keyboard_check_pressed(ord("P")) ) { soupy_context_macro(); } //Text Macro
 		}
 	#endregion
 

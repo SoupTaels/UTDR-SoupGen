@@ -1511,7 +1511,7 @@ function __QuillCore() constructor {
 
 		// Right click opens context menu.
 		//var _tb = __GetBoxById(_hover);
-		if ( _mouse_r_pressed ) {
+		if ( _mouse_r_pressed || !is_undefined(soup_checkout("rightclick", false, true)) ) {
 			if (_hover > 0) {
 				__SetActive(_hover);
 
@@ -1524,7 +1524,7 @@ function __QuillCore() constructor {
 						__TextInputSetCaret(_tb2, _idx3, false, _tb2.config);
 					}
 
-					if ( _tb2.context_menu_enabled ) { OpenContextMenu(__BuildContextMenuForTb(_tb2), _mx, _my, _tb2.id); }
+					if ( _tb2.context_menu_enabled ) { OpenContextMenu(__BuildContextMenuForTb(_tb2), _mx, _my, _tb2.id); soup_checkout("rightclick", , true); }
 				}
 			}
 			else {
