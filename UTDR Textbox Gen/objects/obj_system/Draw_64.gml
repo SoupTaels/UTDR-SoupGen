@@ -60,7 +60,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 	if ( bord_visible ) {
 		var dltrn = spr_bord == spr_border_deltarune; //Check if our border is Deltarune
 		var offset_ = dltrn ? 8 : 0, offset_w = dltrn ? 15 : 0, offset_h = dltrn ? 16 : 0, bordx = 32 - offset_, bordy = ( 315 - offset_ ) - ( ui_viewing && global.pref.sizematters && global.pref.sizematterstop ? 305 + ( global.pref.anyborder ? abs(bord_yoff) : 0 ) : 0 ), bordw = 578 + offset_w, bordh = 152 + offset_w; //Border coords
-		var xx_ = ( bordx + ( ( FACE_USING ? ( dial_text_halign == 0 ? 144 : 28 ) : 28 ) + ( AUTO_ASTERISK ? 4 : 0 ) ) ) + ( offset_ + dltrn ? 6 : 0 ), yy_ = ( bordy + 24 ) + offset_; //Text X Y
+		var xx_ = ( bordx + ( ( FACE_USING && !string_search(FACE_INTERNAL, "pinkmew") ? ( dial_text_halign == 0 ? 144 : 28 ) : 28 ) + ( AUTO_ASTERISK ? 4 : 0 ) ) ) + ( offset_ + dltrn ? 6 : 0 ), yy_ = ( bordy + 24 ) + offset_; //Text X Y
 
 		var ninesl_ = sprite_get_nineslice(spr_bord); 
 		if ( bord_box_visible ) { //Dialogue Box Clone(for transparency issues)

@@ -174,7 +174,7 @@ function map_value(value_, min1_, max1_, min2_, max2_) { return ( ( ( value_ - m
 ///@arg {String} substr_				The string to check.
 ///@arg {Bool} casesense_		Whether the string is case sensitive.
 function string_search(str_ = "", substr_ = "", casesense_ = false) {
-	if ( substr_ == "" || str_ == "" ) { return false; }
+	if ( substr_ == "" || str_ == "" ) || ( !is_string(str_) ) { return false; }
 	return ( string_pos(substr_, !casesense_ ? string_lower(str_) : str_) > 0 );
 }
 
