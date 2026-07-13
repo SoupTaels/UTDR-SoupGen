@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.2.0" //Current game version
+	#macro GAME_VERSION "1.2.1" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -350,7 +350,7 @@ function ui_manage() {
 				if ( variable_instance_get(obj_system, "within_hover") == undefined ) { variable_instance_set(obj_system, "within_hover", false); }
 				if ( variable_instance_get(obj_system, "yscale_") == undefined ) { variable_instance_set(obj_system, "yscale_", 1); }
 				if ( ui_effoff < effects_off ) {
-					var x_ = 605, y_ = 98, within_ = range_within(mouse_x_gui, x_ - 5, x_ + 20) && range_within(mouse_y_gui, y_ - 5, y_ + 5);
+					var x_ = 605, y_ = 98, within_ = range_within(mouse_x_gui, x_ - 10, 640) && range_within(mouse_y_gui, y_ - 10, y_ + 10);
 					if ( within_ ) {
 						if ( !within_hover ) { within_hover = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) { sfx_play(snd_sel_switch, 0, , 1.3); ui_effoff = approach(ui_effoff, effects_off, 1); yscale_ = 0.5; } //Pressed
@@ -365,7 +365,7 @@ function ui_manage() {
 				if ( variable_instance_get(obj_system, "within_hover2") == undefined ) { variable_instance_set(obj_system, "within_hover2", false); }
 				if ( variable_instance_get(obj_system, "yscale_2") == undefined ) { variable_instance_set(obj_system, "yscale_2", 1); }
 				if ( ui_effoff > 0 ) {
-					var x_ = 130, y_ = 98, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 5) && range_within(mouse_y_gui, y_ - 5, y_ + 5);
+					var x_ = 130, y_ = 98, within_ = range_within(mouse_x_gui, x_ - 40, x_ + 10) && range_within(mouse_y_gui, y_ - 10, y_ + 10);
 					if ( within_ ) {
 						if ( !within_hover2 ) {within_hover2 = true; sfx_play(snd_sel_switch); } //Hover
 						if ( mouse_pressed ) { sfx_play(snd_sel_switch, 0, , 0.7); ui_effoff = approach(ui_effoff, 0, 1); yscale_2 = 0.5; } //Pressed
@@ -476,7 +476,7 @@ function ui_manage() {
 			if ( variable_instance_get(obj_system, "within_hover3") == undefined ) { variable_instance_set(obj_system, "within_hover3", false); }
 			if ( variable_instance_get(obj_system, "yscale_3") == undefined ) { variable_instance_set(obj_system, "yscale_3", 1); }
 		
-			var x_ = 320, y_ = 473, within_ = range_within(mouse_x_gui, x_ - 20, x_ + 20) && range_within(mouse_y_gui, y_ - 30, y_ + 50);
+			var x_ = 320, y_ = 473, within_ = range_within(mouse_x_gui, x_ - 40, x_ + 40) && range_within(mouse_y_gui, y_ - 40, y_ + 50);
 			if ( within_ ) {
 				if ( !within_hover3 ) { within_hover3 = true; sfx_play(snd_sel_switch); } //Hover
 				if ( mouse_pressed ) {  sfx_play(snd_enc1, 0, , bord_visible ? 0.7 : 1.3); bord_visible = !bord_visible; yscale_3 = 0.5; } //Pressed

@@ -114,7 +114,7 @@ if ( screenshot || record.enabled ) {
 			if ( state_ < 1 || ( state_ >= 1 && record.frames < record.delay ) ) { record_func(); } //If we're still typing, keep recording
 			if ( state_ >= 1 ) { //If we stopped typing
 				if ( record.frames < record.delay ) { record.frames++; exit; } //Delay before moving on
-				else { if ( dial_text_page < dial_text_page_c - 1 ) { record.frames = 0; point_visible = false; typist_reset(); dial_text_page++; sfx_play(snd_equip); exit; } else { if ( !global.pref.confirmexport ) { finish_func(); } else { if ( !ui_finished ) { ui_finished = true; ui_preview = false; sfx_play(snd_dimbox); TweenFire("?", SYSTEMUI, "$30", "~oback", "ui_finished_y>", 190); } } } } //Either go to the next page or stop recording
+				else { if ( dial_text_page < dial_text_page_c - 1 ) { record.frames = 0; point_visible = false; typist_reset(); dial_text_page++; sfx_play(snd_equip); exit; } else { if ( !global.pref.confirmexport ) { finish_func(); } else { if ( !ui_finished ) { ui_finished = true; ui_preview = false; ui_finished_y = -100; sfx_play(snd_dimbox); TweenFire("?", SYSTEMUI, "$30", "~oback", "ui_finished_y>", 190); } } } } //Either go to the next page or stop recording
 			}
 		}
 	}
