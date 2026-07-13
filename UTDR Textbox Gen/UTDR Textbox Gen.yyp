@@ -1321,6 +1321,7 @@
     {"id":{"name":"TGMX_Experimental","path":"scripts/TGMX_Experimental/TGMX_Experimental.yy",},},
     {"id":{"name":"TGMX_System","path":"scripts/TGMX_System/TGMX_System.yy",},},
     {"id":{"name":"uiexternals","path":"scripts/uiexternals/uiexternals.yy",},},
+    {"id":{"name":"uiinit","path":"scripts/uiinit/uiinit.yy",},},
     {"id":{"name":"uimanager","path":"scripts/uimanager/uimanager.yy",},},
     {"id":{"name":"utils_Exceptions","path":"scripts/utils_Exceptions/utils_Exceptions.yy",},},
     {"id":{"name":"utils_Instances","path":"scripts/utils_Instances/utils_Instances.yy",},},
