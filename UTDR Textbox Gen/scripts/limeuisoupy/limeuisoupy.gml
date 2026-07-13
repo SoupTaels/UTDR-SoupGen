@@ -183,7 +183,7 @@ function soupy_ui_credits() {
 	credits_add(".+\\/\\/\\_______________________________________________/\\/\\/+.");
 	credits_add();
 	credits_add("Scribble, Clean Shapes, Gumshoe: [slant][c_gold]JujuAdams", "https://github.com/JujuAdams", true);
-	credits_add("GMLive, ExecuteShellSimple, FileDropper: [slant][c_gold]YellowAfterlife", "https://yal.cc/", true);
+	credits_add("GMLive, ExecuteShellSimple, FileDropper, Taskbar and Icon: [slant][c_gold]YellowAfterlife", "https://yal.cc/", true);
 	credits_add("TweenGMX: [slant][c_gold]stephenloney", "https://stephenloney.com/", true);
 	credits_add("Undo Stack: [slant][c_gold]alphish-creature(Alice)", "https://github.com/Alphish", true);
 	credits_add("LimeUI: [slant][c_gold]Limekys", "https://github.com/Limekys", true);
@@ -193,6 +193,7 @@ function soupy_ui_credits() {
 	credits_add("Android External File Control: [slant][c_gold]Corin Choi", "https://github.com/CorinChoi31/AndroidExternalFile-Extension", true);
 	credits_add("Windows Clipboard Functionality: [slant][c_gold]MakhamDev", "https://github.com/Ttanasart-pt/Pixel-Composer", true);
 	credits_add("Accurate Determination, Sans, and Papyrus fonts: [slant][c_gold]emihead", "https://twitter.com/emihead", true);
+	credits_add("Wing Dings and LEGEND font: [slant][c_gold]Dragon8er", "https://fontstruct.com/fontstructors/1759178/dragon8erd", true);
 	credits_add("Undertale, Deltarune: [slant][c_gold]Toby Fox[/] [annoyingdog,0,0.15], [slant][c_gold]Temmie Chang[/] [annoyingtem,0,0.15]", "https://undertale.com/about/", true);
 	credits_add("Made in [slant][c_gold]GameMaker[/] [scale,0.15][gamemaker][/]", "https://gamemaker.io/", true);
 	credits_add();
