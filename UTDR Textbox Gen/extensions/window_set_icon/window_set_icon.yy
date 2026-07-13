@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"1.0.0",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":64,"filename":"window_set_icon.dll","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"window_set_icon.dll","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"window_set_icon_init_raw_raw","argCount":2,"args":[1,2,],"documentation":"","externalName":"window_set_icon_init_raw_raw","help":"","hidden":true,"kind":11,"name":"window_set_icon_init_raw_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"window_set_icon_raw","argCount":3,"args":[1,1,1,],"documentation":"","externalName":"window_set_icon_raw","help":"","hidden":true,"kind":11,"name":"window_set_icon_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"window_set_icon_surface_raw","argCount":3,"args":[1,1,1,],"documentation":"","externalName":"window_set_icon_surface_raw","help":"","hidden":true,"kind":11,"name":"window_set_icon_surface_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -31,7 +31,7 @@
     {"$GMExtensionFile":"v1","%Name":"","constants":[
         {"$GMExtensionConstant":"","%Name":"window_set_icon_hresult","hidden":false,"name":"window_set_icon_hresult","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"global.g_window_set_icon_hresult",},
         {"$GMExtensionConstant":"","%Name":"window_set_icon_context","hidden":false,"name":"window_set_icon_context","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"global.g_window_set_icon_context",},
-      ],"copyToTargets":64,"filename":"window_set_icon.gml","final":"","functions":[
+      ],"copyToTargets":9223372036854775807,"filename":"window_set_icon.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"window_set_icon_init","argCount":0,"args":[],"documentation":"","externalName":"window_set_icon_init","help":"","hidden":true,"kind":11,"name":"window_set_icon_init","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"window_set_icon_prepare_buffer","argCount":1,"args":[2,],"documentation":"","externalName":"window_set_icon_prepare_buffer","help":"","hidden":true,"kind":11,"name":"window_set_icon_prepare_buffer","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"window_set_icon_impl_load","argCount":1,"args":[2,],"documentation":"","externalName":"window_set_icon_impl_load","help":"","hidden":true,"kind":11,"name":"window_set_icon_impl_load","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -49,7 +49,7 @@
         {"$GMExtensionFunction":"","%Name":"window_set_overlay_icon_surface","argCount":-1,"args":[],"documentation":"","externalName":"window_set_overlay_icon_surface","help":"window_set_overlay_icon_surface(surface, ?description)","hidden":false,"kind":2,"name":"window_set_overlay_icon_surface","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"window_reset_overlay_icon","argCount":0,"args":[],"documentation":"","externalName":"window_reset_overlay_icon","help":"window_reset_overlay_icon()","hidden":false,"kind":2,"name":"window_reset_overlay_icon","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"window_set_icon_init","kind":2,"name":"","origname":"extensions\\gml.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":64,"filename":"autogen.gml","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"window_set_icon_init_raw","argCount":1,"args":[2,],"documentation":"","externalName":"window_set_icon_init_raw","help":"window_set_icon_init_raw(isRGBA:number)->bool","hidden":false,"kind":2,"name":"window_set_icon_init_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":2,"name":"","origname":"extensions\\autogen.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
