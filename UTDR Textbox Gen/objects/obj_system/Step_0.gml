@@ -36,7 +36,10 @@ if ( dial_text_outline != -1 && !string_search(dial_font, "outline", true) ) { d
 	
 	#region Shake Face
 		var canshake = soup_checkout("face shaker", false);
-		if ( !is_undefined(canshake) ) {
+		if ( canshake != undefined ) {
+			soupy_alarm("face shaker", canshake.time_ + 1);
+			soupy_alarm_run("face shaker", 1, function () { soup_checkout("face shaker"); dial_face_xoff = 0; dial_face_yoff = 0; exit; });
+		
 			if ( canshake.x_ ) { dial_face_xoff = random_range(-canshake.off_, canshake.off_); }
 			if ( canshake.y_ ) { dial_face_yoff = random_range(-canshake.off_, canshake.off_); }
 		}

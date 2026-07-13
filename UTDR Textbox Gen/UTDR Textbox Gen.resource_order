@@ -305,7 +305,6 @@
     {"name":"TGMX_Experimental","order":11,"path":"scripts/TGMX_Experimental/TGMX_Experimental.yy",},
     {"name":"TGMX_System","order":1,"path":"scripts/TGMX_System/TGMX_System.yy",},
     {"name":"uiexternals","order":2,"path":"scripts/uiexternals/uiexternals.yy",},
-    {"name":"uiinit","order":5,"path":"scripts/uiinit/uiinit.yy",},
     {"name":"uimanager","order":1,"path":"scripts/uimanager/uimanager.yy",},
     {"name":"utils_Instances","order":1,"path":"scripts/utils_Instances/utils_Instances.yy",},
     {"name":"__shd_scribble_bake_effect_4dir","order":1,"path":"shaders/__shd_scribble_bake_effect_4dir/__shd_scribble_bake_effect_4dir.yy",},
