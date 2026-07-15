@@ -1,0 +1,146 @@
+[gml_api]
+module GMWebView;
+
+// Functions
+
+[global, bind = typed_gml]
+function webview_open_url([type_hint = `string?`] url) : unit;
+
+[global, bind = typed_gml]
+function webview_hide() : unit;
+
+[global, bind = typed_gml]
+function webview_show() : unit;
+
+[global, bind = typed_gml]
+function webview_close() : unit;
+
+[global, bind = typed_gml]
+function webview_load_html([type_hint = `string?`] html) : unit;
+
+[global, bind = typed_gml]
+function webview_load_local([type_hint = `string?`] path) : unit;
+
+[global, bind = typed_gml]
+function webview_load_blank() : unit;
+
+[global, bind = typed_gml]
+function webview_load_youtube([type_hint = `string?`] uid) : unit;
+
+[global, bind = typed_gml]
+function webview_load_no_internet() : unit;
+
+[global, bind = typed_gml]
+function webview_set_start_mode([type_hint = `WebViewStartMode`] mode) : unit;
+
+[global, bind = typed_gml]
+function webview_set_borderless(on: bool) : unit;
+
+[global, bind = typed_gml]
+function webview_get_url() : string;
+
+[global, bind = typed_gml]
+function webview_get_title() : string;
+
+[global, bind = typed_gml]
+function webview_is_loading() : bool;
+
+[global, bind = typed_gml]
+function webview_is_running() : bool;
+
+[global, bind = typed_gml]
+function webview_is_visible() : bool;
+
+[global, bind = typed_gml]
+function webview_get_body() : string;
+
+[global, bind = typed_gml]
+function webview_get_params() : string;
+
+[global, bind = typed_gml]
+function webview_allow_swipe_refresh(allow: bool) : unit;
+
+[global, bind = typed_gml]
+function webview_eval_js([type_hint = `string?`] js) : unit;
+
+[global, bind = typed_gml]
+function webview_set_js_callback([type_hint = `func?`] cb: gmval) : unit;
+
+[global, bind = typed_gml]
+function webview_button_create(size_dp: int32, gravity: int32, [type_hint = `WebViewButtonAssetType?`] asset_type, [type_hint = `string?`] asset) : int32;
+
+[global, bind = typed_gml]
+function webview_button_destroy(handle: int32) : unit;
+
+[global, bind = typed_gml]
+function webview_button_destroy_all() : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_alpha(handle: int32, alpha: real) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_auto_close(handle: int32, flag: bool) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_margins(handle: int32, left: int32, top: int32, right: int32, bottom: int32) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_size(handle: int32, size_dp: int32) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_gravity(handle: int32, gravity: int32) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_position(handle: int32, x_dp: int32, y_dp: int32) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_visible(handle: int32, visible: bool) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_asset(handle: int32, [type_hint = `WebViewButtonAssetType`] asset_type, [type_hint = `string?`] asset) : unit;
+
+[global, bind = typed_gml]
+function webview_button_set_callback(handle: int32, [type_hint = `func?`] callback) : unit;
+
+[global, hidden, finish_fn, bind = typed_gml]
+function webview_shutdown() : unit;
+
+// Enums
+
+[global, bind = typed_gml, type_hint = uint8]
+enum WebViewJavaScriptEvent {
+    OnUrlChange,
+    OnBodyChange,
+    OnTitleChange,
+    OnButtonPress,
+    OnPageLoadStart,
+    OnPageLoadEnd,
+    OnCustomPost
+}
+
+[global, bind = typed_gml, type_hint = uint8]
+enum WebViewStartMode {
+    Hidden,
+    Visible,
+}
+
+[global, bind = typed_gml, type_hint = uint8]
+enum WebViewButtonAssetType {
+    DefaultIcon,
+    FilePath,
+    Base64Data,
+    RawData
+}
+
+[global, bind = typed_gml]
+enum WebViewButtonGravity : uint32 {
+    Left = 0x03,
+    Right = 0x05,
+    Top = 0x30,
+    Bottom = 0x50,
+    Start = 0x800003,
+    End = 0x800005,
+    CenterHorizontal = 0x01,
+    CenterVertical = 0x10,
+    Center = 0x11,
+}

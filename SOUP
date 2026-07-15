@@ -1,5 +1,5 @@
 {
-  "game_version":"1.3.0",
+  "game_version":"1.3.1",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- i love soup|- i love soup|- i love soup|- i love soup|- i love soup|- i love soup|- i love soup|",
+  "changelog":"- added webviews(opens websites without having to leave the app) for android|- new button for the success window if you can't find your result|- i'm so soupy!! let me know if this works guys",
 }

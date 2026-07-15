@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"WebView_api",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"WebView_api",
+  "parent":{
+    "name":"WebView",
+    "path":"folders/Extensions/WebView/WebView.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

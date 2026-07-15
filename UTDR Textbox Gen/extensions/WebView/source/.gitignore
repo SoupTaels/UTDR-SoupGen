@@ -1,0 +1,16 @@
+# VS and VSC folders
+**/.vs/
+**/.vsc/
+
+# Common extensions
+**/*.exp
+**/*.ilk
+**/*.lib
+**/*.pdb
+**/*.exp
+**/*.exe
+
+# Compilation folders
+**/bin/
+**/obj/
+**/out/

@@ -53,7 +53,7 @@ if ( screenshot || record.enabled ) {
 				if ( gif_ ) { record.id_ = gif_save(record.id_, fpath_final); } //Save GIF
 				else { surface_save_part(screenshot_surf, fpath_final, x_, y_, w_, h_); } //Save screenshot
 				MobileUtils_Vibrate_Shot(100);
-				if ( !global.pref.hidemessages ) { soupy_message($"{fname}_.{gif_ ? "gif" : "png"}[/] [rainbow][wave]saved at[/]| |[c_lime]{fpath_final}![/]| |Your [c_gold]good soup[/] is ready!|The file path was [c_yellow]copied to your clipboard[/]{ global.pref.openresult ? " and|the result will open up in your [c_cyan]default image viewer[/]" : ""}.| |Please share your dialogue with [c_gold]#soupgen[/] for easier find!", "I'm so soupy!!", , , , snd_dumbvictory, fnt_abaddon, , , true, 590); } 
+				if ( !global.pref.hidemessages ) { soupy_ui_success(fname, gif_, fpath_final); } 
 				else { sfx_play(snd_dumbvictory); instance_create_depth(0, 0, 0, obj_success); SYSTEMUI.ui_paused = false; } 
 				if ( global.pref.openresult ) {
 					if ( !is_android() ) {

@@ -1,0 +1,37 @@
+{
+  "$schema": "./extgen.schema.json",
+  "input": "spec.gmidl",
+  "root": "./",
+  "gml": {
+    "declarationsFile": "./declarations.yy",
+    "outputFile": "../../../scripts/WebView_api/WebView_api.gml"
+  },
+  "gamemaker": {
+    "wrappers": {
+      "outputFile": "../../../scripts/WebView_api/WebView_api.gml"
+    },
+    "extension": {
+      "mode": "patch",
+      "outputFile": "../../../extensions/WebView/WebView.yy",
+      "extensionName": "WebView",
+      "extensionFileName": "WebView.ext"
+    },
+    "injectors": {}
+  },
+  "targets": {
+    "windows": {},
+    "macos": {},
+    "linux": {},
+    "ios": {
+      "mode": "objc"
+    },
+    "android": {
+      "mode": "java"
+    }
+  },
+  "extras": {
+    "docs": {
+      "outputFile": "../../../../../docs/extgen_docs.js"
+    }
+  }
+}

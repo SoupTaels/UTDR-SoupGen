@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>WebView Extension - GMEXT-WebView</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link href="assets/css/gmext_style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "WebView Extension";
+        var mkdocs_page_input_path = "home.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/gml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> GMEXT-WebView
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">WebView Extension</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">WebView Extension</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">GMEXT-WebView</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">WebView Extension</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/YoYoGames/GMEXT-WebView/edit/master/docs/home.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a id="top"></a></p>
+<h1 id="webview"><strong>WebView</strong></h1>
+<p>This extension allows <strong>Android</strong> and <strong>iOS</strong> developers as well as developers of <strong>Windows</strong>, <strong>macOS</strong> and <strong>Linux</strong> to make use of the WebView to display site URLs directly from inside their game.
+The WebView extension can also be used to perform OAuth2 authentication from within your game.</p>
+<p>When specifying a URL to open, you should make sure to always include the protocol part (e.g., <code>"http://"</code>, <code>"https://"</code>, <code>"file://"</code>, etc.).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can only have one WebView window open at a given time.</p>
+</div>
+<h2 id="guides">Guides</h2>
+<p>These are the guides for the WebView extension:</p>
+<ul>
+<li><a href="setup.html">Setup</a></li>
+</ul>
+<h2 id="functions">Functions</h2>
+<p>The following functions are provided to manipulate the WebView:</p>
+<ul>
+<li><a href="home.html#webview_open_url">webview_open_url</a></li>
+<li><a href="home.html#webview_hide">webview_hide</a></li>
+<li><a href="home.html#webview_show">webview_show</a></li>
+<li><a href="home.html#webview_close">webview_close</a></li>
+<li><a href="home.html#webview_load_html">webview_load_html</a></li>
+<li><a href="home.html#webview_load_local">webview_load_local</a></li>
+<li><a href="home.html#webview_load_blank">webview_load_blank</a></li>
+<li><a href="home.html#webview_load_youtube">webview_load_youtube</a></li>
+<li><a href="home.html#webview_load_no_internet">webview_load_no_internet</a></li>
+<li><a href="home.html#webview_set_start_mode">webview_set_start_mode</a></li>
+<li><a href="home.html#webview_set_borderless">webview_set_borderless</a></li>
+<li><a href="home.html#webview_get_url">webview_get_url</a></li>
+<li><a href="home.html#webview_get_title">webview_get_title</a></li>
+<li><a href="home.html#webview_is_loading">webview_is_loading</a></li>
+<li><a href="home.html#webview_is_running">webview_is_running</a></li>
+<li><a href="home.html#webview_is_visible">webview_is_visible</a></li>
+<li><a href="home.html#webview_get_body">webview_get_body</a></li>
+<li><a href="home.html#webview_get_params">webview_get_params</a></li>
+<li><a href="home.html#webview_allow_swipe_refresh">webview_allow_swipe_refresh</a></li>
+<li><a href="home.html#webview_eval_js">webview_eval_js</a></li>
+<li><a href="home.html#webview_set_js_callback">webview_set_js_callback</a></li>
+<li><a href="home.html#webview_button_create">webview_button_create</a></li>
+<li><a href="home.html#webview_button_destroy">webview_button_destroy</a></li>
+<li><a href="home.html#webview_button_destroy_all">webview_button_destroy_all</a></li>
+<li><a href="home.html#webview_button_set_alpha">webview_button_set_alpha</a></li>
+<li><a href="home.html#webview_button_set_auto_close">webview_button_set_auto_close</a></li>
+<li><a href="home.html#webview_button_set_margins">webview_button_set_margins</a></li>
+<li><a href="home.html#webview_button_set_size">webview_button_set_size</a></li>
+<li><a href="home.html#webview_button_set_gravity">webview_button_set_gravity</a></li>
+<li><a href="home.html#webview_button_set_position">webview_button_set_position</a></li>
+<li><a href="home.html#webview_button_set_visible">webview_button_set_visible</a></li>
+<li><a href="home.html#webview_button_set_asset">webview_button_set_asset</a></li>
+<li><a href="home.html#webview_button_set_callback">webview_button_set_callback</a></li>
+<li><a href="home.html#webview_shutdown">webview_shutdown</a></li>
+</ul>
+<h2 id="constants">Constants</h2>
+<p>The following enumerations are provided to configure the WebView:</p>
+<ul>
+<li><a href="home.html#webviewstartmode">WebViewStartMode</a></li>
+<li><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></li>
+<li><a href="home.html#webviewbuttonassettype">WebViewButtonAssetType</a></li>
+<li><a href="home.html#webviewbuttongravity">WebViewButtonGravity</a></li>
+</ul>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_open_url">webview_open_url</h1>
+<p>This function opens the given URL in a WebView.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function will destroy all buttons currently on the WebView if a URL is already open.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_open_url(url=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The URL to open</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_open_url("https://manual.gamemaker.io");</code></pre>
+This code opens a URL in the WebView window.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_hide">webview_hide</h1>
+<p>This function hides the WebView window.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_hide()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_hide();</code></pre>
+This code hides the WebView window.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_show">webview_show</h1>
+<p>This function shows the WebView window, setting it to visible.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function requests the WebView to be made visible. <a href="home.html#webview_is_visible">webview_is_visible</a> will not immediately return <code>true</code> after calling this function.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_show()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_show();</code></pre>
+This code brings up the WebView window.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_close">webview_close</h1>
+<p>This function closes the WebView window.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_close()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_close();</code></pre>
+This code closes the WebView.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_load_html">webview_load_html</h1>
+<p>This function loads custom HTML in the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_load_html(html=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>html</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The HTML to load</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _html = @"
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;h1&gt;Information&lt;/h1&gt;
+    &lt;p&gt;This is information about the game.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;";
+webview_load_html(_html);</code></pre>
+This code loads the HTML in the WebView.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_load_local">webview_load_local</h1>
+<p>This function loads a page from a local file in the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_load_local(path=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The path to the local file</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_load_local("instructions.htm");</code></pre>
+This code loads a local page.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_load_blank">webview_load_blank</h1>
+<p>This function loads a blank page.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_load_blank()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_load_blank();</code></pre>
+This code loads a blank page.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_load_youtube">webview_load_youtube</h1>
+<p>This function loads a YouTube video in the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_load_youtube(uid=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uid</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The ID of the video</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_load_no_internet">webview_load_no_internet</h1>
+<p>This function loads a "no internet" page.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_load_no_internet()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_load_no_internet();</code></pre>
+This code loads a "no internet" page.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_set_start_mode">webview_set_start_mode</h1>
+<p>This function sets the start mode for the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_set_start_mode(mode)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td><a href="home.html#webviewstartmode">WebViewStartMode</a></td>
+<td>The mode to use</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_set_start_mode(WebViewStartMode.Visible);</code></pre>
+This code sets the WebView to start visible.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_set_borderless">webview_set_borderless</h1>
+<p>This function sets whether the WebView window should have a border or not. The function should be called after opening or loading a page, calls before that will have no effect.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Borderless functionality only works on desktop targets. On mobile the WebView is always displayed borderless and fullscreen.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_set_borderless(on)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>on</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>Whether to display borderless or not</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_open_url("https://www.google.com");
+webview_set_borderless(true);</code></pre>
+This code opens a URL and then sets the WebView window to display without the window border.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_get_url">webview_get_url</h1>
+<p>This function gets the WebView's URL.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_get_url()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _url = webview_get_url();
+show_debug_message(_url);</code></pre>
+This code gets the WebView URL and outputs it in a debug message.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_get_title">webview_get_title</h1>
+<p>This function gets the title of the page loaded in the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_get_title()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _title = webview_get_title();
+show_debug_message(_title);</code></pre>
+This code gets the current page title and outputs it in a debug message.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_is_loading">webview_is_loading</h1>
+<p>This function returns if the WebView is loading.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_is_loading()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">/// Draw GUI Event
+var _loading = webview_is_loading();
+draw_text(5, 5, $"Loading: {_loading}");</code></pre>
+This code draws a text in the Draw GUI event to indicate if the WebView is loading or not.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_is_running">webview_is_running</h1>
+<p>This function returns if the WebView is running.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_is_running()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">/// Draw GUI Event
+var _running = webview_is_running();
+draw_text(5, 5, $"Running: {_running}");</code></pre>
+This code draws a text in the Draw GUI event to indicate if the WebView is running or not.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_is_visible">webview_is_visible</h1>
+<p>This function returns if the WebView is visible.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_is_visible()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _visible = webview_is_visible();</code></pre>
+This code gets the visibility of the WebView.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_get_body">webview_get_body</h1>
+<p>This function gets the body HTML contents, i.e. the inner HTML, of the WebView.</p>
+<p>The body contents will be valid after the page has finished loading and will be updated after that to account for dynamic changes to the page. Subsequent calls to this function will reflect this.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The contents are returned as a Base64 encoded string if the page was loaded using <a href="home.html#webview_load_html">webview_load_html</a>.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_get_body()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _body_html = webview_get_body();</code></pre>
+This code gets the current contents of the body of the WebView.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_get_params">webview_get_params</h1>
+<p>This function gets the query string part of the WebView's URL, for example <code>"field1=value1&amp;field2=value2"</code>.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_get_params()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _query = webview_get_params();
+show_debug_message($"Parameters: {_query}");</code></pre>
+This code gets the query string and outputs it in a debug message.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_allow_swipe_refresh">webview_allow_swipe_refresh</h1>
+<p>This function sets whether to allow swipe refresh of the page in the WebView.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This functionality is not supported on the Desktop targets.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_allow_swipe_refresh(allow)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allow</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>Whether to allow swipe refresh or not</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_allow_swipe_refresh(true);</code></pre>
+This code sets the WebView to allow a swipe refresh of the page.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_eval_js">webview_eval_js</h1>
+<p>This function evaluates the JavaScript code passed in the parameter.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the <code>gm_post()</code> function to post custom data that will be returned in the callback.
+[!WARNING]</p>
+<p>Functions starting with <code>__</code> are used internally and should not be used.
+[!WARNING]</p>
+<p>The WebView extension doesn't perform any security checks on the code that you pass it.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_eval_js(js=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>js</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The string containing the JavaScript code to evaluate</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">var _js = "alert('Hello World from GameMaker!');";
+webview_eval_js(_js);
+
+webview_eval_js("gm_post('Hello World from GameMaker!')");</code></pre>
+This code calls the function to show a message in a JavaScript alert and also posts the same message using <code>gm_post()</code>.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_set_js_callback">webview_set_js_callback</h1>
+<p>This function sets the JavaScript callback function.</p>
+<p>This function operates asynchronously, which means that it does not immediately return the requested result. Instead, upon completion of the task, it will trigger the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a>.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_set_js_callback(cb=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cb</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Script_Functions.htm">Function</a></td>
+<td>The callback function to use, or <code>undefined</code> to unset</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Triggers:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a></p>
+</blockquote>
+<p>This callback is triggered when the page title changes.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnTitleChange</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered when the page body changes.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnBodyChange</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered when the page URL changes.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnUrlChange</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered when a button was pressed.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnButtonPress</code></td>
+</tr>
+<tr>
+<td>payload</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered when the page starts loading.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnPageLoadStart</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered when the page finishes loading.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnPageLoadEnd</code></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This callback is triggered after a custom post.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td><a href="home.html#webviewjavascriptevent">WebViewJavaScriptEvent</a></td>
+<td>The constant <code>WebViewJavaScriptEvent.OnCustomPost</code></td>
+</tr>
+<tr>
+<td>payload</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>A JSON-formatted string containing an array with the parameters passed to <code>gm_post()</code> (see <a href="home.html#webview_eval_js">webview_eval_js</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_set_js_callback(function(_event_type, _payload) {
+    if (_event_type == WebViewJavaScriptEvent.OnCustomPost) {
+        show_debug_message("Post Parameters Received:");
+        var _params = json_parse(_payload);
+        array_foreach(_params, show_debug_message);
+    } else {
+        show_debug_message("JavaScript Callback!");
+    }
+});</code></pre>
+This code sets a JavaScript callback function that outputs a debug message containing the parameters passed in case of a custom post event, or a short debug message for any other event.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_create">webview_button_create</h1>
+<p>This function creates a button on the WebView. Buttons need to be created after opening a window.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Buttons will not work when you navigate to pages that contain pre-injected iframes.
+[!NOTE]</p>
+<p>Sprites cannot be passed as an asset directly. You can save a sprite using <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asset_Management/Sprites/Sprite_Manipulation/sprite_save.htm">sprite_save</a> and pass the path to the created file with a type of <code>WebViewButtonAssetType.FilePath</code> or pass the image as Base64 data (see the second example on the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Buffers/buffer_base64_encode.htm">buffer_base64_encode</a> page) with a type of <code>WebViewButtonAssetType.Base64Data</code>. To load from the save area, the path needs to be prefixed with <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/General_Game_Control/game_save_id.htm">game_save_id</a>.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_create(size_dp, gravity, asset_type=undefined, asset=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>size_dp</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The size of the button in dp</td>
+</tr>
+<tr>
+<td>gravity</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>A bitmask of gravity constants (<a href="home.html#webviewbuttongravity">WebViewButtonGravity</a>)</td>
+</tr>
+<tr>
+<td>asset_type</td>
+<td><a href="home.html#webviewbuttonassettype">WebViewButtonAssetType</a></td>
+<td>The type of asset referred to in the <code>asset</code> parameter</td>
+</tr>
+<tr>
+<td>asset</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The path to the image asset (in case of file path) or its contents (in case of Base64 data or raw HTML)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">button1 = webview_button_create(48, WebViewButtonGravity.Top|WebViewButtonGravity.Left);
+button2 = webview_button_create(48, WebViewButtonGravity.Bottom|WebViewButtonGravity.Right, WebViewButtonAssetType.FilePath, "my_custom_button.png");
+button3 = webview_button_create(48, WebViewButtonGravity.Bottom|WebViewButtonGravity.Left, WebViewButtonAssetType.RawData, "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgeD0iMTAiIHk9IjEwIiByeD0iMjAiIHJ5PSIyMCIgZmlsbD0iYmx1ZSIgLz48L3N2Zz4=");</code></pre>
+This code creates a few buttons on the WebView, each using a different asset type for the button.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_destroy">webview_button_destroy</h1>
+<p>This function destroys the given button.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_destroy(handle)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_destroy(button1);</code></pre>
+This code destroys a previously created button.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_destroy_all">webview_button_destroy_all</h1>
+<p>This function destroys all buttons currently on the WebView.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_destroy_all()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_destroy_all();</code></pre>
+This code destroys all previously created buttons.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_alpha">webview_button_set_alpha</h1>
+<p>This function sets the alpha value of the given button.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_alpha(handle, alpha)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>alpha</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The alpha value (a value from 0 (fully transparent) to 1 (fully opaque))</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_alpha(button1, 0.5);</code></pre>
+This code sets a button's alpha to 0.5.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_auto_close">webview_button_set_auto_close</h1>
+<p>This function sets whether the given button closes the WebView window.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_auto_close(handle, flag)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>flag</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>Whether the button closes the WebView window or not</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_auto_close(button2, true);</code></pre>
+This code sets a button to auto close the WebView window.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_margins">webview_button_set_margins</h1>
+<p>This function sets the margins for the given button.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Margins can be different for each button.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_margins(handle, left, top, right, bottom)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>left</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The left margin</td>
+</tr>
+<tr>
+<td>top</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The top margin</td>
+</tr>
+<tr>
+<td>right</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The right margin</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The bottom margin</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_margins(button1, 48, 12, 48, 12);</code></pre>
+This code sets a button's margins to 48 units horizontally and 12 units vertically.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_size">webview_button_set_size</h1>
+<p>This function sets the size of the given button.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_size(handle, size_dp)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>size_dp</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button's new size in dp</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_size(button1, 100);</code></pre>
+This code sets the button's size to 100.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_gravity">webview_button_set_gravity</h1>
+<p>This function sets the gravity for the given button.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_gravity(handle, gravity)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>gravity</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>A bitwise OR of the constants to set (<a href="home.html#webviewbuttongravity">WebViewButtonGravity</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<pre class="highlight"><code class="language-gml">webview_button_set_gravity(button2, WebViewButtonGravity.Top|WebViewButtonGravity.Right);</code></pre>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_position">webview_button_set_position</h1>
+<p>This function sets the position for the given button.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_position(handle, x_dp, y_dp)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>x_dp</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The x position in dp</td>
+</tr>
+<tr>
+<td>y_dp</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The y position in dp</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_position(button1, 200, 200);</code></pre>
+This code sets a button's position to (200, 200).</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_visible">webview_button_set_visible</h1>
+<p>This function sets whether the given button is visible or not.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_visible(handle, visible)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>visible</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>Whether the button should be visible or not</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_visible(button1, false);</code></pre>
+This code sets a button invisible.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_asset">webview_button_set_asset</h1>
+<p>This function sets the image asset to be used for the given button.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sprites cannot be passed as an asset directly. You can save a sprite using <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asset_Management/Sprites/Sprite_Manipulation/sprite_save.htm">sprite_save</a> and pass the path to the created file with a type of <code>WebViewButtonAssetType.FilePath</code> or pass the image as Base64 data (see the second example on the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Buffers/buffer_base64_encode.htm">buffer_base64_encode</a> page) with a type of <code>WebViewButtonAssetType.Base64Data</code>. To load from the save area, the path needs to be prefixed with <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/General_Game_Control/game_save_id.htm">game_save_id</a>.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_asset(handle, asset_type, asset=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>asset_type</td>
+<td><a href="home.html#webviewbuttonassettype">WebViewButtonAssetType</a></td>
+<td>The type of asset referred to in the <code>asset</code> parameter</td>
+</tr>
+<tr>
+<td>asset</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The path to the image asset (in case of file path) or its contents (in case of Base64 data or raw HTML)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_asset(button2, WebViewButtonAssetType.FilePath, "my_custom_button.png");</code></pre>
+This code sets the asset for a button to an image stored in the given filepath.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_button_set_callback">webview_button_set_callback</h1>
+<p>This function sets the callback function to trigger for the button referred to by the given handle.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_button_set_callback(handle, callback=undefined)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handle</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The button handle</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Script_Functions.htm">Function</a></td>
+<td>The function to call for this button on callback</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">webview_button_set_callback(button3, func);</code></pre>
+This code sets the GML callback function to be called when the button is clicked.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webview_shutdown">webview_shutdown</h1>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">webview_shutdown()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webviewstartmode">WebViewStartMode</h1>
+<p>This enumeration contains the modes in which the WebView can be started.</p>
+<p>These constants are referenced by the following functions:</p>
+<ul>
+<li><a href="home.html#webview_set_start_mode">webview_set_start_mode</a></li>
+</ul>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Hidden</code></td>
+<td>The WebView is hidden.</td>
+</tr>
+<tr>
+<td><code>Visible</code></td>
+<td>The WebView is visible.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webviewjavascriptevent">WebViewJavaScriptEvent</h1>
+<p>This enumeration contains the types of JavaScript callback.</p>
+<p>These constants are referenced by the following functions:</p>
+<ul>
+<li><a href="home.html#webview_set_js_callback">webview_set_js_callback</a></li>
+</ul>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OnUrlChange</code></td>
+<td>The page URL changed.</td>
+</tr>
+<tr>
+<td><code>OnBodyChange</code></td>
+<td>The page body changed.</td>
+</tr>
+<tr>
+<td><code>OnTitleChange</code></td>
+<td>The page title changed.</td>
+</tr>
+<tr>
+<td><code>OnButtonPress</code></td>
+<td>A button was pressed.</td>
+</tr>
+<tr>
+<td><code>OnPageLoadStart</code></td>
+<td>The page has started loading.</td>
+</tr>
+<tr>
+<td><code>OnPageLoadEnd</code></td>
+<td>The page has finished loading.</td>
+</tr>
+<tr>
+<td><code>OnCustomPost</code></td>
+<td>A custom message was posted.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webviewbuttonassettype">WebViewButtonAssetType</h1>
+<p>This enumeration contains the possible asset types for a WebView button.</p>
+<p>These constants are referenced by the following functions:</p>
+<ul>
+<li><a href="home.html#webview_button_create">webview_button_create</a></li>
+<li><a href="home.html#webview_button_set_asset">webview_button_set_asset</a></li>
+</ul>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DefaultIcon</code></td>
+<td>The default icon is used.</td>
+</tr>
+<tr>
+<td><code>FilePath</code></td>
+<td>The button image is taken from a file.</td>
+</tr>
+<tr>
+<td><code>Base64Data</code></td>
+<td>The button image is taken from Base64 data.</td>
+</tr>
+<tr>
+<td><code>RawData</code></td>
+<td>The button image consists of raw data passed as a data URL to the image tag's <code>src</code> attribute.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="webviewbuttongravity">WebViewButtonGravity</h1>
+<p>This enumeration holds the possible values for the button gravity. These constants can be joined together using the boolean "or" operator <code>|</code>.</p>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Left</code></td>
+<td>Left</td>
+</tr>
+<tr>
+<td><code>Right</code></td>
+<td>Right</td>
+</tr>
+<tr>
+<td><code>Top</code></td>
+<td>Top</td>
+</tr>
+<tr>
+<td><code>Bottom</code></td>
+<td>Bottom</td>
+</tr>
+<tr>
+<td><code>Start</code></td>
+<td>Start</td>
+</tr>
+<tr>
+<td><code>End</code></td>
+<td>End</td>
+</tr>
+<tr>
+<td><code>CenterHorizontal</code></td>
+<td>Center Horizontally</td>
+</tr>
+<tr>
+<td><code>CenterVertical</code></td>
+<td>Center Vertically</td>
+</tr>
+<tr>
+<td><code>Center</code></td>
+<td>Center</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><p align="center">GameMaker 2026</p></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/YoYoGames/GMEXT-WebView" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="setup.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gml.min.js"></script>
+      <script src="assets/js/gmext_script.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -12,7 +12,7 @@ soupstack_i++; } //Delete all the sprites
 surface_free(soupstack_surf); //Free surface to prevent memory leaks
 MobileUtils_Vibrate_Shot(100);
 if ( !abort ) { 
-	soupy_message($"{soupstack_fname}_.png[/] [rainbow][wave]saved at[/]| |[c_lime]{soupstack_path}![/]| |Your [c_gold]good soup[/] is ready!|The file path was [c_yellow]copied to your clipboard[/]{ global.pref.openresult ? " and|the result will open up in your [c_cyan]default image viewer[/]" : ""}.| |Please share your dialogue with [c_gold]#soupgen[/] for easier find!", "I'm so soupy!!", , , , snd_dumbvictory, fnt_abaddon, , , true, 590);
+	soupy_ui_success(soupstack_fname, , soupstack_path);
 	if ( global.pref.openresult ) {
 		if ( !is_android() ) { 
 			soupy_url($"{executable_get_directory()}{soupstack_folder}", , , 6); //Open the directory (Windows only)
