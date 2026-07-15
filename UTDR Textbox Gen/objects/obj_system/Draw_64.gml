@@ -92,7 +92,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 				if ( dial_text != "" && dial_text != chr(0) ) { //No need to draw blank text
 					var line_sp = dial_text_line_spacing != -1 ? dial_text_line_spacing : 36;
 					#region Actual Text
-						var tx_x = AUTO_ASTERISK ? xx_ + 28 : xx_, wrapcalc = dial_auto_wrap ? ( 590 - xx_ ) : -1;
+						var tx_x = AUTO_ASTERISK ? xx_ + 28 : xx_, wrapcalc = dial_auto_wrap ? ( 585 - xx_ ) : -1;
 						var align_ = scribble_alignment(dial_text_halign, dial_text_valign);
 						var scrib_dial = scribble(dial_text) //Dialogue Text
 							dial_text_page_c = scrib_dial.get_page_count();
@@ -326,7 +326,7 @@ draw_sprite_ext(spr_pixel, 0, 0, 0, 640, 480, 0, c_black, fader); //Black fade o
 							ui_finished = false; ui_preview = true; soup_checkout("finishfunc", , true)(); sfx_ = true;
 						} break;
 						case "preview": {
-							if ( instance_exists(obj_mini) ) { with ( obj_mini ) { alpha = 0; } } typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -window_get_height(); dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); sfx_ = true;
+							if ( instance_exists(obj_mini) ) { with ( obj_mini ) { alpha = 0; } } dial_wrap_count = 1; typist.reset(); ui_finished = false; ui_preview = true; ui_finished_y = -window_get_height(); dial_text_page = soup_checkout("lastpage", false, true); ui_export(record.type ? 1 : 2, record.framesmax, record.delay, record.quant); sfx_ = true;
 						} break;
 						case "cancel": {
 							ui_finished = false; soup_store("doublepress", 15, , true); soup_store("previewcancel", , , true); sfx_ = true;

@@ -123,10 +123,7 @@
     "path":"folders/Fonts.yy",
   },
   "pointRounding":0,
-  "ranges":[
-    {"lower":32,"upper":127,},
-    {"lower":9647,"upper":9647,},
-  ],
+  "ranges":[],
   "regenerateBitmap":false,
   "resourceType":"GMFont",
   "resourceVersion":"2.0",

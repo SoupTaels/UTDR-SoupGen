@@ -134,7 +134,7 @@ function LuiScrollPanel(_params = {}) : LuiBase(_params) constructor {
 	
 	self.addEvent(LUI_EV_CLICK_R, function(_element) {
 		var btm = -(_element.scroll_container.height - _element.height);
-		_element.scroll_target_offset_y = _element.scroll_target_offset_y == btm ? 0 : btm;
+		_element.scroll_target_offset_y = _element.scroll_target_offset_y <= btm/2 ? 0 : btm;
 		sfx_play(_element.sound_right, , _element.sound_right_g, _element.sound_right_p)
 	});
 }

@@ -19,7 +19,7 @@ failedfunc = function() { //Failed connection, abort...
 }
 
 if ( os_is_network_connected(true) ) {
-	var updateurl = "https://raw.githubusercontent.com/SoupTaels/UTDR-Textbox-Soup/refs/heads/main/SOUP"; //Link to check for updates
+	var updateurl = "https://raw.githubusercontent.com/SoupTaels/UTDR-SoupGen/refs/heads/main/SOUP"; //Link to check for updates
 
 	http(updateurl, , , , function(status, result) { //We got connected!
 		if ( real(status) >= 400 ) { failedfunc(); exit; } //If there's internet, but maybe the content wasn't found, the website is down, or whatever else, let's just assume a connection fail anyways.
@@ -32,14 +32,27 @@ if ( os_is_network_connected(true) ) {
 			var c_real = real(currversion[i]);
 			var n_real = real(newversion[i]);
 			if ( n_real > c_real ) { //New update available! Go to the update room
-				var arr_ = [
-					new LuiImage({ value: get_icon("gameico"), maintain_aspect: false, }).setSize(120, 120).setFlexAlignSelf(flexpanel_align.center).addEvent(LUI_EV_CLICK, function(e_) { e_.main_ui.animate(e_, "xscale", 1, 0.3, global.Ease.OutBack, 12); e_.main_ui.animate(e_, "yscale", 1, 0.3, global.Ease.OutBack, -6); sfx_play(snd_squish); }),
-					new LuiText({ value: "There's a [rainbow]new update available![/] [tinysoupy]", font: fnt_abaddon, scribbletext: true, }),
-					new LuiText({ value: $"Current Version: [c_yellow]{GAME_VERSION}[/] | New Version: [c_lime]{updateversion.game_version}", font: fnt_abaddon, scribbletext: true, }),
-					new LuiText({ value: "Would you like to update now?", font: fnt_abaddon, }),
-					new LuiButton({ text: "Time for some new soup!", height: 35, font: fnt_abaddon, }).setData("link", updateversion.game_page).addEvent(LUI_EV_CLICK, function(e_) { soupy_url(e_.getData("link"), , , 0); }),
-				];
-				soupy_popup(arr_, function() { TweenScript(SYSTEMUI, 0, 3, function(){ if ( SYSTEMUI.ui_paused ) { SYSTEMUI.ui_paused = false; } }); }, "Gotta generate smth rq.", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
+				#region Main message
+					var arr_ = [ 
+						new LuiImage({ value: get_icon("gameico"), maintain_aspect: false, }).setSize(120, 120).setFlexAlignSelf(flexpanel_align.center).addEvent(LUI_EV_CLICK, function(e_) { e_.main_ui.animate(e_, "xscale", 1, 0.3, global.Ease.OutBack, 12); e_.main_ui.animate(e_, "yscale", 1, 0.3, global.Ease.OutBack, -6); sfx_play(snd_squish); }),
+						new LuiText({ value: "There's a [rainbow]new update available![/] [tinysoupy]", font: fnt_abaddon, scribbletext: true, }),
+						new LuiText({ value: $"Current Version: [c_yellow]{GAME_VERSION}[/] | New Version: [c_lime]{updateversion.game_version}", font: fnt_abaddon, scribbletext: true, }),
+						new LuiText({ value: "Would you like to update now?", font: fnt_abaddon, }),
+						new LuiButton({ text: "Time for some new soup!", height: 35, font: fnt_abaddon, }).setData("link", updateversion.game_page).addEvent(LUI_EV_CLICK, function(e_) { soupy_url(e_.getData("link"), , , 0); }),
+						new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.", font: fnt_abaddon, }),
+						new LuiText({ value: "CHANGELOG:", font: fnt_abaddon, }),
+					];
+				#endregion
+				#region Changelog
+					var cl = updateversion[$ "changelog"];
+					var j = 0, txt = string_split(cl ?? "- no problem here.|- see the github commit history for more info.", "|"), len = array_length(txt); //If, for some reason, it can't fetch the changelog, then fallback to default text
+					repeat ( len ) {
+						var cur = txt[j];
+						array_push(arr_, new LuiText({ value: cur, font: fnt_abaddon, }));
+					j++; }
+				#endregion
+				var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
+				soupy_popup([maincan, ], function() { TweenScript(SYSTEMUI, 0, 3, function(){ if ( SYSTEMUI.ui_paused ) { SYSTEMUI.ui_paused = false; } }); }, "Gotta generate smth rq.", , , , snd_dimbox, fnt_abaddon, SYSTEMUI.ui_paused);
 				instance_destroy();
 				exit;
 			}

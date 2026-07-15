@@ -73,7 +73,7 @@
   "option_android_support_lib":"36.0.0",
   "option_android_sync_amazon":false,
   "option_android_target_sdk":"36",
-  "option_android_texture_page":"4096x4096",
+  "option_android_texture_page":"2048x2048",
   "option_android_tools_from_version":false,
   "option_android_tv_banner":"${base_options_dir}/android/tv_banner.png",
   "option_android_tv_isgame":true,
