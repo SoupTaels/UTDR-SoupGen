@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.3.1" //Current game version
+	#macro GAME_VERSION "1.3.2" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -151,8 +151,8 @@ function Button(datastruct_ = undefined) constructor {
 }
 
 ///@desc Platform-based url opening
-function soupy_url(path_, args_ = "", act_ = "", cmd_ = 5) {
-	if ( !is_android() ) { execute_shell_simple(path_, args_, act_, cmd_); } else { webview_open_url(path_); webview_set_borderless(true); webview_button_set_auto_close(webview_button_create(30, WebViewButtonGravity.CenterHorizontal | WebViewButtonGravity.Top), true); }
+function soupy_url(path_, args_ = "", act_ = "", cmd_ = 5, webview_ = true) {
+	if ( !is_android() ) { execute_shell_simple(path_, args_, act_, cmd_); } else { if ( webview_ ) { webview_open_url(path_); webview_allow_swipe_refresh(true); webview_set_borderless(true); webview_button_set_auto_close(webview_button_create(30, WebViewButtonGravity.CenterHorizontal | WebViewButtonGravity.Top), true); } else { url_open(path_); } }
 }
 
 ///@desc Manages state for UI tabs.

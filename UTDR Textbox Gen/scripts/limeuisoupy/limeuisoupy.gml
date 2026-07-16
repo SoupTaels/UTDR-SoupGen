@@ -309,7 +309,7 @@ function soupy_ui_success(fname, gif_ = false, fpath_final) {
 		new LuiText({ value: "Please share your dialogue with [c_gold]#soupgen[/] for easier find!", auto_width: false, auto_height: false, text_halign: fa_center, text_valign: fa_center, font: fnt_abaddon, scribbletext: true, wraplimit: 590 }).setPadding(10),
 		new LuiButton({ text: "I don't see it.", "height": 35, font: fnt_abaddon, }).setTooltip("Don't see where your file is located?\nLet's try to upload your result to\na temp file hosting server instead!\nIt will expire in 3 hours.", true).setData("file", fpath_final).addEvent(LUI_EV_CLICK, function (e_) {
 			var form = new FormData(); form.add_file("files[]", e_.getData("file"));
-			http("https://uguu.se/upload?output=text", "POST", form, , function(_, result) { sfx_play(snd_dimbox); soupy_url(result); clipboard_set_text(result); }, function (_, result) { soupy_message("[shake][c_red]An error had occurred.[/]||Either the hosting server([c_gray][slant]uguu.se[/]) is down|or your internet is down.", "Uh oh.", 400, , , snd_error, fnt_abaddon, , true, true); });
+			http("https://uguu.se/upload?output=text", "POST", form, , function(_, result) { sfx_play(snd_dimbox); soupy_url(result, , , , false); clipboard_set_text(result); }, function (_, result) { soupy_message("[shake][c_red]An error had occurred.[/]||Either the hosting server([c_gray][slant]uguu.se[/]) is down|or your internet is down.", "Uh oh.", 400, , , snd_error, fnt_abaddon, , true, true); });
 		}),
 	];
 	soupy_popup(arr_, , "I'm so soupy!!", 620, , , snd_dumbvictory, fnt_abaddon, );

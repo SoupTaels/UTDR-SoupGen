@@ -66,7 +66,7 @@ function FormData() constructor {
 		});
 		// now check the boundary.. yaaaaay
 		var check_bound_byte = 1;
-		for (var p=0;p<buffer_get_size(buffer);p++) {
+		try { for (var p=0;p<buffer_get_size(buffer);p++) {
 			var byte = buffer_peek(buffer,p,buffer_u8);	
 			var check_byte = ord(string_byte_at(boundary,check_bound_byte));
 			if (byte == check_byte) {
@@ -77,7 +77,8 @@ function FormData() constructor {
 			} else {
 				bc = 1;
 			}
-		}
+		} }
+		catch ( err ) { bc = 1; }
 	}
 	/// @description Add a text field to the FormData instance
 	/// @param {string} field Field name
@@ -94,7 +95,7 @@ function FormData() constructor {
 			var field = fields[i];
 			if (field.type == "file") {
 				if (field.keep_buffer != true) {
-					buffer_delete(field.buffer);
+					if ( buffer_exists(field.buffer) ) { buffer_delete(field.buffer); }
 				}
 			}
 		}
@@ -106,13 +107,13 @@ function FormData() constructor {
 			var field = fields[i];
 			var name = field.name;
 			
-			buffer_write(buffer,buffer_text,"--"+boundary+NEWLINE);
+			buffer_write(buffer,buffer_text,$"--{boundary}{NEWLINE}");
 			
 			// Text field
 			if (field.type=="text") {
 				var data = field.data;
-				buffer_write(buffer,buffer_text,"Content-Disposition: form-data; name=\""+name+"\""+NEWLINE+NEWLINE);
-				buffer_write(buffer,buffer_text,string(data)+NEWLINE);
+				buffer_write(buffer,buffer_text,$"Content-Disposition: form-data; name=\"{name}{NEWLINE}{NEWLINE}");
+				buffer_write(buffer,buffer_text,$"{data}{NEWLINE}");
 				continue;
 			}
 			// File field!
@@ -123,14 +124,15 @@ function FormData() constructor {
 				// apparently this should be assumed, ask rfc2045 ¯\_(ツ)_/¯
 				field.mimetype = "text/plain";	
 			}
-			buffer_write(buffer,buffer_text,"Content-Disposition: form-data;name=\""+name+"\"; filename=\"" + field.filename + "\"" + NEWLINE);
-			buffer_write(buffer,buffer_text,"Content-Type: " + field.mimetype + NEWLINE + NEWLINE);
+			buffer_write(buffer,buffer_text, $"Content-Disposition: form-data;name=\"{name}\"; filename=\"{field.filename}\"{NEWLINE}");
+			buffer_write(buffer,buffer_text, $"Content-Type: {field.mimetype}{NEWLINE}{NEWLINE}");
 			
+			if ( !buffer_exists(field.buffer) ) { return [buffer,boundary]; }
 			buffer_copy(field.buffer,0,buffer_get_size(field.buffer),buffer,buffer_tell(buffer));
 			buffer_seek(buffer,buffer_seek_relative,buffer_get_size(field.buffer));
 			buffer_write(buffer,buffer_text,NEWLINE);
 		}
-		buffer_write(buffer,buffer_text,"--"+boundary+"--"+NEWLINE);
+		buffer_write(buffer,buffer_text,$"--{boundary}--{NEWLINE}");
 		return [buffer,boundary];
 	}
 }

@@ -90,8 +90,8 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 		scribble_glyph_set("fnt_papyrus_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, -2); scribble_glyph_set("fnt_papyrus_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_papyrus_alt", all, SCRIBBLE_GLYPH.Y_OFFSET, -1); scribble_glyph_set("fnt_papyrus_alt", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
 		scribble_glyph_set("fnt_papyrus_alt_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, -2); scribble_glyph_set("fnt_papyrus_alt_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14);
-		scribble_glyph_set("fnt_determination", all, SCRIBBLE_GLYPH.X_OFFSET, 0); scribble_glyph_set("fnt_determination", "!", SCRIBBLE_GLYPH.X_OFFSET, 1);
-		scribble_glyph_set("fnt_determination_outline", all, SCRIBBLE_GLYPH.X_OFFSET, -1); scribble_glyph_set("fnt_determination_outline", "!", SCRIBBLE_GLYPH.X_OFFSET, 0);
+		scribble_glyph_set("fnt_determination", all, SCRIBBLE_GLYPH.X_OFFSET, 0); scribble_glyph_set("fnt_determination", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14); scribble_glyph_set("fnt_determination", all, SCRIBBLE_GLYPH.Y_OFFSET, -2);  
+		scribble_glyph_set("fnt_determination_outline", all, SCRIBBLE_GLYPH.X_OFFSET, -1); scribble_glyph_set("fnt_determination_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, 14); scribble_glyph_set("fnt_determination_outline", all, SCRIBBLE_GLYPH.Y_OFFSET, -3);  
 		//I'm so happy Deltarune doesn't introduce new fonts cause fuck this honestly. Never want to do this again.
 	#endregion
 	
@@ -479,7 +479,7 @@ ui_init();
 #endregion
 
 #region First Time
-	var txt_ = $"Ayy! Welcome to [wheel][c_gold]UTDR SoupGen![/]|I see that it's your first time booting this up.|I would recommend [c_yellow]reading the|[c_yellow]help guide before you continue[/].|SoupGen got a [slant]lot[/] of power to it compared|to your average UTDR textbox generator,|so do familarize yourself with what all you can do!| |With that being said, [wave][c_lime]I hope you enjoy|this release!| |Once you're done, just press ESC for export options!{is_android() ? "| |You're using the Android version!|SoupGen was not optimized for phones,|but plenty of work has gone into making the experience similar|to PCs. You may still struggle in some places tho, sorry!" : ""}";
+	var txt_ = $"Ayy! Welcome to [wheel][c_gold]UTDR SoupGen![/]|I see that it's your first time booting this up.|I would recommend [c_yellow]reading the[c_yellow] help guide before you continue[/].||SoupGen got a [slant]lot[/] of power to it compared|to your average UTDR textbox generator,|so do familarize yourself with what all you can do!| |With that being said, [wave][c_lime]I hope you enjoy|this release!|Once you're done, just press ESC for export options!{is_android() ? "| |You're using the Android version!|SoupGen was not optimized for phones,|but plenty of work has gone into making the experience similar|to PCs. You may still struggle in some places tho, sorry!||You will now be asked where to let SoupGen store files at.|I recommend your Pictures folder." : ""}";
 	
 	save_pref = function () {
 		var data_ = json_stringify(global.pref);
@@ -491,7 +491,11 @@ ui_init();
 		global.pref.firsttime = false;
 		SYSTEMUI.save_pref();
 		soupy_url("https://rentry.co/utdrsoupguides", , , 0);
-		if ( is_android() ) { android_path = intent_saf_request(SAF_REQUEST_SEARCH_DIRECTORY); }
+		if ( is_android() ) {
+			var perm_r = "android.permission.READ_EXTERNAL_STORAGE", perm_w = "android.permission.WRITE_EXTERNAL_STORAGE";
+			if ( os_check_permission(perm_r) == os_permission_denied || os_check_permission(perm_w) == os_permission_denied ) { os_request_permission(perm_r, perm_w); }
+			android_path = intent_saf_request(SAF_REQUEST_SEARCH_DIRECTORY, SAF_MIME_TYPE_IMAGE); 
+		}
 	}
 	
 	if ( global.pref.firsttime ) { var id_ = soupy_message(txt_, "Let's get soupy!", 480, , , snd_dimbox, fnt_abaddon, save_, , true, , , fa_top); soup_store("firsttime", id_, , true); }

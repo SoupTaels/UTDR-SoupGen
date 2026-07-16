@@ -26,7 +26,11 @@ switch ( get_[? "type"] ) {
 	
 	case "saf_request_search_directory_canceled": {
 		MobileUtils_Vibrate_Shot(150);
-		soupy_message("You must define a safe path to save/ load|to in order for SoupGen to work.", "Try Again.", 480, , , snd_error, fnt_abaddon, function(){ intent_saf_request(SAF_REQUEST_SEARCH_DIRECTORY); }, , true, , , fa_top); 
+		soupy_message("You must define a safe path to save/ load|to in order for SoupGen to work.", "Try Again.", 480, , , snd_error, fnt_abaddon, function() {
+			var perm_r = "android.permission.READ_EXTERNAL_STORAGE", perm_w = "android.permission.WRITE_EXTERNAL_STORAGE";
+			if ( os_check_permission(perm_r) == os_permission_denied || os_check_permission(perm_w) == os_permission_denied ) { os_request_permission(perm_r, perm_w); }
+			intent_saf_request(SAF_REQUEST_SEARCH_DIRECTORY); 
+		}, , true, , , fa_top); 
 	} break;
 	
 	case "MobileUtils_Gallery_Open": {
