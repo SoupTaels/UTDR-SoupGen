@@ -1,5 +1,5 @@
 {
   "game_version":"1.3.2",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- makes determination mono more accurate|- removes multilang version as the new|main font is already multilingual|- no webview on export",
+  "changelog":"- makes determination mono more accurate|- removes multilang version as the new\nmain font is already multilingual|- no webview on export",
 }
