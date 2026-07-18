@@ -116,7 +116,6 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	dial_text_yoff = 0; //Offset Y Text
 	dial_text_halign = 0; //Text H alignment
 	dial_text_valign = 0; //Text V alignment
-	dial_auto_page = false; //Whether to automatically add new pages when text height overflows
 	dial_rtl = false; //Right-to-left text
 	dial_gradient = false; //Text gradient
 	dial_gradient_orig = dial_gradient; //Text gradient original

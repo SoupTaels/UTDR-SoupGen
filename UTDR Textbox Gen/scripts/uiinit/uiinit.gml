@@ -416,11 +416,6 @@ function ui_init() {
 				]),
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
-					new LuiText({ value: "Auto Page:", width: 100, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically add new pages when\nyour text overflows the dialogue box.\n[c_yellow]This [c_red]disables[c_yellow] vertical text alignments if it's on.[c_white]\nPage created this way will [c_yellow]not start with\nan asterisk if auto-asterisk is on.", true, , true),
-					new LuiToggleSwitch({ value: dial_auto_page, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_auto_page"),
-				]),
-			
-				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Right-To-Left:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether dialogue should be read right-to-left.", true, , true),
 					new LuiToggleSwitch({ value: dial_rtl, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_rtl"),
 				]),

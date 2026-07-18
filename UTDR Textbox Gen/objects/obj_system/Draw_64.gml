@@ -99,7 +99,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 							dial_text_page = clamp(dial_text_page, 0, dial_text_page_c - 1);
 							scrib_dial.starting_format(dial_font, dial_text_c).scale(dial_text_scale).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw)
 							.allow_line_data_getter().allow_glyph_data_getter().right_to_left(dial_rtl).gradient(dial_gradient_clr, dial_gradient).allow_text_getter()
-							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, dial_auto_page ? 110 : -1).align(align_.h, align_.v)
+							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v)
 							
 							#region Effects with Regions
 								var regions_ = scrib_dial.region_get_bboxes(), regions_len = array_length(regions_), regions_i = 0;
