@@ -5,10 +5,15 @@ function clipboard_set_surface(surf) {
 	var w = surface_get_width(surf), h = surface_get_height(surf), buff = buffer_create(w * h * 4, buffer_fixed, 1);
 	var temp = surface_create(w, h);
 	
+	
 	surface_set_target(temp);
+	gpu_set_blendmode_ext(bm_one, bm_zero);
+	shader_set(shd_bgr);
 		draw_clear_alpha(c_black, 0);
 		draw_surface(surf, 0, 0);
+	gpu_set_blendmode(bm_normal); gpu_set_blendequation(bm_eq_add);
 	surface_reset_target();
+	shader_reset();
 	
 	buffer_get_surface(buff, temp, 0);
 	clipboard_set_bitmap(buffer_get_address(buff), w, h);
@@ -22,9 +27,13 @@ function clipboard_set_sprite(spr_, ind = 0, xs_ = 1, ys_ = 1, rot_ = 0, clr_ = 
 	var temp = surface_create(w, h);
 	
 	surface_set_target(temp);
+	gpu_set_blendmode_ext(bm_one, bm_zero);
+	shader_set(shd_bgr);
 		draw_clear_alpha(c_black, 0);
 		draw_sprite_ext(spr_, ind, ( rot_ == 0 ? sprite_get_xoffset(spr_) : ( w/ 2 ) ), ( rot_ == 0 ? sprite_get_yoffset(spr_) : ( h/ 2 ) ), xs_, ys_, rot_, clr_, alp_);
+	gpu_set_blendmode(bm_normal); gpu_set_blendequation(bm_eq_add);
 	surface_reset_target();
+	shader_reset();
 	
 	buffer_get_surface(buff, temp, 0);
 	clipboard_set_bitmap(buffer_get_address(buff), w, h);

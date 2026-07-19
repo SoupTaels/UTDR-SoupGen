@@ -326,6 +326,7 @@
     {"name":"__shdCleanAntialias","order":1,"path":"shaders/__shdCleanAntialias/__shdCleanAntialias.yy",},
     {"name":"__shdCleanAntialiasLegacy","order":2,"path":"shaders/__shdCleanAntialiasLegacy/__shdCleanAntialiasLegacy.yy",},
     {"name":"__shdCleanJaggies","order":3,"path":"shaders/__shdCleanJaggies/__shdCleanJaggies.yy",},
+    {"name":"shd_bgr","order":1,"path":"shaders/shd_bgr/shd_bgr.yy",},
     {"name":"shd_clip_mask","order":3,"path":"shaders/shd_clip_mask/shd_clip_mask.yy",},
     {"name":"snd_bump","order":8,"path":"sounds/snd_bump/snd_bump.yy",},
     {"name":"snd_cancel","order":6,"path":"sounds/snd_cancel/snd_cancel.yy",},
