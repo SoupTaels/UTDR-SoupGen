@@ -94,10 +94,20 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 					#region Actual Text
 						var tx_x = AUTO_ASTERISK ? xx_ + 28 : xx_, wrapcalc = dial_auto_wrap ? ( 585 - xx_ ) : -1;
 						var align_ = scribble_alignment(dial_text_halign, dial_text_valign);
+						
+						if ( dial_text_shdw ) {
+							var scrib_dial = scribble(dial_text) //Dialogue Text
+							scrib_dial.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline)
+							.right_to_left(dial_rtl).gradient(dial_text_shdw_clr_g, 1)
+							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v)
+							
+							scrib_dial.draw(( tx_x + dial_text_xoff ) + dial_text_shdw_x, ( yy_ + dial_text_yoff ) + dial_text_shdw_y, dial_text_gif ? typist : undefined);
+						}
+						
 						var scrib_dial = scribble(dial_text) //Dialogue Text
 							dial_text_page_c = scrib_dial.get_page_count();
 							dial_text_page = clamp(dial_text_page, 0, dial_text_page_c - 1);
-							scrib_dial.starting_format(dial_font, dial_text_c).scale(dial_text_scale).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw)
+							scrib_dial.starting_format(dial_font, dial_text_c).scale(dial_text_scale).outline(dial_text_outline)
 							.allow_line_data_getter().allow_glyph_data_getter().right_to_left(dial_rtl).gradient(dial_gradient_clr, dial_gradient).allow_text_getter()
 							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v)
 							
@@ -176,8 +186,15 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 										var p_x = xx_ - 4, p_y = yy_ + lined.y;
 										if ( dial_text_gif && dial_miniface[i] > 0 ) { draw_sprite_ensure(dial_miniface[i], dial_miniface_index[i], xx_ + dial_text_xoff, ( p_y + 12 ) + dial_text_yoff, dial_text_scale, dial_text_scale, 0, dial_point_clr, 1); }
 										else {
+											if ( dial_text_shdw ) {
+												var scrib_point = scribble(dial_point_chr) //Dialogue Point
+												.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_text_shdw_clr_g, 1)
+												.allow_line_data_getter()
+												scrib_point.draw(( p_x + dial_text_xoff ) + dial_text_shdw_x, ( p_y + dial_text_yoff ) + dial_text_shdw_y);
+											}
+											
 											var scrib_point = scribble(dial_point_chr) //Dialogue Point
-												.starting_format(dial_font, dial_point_clr).scale(dial_text_scale).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw).gradient(dial_gradient_clr, dial_gradient)
+												.starting_format(dial_font, dial_point_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_gradient_clr, dial_gradient)
 												.allow_line_data_getter()
 												scrib_point.draw(p_x + dial_text_xoff, p_y + dial_text_yoff);
 										}
@@ -203,8 +220,15 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 					#region Available Choices
 						var x1_ = xx_ + 270, y1_ = yy_ + 10, x1_a = 0, y1_a = 0;
 						if ( dial_choices[0] != "" ) { //Top
+							if ( dial_text_shdw ) {
+								var choice1 = scribble(dial_choices[0])
+								.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 1 ? c_yellow : dial_text_shdw_clr).gradient(dial_gradient_clr, 1);
+								
+								choice1.draw(x1_ + dial_text_shdw_x, y1_ + dial_text_shdw_y);
+							}
+							
 							var choice1 = scribble(dial_choices[0])
-							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw).starting_format(dial_font, dial_choices_menu == 1 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
+							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 1 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
 							
 							var choice1_bb = choice1.get_bbox(x1_, y1_);
 							if ( dial_choices_deltarunelike ) { x1_a = choice1_bb.left - ( sprite_get_width(dial_choices_ico)/ 2 ) - 5; y1_a = choice1_bb.top + ( choice1_bb.height/ 2 ); } //Move the choicer soul next to the text
@@ -214,8 +238,15 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 					
 						var x2_ = xx_ + 130, y2_ = yy_ + 50, x2_a = 0, y2_a = 0;
 						if ( dial_choices[1] != "" ) { //Left
+							if ( dial_text_shdw ) {
+								var choice1 = scribble(dial_choices[1])
+								.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 2 ? c_yellow : dial_text_shdw_clr).gradient(dial_gradient_clr, 1);
+								
+								choice1.draw(x2_ + dial_text_shdw_x, y2_ + dial_text_shdw_y);
+							}
+							
 							var choice1 = scribble(dial_choices[1])
-							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw).starting_format(dial_font, dial_choices_menu == 2 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
+							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 2 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
 							
 							var choice1_bb = choice1.get_bbox(x2_, y2_);
 							if ( dial_choices_deltarunelike ) { x2_a = choice1_bb.left - ( sprite_get_width(dial_choices_ico)/ 2 ) - 5; y2_a = choice1_bb.top + ( choice1_bb.height/ 2 ); } //Move the choicer soul next to the text
@@ -225,8 +256,15 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 					
 						var x3_ = xx_ + 400, y3_ = yy_ + 50, x3_a = 0, y3_a = 0;
 						if ( dial_choices[2] != "" ) { //Right
+							if ( dial_text_shdw ) {
+								var choice1 = scribble(dial_choices[2])
+								.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 3 ? c_yellow : dial_text_shdw_clr).gradient(dial_gradient_clr, 1);
+								
+								choice1.draw(x3_ + dial_text_shdw_x, y3_ + dial_text_shdw_y);
+							}
+							
 							var choice1 = scribble(dial_choices[2])
-							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw).starting_format(dial_font, dial_choices_menu == 3 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
+							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 3 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
 							
 							var choice1_bb = choice1.get_bbox(x3_, y3_);
 							if ( dial_choices_deltarunelike ) { x3_a = choice1_bb.left - ( sprite_get_width(dial_choices_ico)/ 2 ) - 5; y3_a = choice1_bb.top + ( choice1_bb.height/ 2 ); } //Move the choicer soul next to the text
@@ -236,8 +274,15 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 					
 						var x4_ = xx_ + 270, y4_ = yy_ + 90, x4_a = 0, y4_a = 0;
 						if ( dial_choices[3] != "" ) { //Top
+							if ( dial_text_shdw ) {
+								var choice1 = scribble(dial_choices[3])
+								.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 4 ? c_yellow : dial_text_shdw_clr).gradient(dial_gradient_clr, 1);
+								
+								choice1.draw(x4_ + dial_text_shdw_x, y4_ + dial_text_shdw_y);
+							}
+							
 							var choice1 = scribble(dial_choices[3])
-							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).shadow(dial_text_shdw_clr, dial_text_shdw).starting_format(dial_font, dial_choices_menu == 4 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
+							.align(fa_center, fa_center).scale(2).outline(dial_text_outline).starting_format(dial_font, dial_choices_menu == 4 ? c_yellow : dial_text_c).gradient(dial_gradient_clr, dial_gradient);
 							
 							var choice1_bb = choice1.get_bbox(x4_, y4_);
 							if ( dial_choices_deltarunelike ) { x4_a = choice1_bb.left - ( sprite_get_width(dial_choices_ico)/ 2 ) - 5; y4_a = choice1_bb.top + ( choice1_bb.height/ 2 ); } //Move the choicer soul next to the text

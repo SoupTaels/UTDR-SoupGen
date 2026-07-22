@@ -11,7 +11,6 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	
 			if ( is_struct(pref_) ) {
 				var get_ = pref_[$ "firsttime"]; global.pref.firsttime = !is_undefined(get_) ? get_ : true;
-				var get_ = pref_[$ "shadowoff"]; global.pref.shadowoff = !is_undefined(get_) ? abs(round(get_)) : 1;
 				var get_ = pref_[$ "killaudio"]; global.pref.killaudio = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "randomclr"]; global.pref.randomclr = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "sizematters"]; global.pref.sizematters = !is_undefined(get_) ? get_ : false;
@@ -25,6 +24,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "pausesymbols"]; global.pref.pausesymbols = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "soupyicon"]; global.pref.soupyicon = !is_undefined(get_) ? get_ : true;
+				var get_ = pref_[$ "presets"]; global.pref.presets = !is_undefined(get_) ? get_ : {};
 				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : true; dial_point_auto = global.pref.autopoint;
 				var get_ = pref_[$ "macros"]; global.pref.macros = !is_undefined(get_) ? get_ : { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }; 
@@ -75,8 +75,8 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 		var i = 0, arr = tag_get_assets("fonts"), len = array_length(arr);
 		repeat (  len ) {
 			var cur_ = arr[i];
-			scribble_font_bake_outline_and_shadow(cur_, $"{cur_}_s", global.pref.shadowoff, global.pref.shadowoff, SCRIBBLE_OUTLINE.NO_OUTLINE, 0, false);
-			scribble_font_bake_outline_and_shadow(cur_, $"{cur_}_outline", global.pref.shadowoff, global.pref.shadowoff, SCRIBBLE_OUTLINE.EIGHT_DIR, 0, false);
+			scribble_font_bake_outline_and_shadow(cur_, $"{cur_}_s", 0, 0, SCRIBBLE_OUTLINE.NO_OUTLINE, 0, false);
+			scribble_font_bake_outline_and_shadow(cur_, $"{cur_}_outline", 0, 0, SCRIBBLE_OUTLINE.EIGHT_DIR, 0, false);
 			var h_ = scribble_glyph_get($"{cur_}_s", "W", SCRIBBLE_GLYPH.FONT_HEIGHT), x_ = scribble_glyph_get($"{cur_}_s", "A", SCRIBBLE_GLYPH.LEFT_OFFSET);
 			scribble_glyph_set($"{cur_}_outline", all, SCRIBBLE_GLYPH.FONT_HEIGHT, h_); scribble_glyph_set($"{cur_}_outline", all, SCRIBBLE_GLYPH.LEFT_OFFSET, x_);
 			scribble_font_delete(cur_); scribble_font_rename($"{cur_}_s", cur_);
@@ -431,6 +431,9 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 #region Dialogue Shadow
 	dial_text_shdw = false; //Whether text should have a shadow
 	dial_text_shdw_clr = c_deltarune; //Shadow Color
+	dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); //Shadow gradient color
+	dial_text_shdw_x = 1; //Shadow x offset
+	dial_text_shdw_y = 1; //Shadow y offset
 #endregion
 
 #region Dialogue Face
@@ -484,6 +487,24 @@ ui_init();
 		var data_ = json_stringify(global.pref);
 		var buff_ = buffer_create(string_byte_length(data_), buffer_fixed, 1);
 		buffer_write(buff_, buffer_text, data_); buffer_save(buff_, PREF_SOUP); buffer_delete(buff_);
+	}
+	
+	save_preset = function (label_ = "") {
+		global.pref.presets[$ label_] = {
+			//Borders
+			spr_bord, bord_name, bord_clr, bord_index, bord_spd, bord_anim, bord_anim_track, bord_scale, bord_stretch, bord_xoff, bord_yoff, bord_angle, bord_prev,
+			
+			//Text
+			dial_font, dial_text_scale, dial_text_c, dial_text_outline, dial_point_chr, dial_point_clr, dial_point_clr_anim, dial_point_clr_anim_alpha, dial_text_line_spacing, dial_text_xoff, dial_text_yoff, dial_text_halign, dial_text_valign, dial_rtl, dial_gradient,
+			dial_gradient_clr, dial_indicator, dial_indicator_index,dial_indicator_spd, dial_indicator_anim, dial_indicator_visible, dial_indicator_scale, dial_indicator_xoff, dial_indicator_yoff, dial_indicator_angle, dial_indicator_blink,
+			typist_spd, typist_smooth, typist_ease, dial_gradient_orig, dial_gradient_clr_orig, 
+			
+			//Shadow
+			dial_text_shdw, dial_text_shdw_clr, dial_text_shdw_clr_g, dial_text_shdw_x, dial_text_shdw_y,
+			
+			//Face
+			dial_face_clr, dial_face_xscale, dial_face_yscale, dial_face_angle, dial_face_alpha, dial_face_xoff_static, dial_face_yoff_static, dial_face_anim, dial_face_angle_orig, dial_face_alpha_orig,
+		};
 	}
 	
 	var save_ = function () {

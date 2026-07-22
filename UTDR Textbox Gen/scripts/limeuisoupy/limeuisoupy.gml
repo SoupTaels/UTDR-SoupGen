@@ -161,6 +161,7 @@ function soupy_color_picker_border() { soupy_color_picker(SYSTEMUI.bord_clr, "da
 function soupy_color_picker_asterisk() { soupy_color_picker(SYSTEMUI.dial_point_clr, "dataasterisk"); }
 function soupy_color_picker_textc() { soupy_color_picker(SYSTEMUI.dial_text_c, "datatextc"); } function soupy_color_picker_textcout() { soupy_color_picker(SYSTEMUI.dial_text_outline, "datatextcout"); }
 function soupy_color_picker_shadow() { soupy_color_picker(SYSTEMUI.dial_text_shdw_clr, "datashadow"); }
+function soupy_color_picker_shadow_g() { soupy_color_picker(SYSTEMUI.dial_text_shdw_clr_g, "datashadow_g"); }
 function soupy_color_picker_gradient() { soupy_color_picker(SYSTEMUI.dial_gradient_clr, "datagradient"); }
 function soupy_color_picker_highlight() { soupy_color_picker(SYSTEMUI.dial_highlight, "datahighlight"); }
 function soupy_color_picker_underline() { soupy_color_picker(SYSTEMUI.dial_underline, "dataunderline"); }
@@ -253,6 +254,66 @@ function soupy_ui_textmacros() {
 	}
 	else {
 		array_push(arr_, new LuiText({ value: "(No macros found.)", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_gray, xoff: 0, y: 10 }));
+	}
+	
+	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
+	var mainui = soupy_popup([ maincan, ], , "Go Back", , 460, , snd_chest, fnt_abaddon, , , 40); soup_store("mainui", mainui, , true);
+}
+	
+function soupy_ui_presets() {
+	var arr_ = [];
+	
+	array_push(arr_, new LuiText({ value: "Config presets allow you to save/ load common settings", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_yellow, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "so that you don't always have to go through the menuing", truncate: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_yellow, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "process for a particular look again!", truncate: false, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_yellow, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiButton({ text: "Save Current Settings", height: 35, })
+		.addEvent(LUI_EV_CLICK, function (e_) {
+			var arr_ = [
+				new LuiText({ value: "Labels must be uniquely named.", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+				new LuiInput({ height: 40, placeholder: "Label (ex: uty_clover, wavyrainbow, soupytext, etc.)", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("label", e_, , true); }),
+				new LuiButton({ text: "Add new preset!", height: 40, }).addEvent(LUI_EV_CLICK, function () { 
+					var result = soup_checkout("label", false, true).get();
+					if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid label.", , 270, , , snd_error, , , true); exit; }
+				
+					var available = is_undefined(global.pref.presets[$ result]);
+					if ( available ) { sfx_play(snd_sparkle2); sfx_play(snd_chest); SYSTEMUI.save_preset(result); SYSTEMUI.save_pref(); soup_checkout("mainui2", , true).destroy(); SYSTEMUI.ui_paused = false; soup_checkout("mainui", , true).destroy(); }
+					else { soupy_message("A preset with this|label already exists.", , 270, , , snd_error, , , true); }
+				}),
+			];
+		
+			var mainui = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui, , true);
+		})
+	);
+	array_push(arr_, new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(0).setHeight(5));
+	
+	var hist_ = struct_get_names(global.pref.presets), hist_len = array_length(hist_), hist_i = 0;
+	if ( hist_len > 0 ) {
+		repeat ( hist_len ) {
+			var cur_ = hist_[hist_i];
+			var preset_arr = [
+				new LuiText({ value: cur_, text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }).setPadding(5),
+				new LuiButton({ text: "APPLY", height: 35, width: 80, }).setData("name", cur_).setData("data", global.pref.presets[$ cur_])
+				.addEvent(LUI_EV_CLICK, function (e_) {
+					var data = e_.getData("data"), data_i = 0, data_var = struct_get_names(data), data_len = array_length(data_var);
+					repeat ( data_len ) {
+						var data_cur = data_var[data_i];
+						variable_instance_set(obj_system, data_cur, data[$ data_cur]);
+					data_i++; }
+					with ( SYSTEMUI ) { typist.in(typist_spd, typist_smooth); typist.ease(typist_ease.type, typist_ease.x, typist_ease.y, typist_ease.xscale, typist_ease.yscale, typist_ease.angle, typist_ease.alpha); ui_paused = false; }
+					sfx_play(snd_equip2); soup_checkout("mainui", , true).destroy(); 
+				}),
+				new LuiButton({ text: "DISCARD", height: 35, width: 80, }).setData("name", cur_).setData("data", global.pref.presets[$ cur_])
+				.addEvent(LUI_EV_CLICK, function (e_) { struct_remove(global.pref.presets, e_.getData("name")); SYSTEMUI.save_pref(); sfx_play(snd_throw); SYSTEMUI.ui_paused = false; soup_checkout("mainui", , true).destroy(); }),
+			];
+		
+			array_push(arr_, new LuiRow().setFlexGrow(1).centerContent().addContent(preset_arr));
+		hist_i++; }
+	}
+	else {
+		array_push(arr_, new LuiText({ value: "(No presets found.)", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_gray, xoff: 0, y: 10 }));
 	}
 	
 	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
