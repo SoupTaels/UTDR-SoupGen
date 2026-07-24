@@ -1,5 +1,5 @@
 ///@desc Bulk Load Faces
-if ( live_call() ) { return live_result; }
+//if ( live_call() ) { return live_result; }
 var get_ = async_load, info_ = soup_checkout("bulkload", , true);
 if ( !is_undefined(info_) && get_[?"id"] == info_.id ) {
 	if ( get_[?"status"] == 0 ) { //Successfully unzipped!
