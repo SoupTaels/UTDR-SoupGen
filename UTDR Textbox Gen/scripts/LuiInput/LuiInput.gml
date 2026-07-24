@@ -109,7 +109,7 @@ function LuiInput(_params = {}) : LuiBase(_params) constructor {
     
     ///@ignore
     static _limit_value = function(_string) {
-        return string_copy(_string, 1, self.max_length);
+        return !is_undefined(self.max_length) ? string_copy(_string, 1, self.max_length) : _string;
     }
     
     ///@ignore

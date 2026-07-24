@@ -145,7 +145,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			#region Auto Asterisks
 				var mychr = chr(_element.get_glyph_data(_position - 1).unicode); //Get the currently revealed character
 				var mychr2 = chr(_element.get_glyph_data(_position).unicode); //Get the next character
-				if ( mychr == chr(10) && string_lettersdigits(mychr2) != "" ) { //Newline
+				if ( mychr == chr(10) && mychr2 != " " && mychr2 != "" ) { //Newline
 					var lined = _element.get_line_data(dial_wrap_count, dial_text_page);
 					if ( !lined.forced_break ) { dial_wrap_count++; } //Account for cases where there's a line wrap and a break
 					dial_wrap_count++;

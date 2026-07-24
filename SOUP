@@ -1,5 +1,5 @@
 {
-  "game_version":"1.4.0",
+  "game_version":"1.4.1",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- new text shadow system. this allows for gradient|shadows and pixel offset adjustments.|not well tested, so do report back bugs to me!|- new config presets! now you can save your tweaked|dialogue settings in presets without much menuing!",
+  "changelog":"- fixed auto-asterisk not working when|starting out with symbols or accents|- added the combined flowers icon|- you can add sprites via a URL now!|- fixed preview portraits sometimes not showing up",
 }

@@ -358,7 +358,7 @@ pref = {
 #region Functions
 	///@desc Returns an external sprite or adds it if it doesn't already exist
 	function external_ensure(name_, fname_, fpath_, type_ = 0, allowmultiple_ = true, showmsg_ = true) {
-		if ( filename_ext(fpath_) != ".png" && !is_android() ) { soupy_message($"\"{fname_}\"|is not allowed to be loaded.|File must be a PNG format.", , 320, , , snd_error, , , true); return -1; }
+		if ( filename_ext(fpath_) != ".png" && !is_android() ) { soupy_message($"\"{fname_}\"|is not allowed to be loaded.|File must be a PNG format.", , 320, , , snd_error, , , SYSTEMUI.ui_paused); return -1; }
 		
 		switch ( type_ ) {
 			case 0: { //Face Sprites
@@ -475,7 +475,7 @@ pref = {
 		var options_ = [], options_names = struct_get_names(global.faces_dict), options_len = array_length(options_names), options_i = 0;
 		repeat ( options_len ) { //Add available characters to an array
 			var cur_ = options_names[options_i], isnew_ = global.faces_dict[$ cur_][$ "NEW SPRITE"];
-			var face_ = struct_get_names(global.faces_dict[$ cur_]); face_ = face_[irandom_range(0, array_length(face_) - 1)];
+			var face_ = struct_get_names(global.faces_dict[$ cur_]); face_ = get_face(cur_) == -1 ? face_[irandom(array_length(face_) - 1)] : cur_;
 			array_push(options_, 
 				new LuiRow().setFlexGrow(1).centerContent().setData("name", cur_).addContent([
 					new LuiText({ value: isnew_ != undefined && isnew_ ? $"{string_upper_first(cur_)} (NEW!)" : string_upper_first(cur_), id_: cur_, font: fnt_speech, text_halign: fa_center, auto_height: false, height: 70, text_valign: fa_middle, color: ( get_face(cur_) != -1 ? c_cyan : c_white ), }).setPadding(5).setData("chara", cur_).setTooltip(get_face(cur_) != -1 ? $"[{cur_},0,0.15] [rainbow]Unique and recent!" : "", true, , true)
@@ -555,6 +555,35 @@ pref = {
 					else { soup_store("asynctype", "face", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
 			);
+			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						var arr_ = [
+						new LuiText({ value: "Enter the URL. The URL must end in \".png\".", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+						new LuiInput({ height: 40, max_length: undefined, offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("label", e_, , true); }),
+						new LuiButton({ text: "Download Image!", height: 40, }).addEvent(LUI_EV_CLICK, function () { 
+							var result = soup_checkout("label", false, true).get();
+							if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid URL.", , 270, , , snd_error, , , true); exit; }
+				
+							http(result, , , { get_file: true }, function (_, result) { //Success!
+								var temp_ = soup_checkout("label", false, true).get(); //Get URL
+								var fname_ = filename_name(temp_); //Get the filename of the URL (just the .png part)
+								buffer_save(result, fname_); //Temp save file
+								var myname_ = string_exclude(string_replace(string_replace(fname_, "_strip", ""), ".png", ""), "0123456789"); spr_ = external_ensure(myname_, fname_, fname_, , false); //Add file
+								soup_checkout("mainui2", false, true).destroy();
+								soup_checkout("datafunc", false)();
+								file_delete(fname_);
+							}, function () { //Failure!
+								soupy_popup("Couldn't download image.", , "OK", , , , snd_error, fnt_abaddon, true);
+							});
+						}),
+					];
+		
+					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
+				})
+			);
 			array_push(options_, new LuiText({ value: "Clear Page Face", font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_red, }).setPadding(5)
 				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -610,6 +639,35 @@ pref = {
 						sfx_play(snd_updated); soup_checkout("datainputB", false, true).set(myname_); soup_checkout("dataimageB", false, true).set(result); soup_checkout("datafunc", false)();
 					}
 					else { soup_store("asynctype", "border", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+				})
+			);
+			
+			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						var arr_ = [
+						new LuiText({ value: "Enter the URL. The URL must end in \".png\".", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+						new LuiInput({ height: 40, max_length: undefined, offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("label", e_, , true); }),
+						new LuiButton({ text: "Download Image!", height: 40, }).addEvent(LUI_EV_CLICK, function () { 
+							var result = soup_checkout("label", false, true).get();
+							if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid URL.", , 270, , , snd_error, , , true); exit; }
+				
+							http(result, , , { get_file: true }, function (_, result) { //Success!
+								var temp_ = soup_checkout("label", false, true).get(); //Get URL
+								var fname_ = filename_name(temp_); //Get the filename of the URL (just the .png part)
+								buffer_save(result, fname_); //Temp save file
+								var myname_ = string_exclude(string_replace(string_replace(fname_, "_strip", ""), ".png", ""), "0123456789"); spr_ = external_ensure(myname_, fname_, fname_, 1, false); //Add file
+								soup_checkout("mainui2", false, true).destroy();
+								soup_checkout("datafunc", false)();
+								file_delete(fname_);
+							}, function () { //Failure!
+								soupy_popup("Couldn't download image.", , "OK", , , , snd_error, fnt_abaddon, true);
+							});
+						}),
+					];
+		
+					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
 			);
 		#endregion
@@ -676,6 +734,35 @@ pref = {
 						soup_checkout("datafunc", false)();
 					}
 					else { soup_store("asynctype", "font", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+				})
+			);
+			
+			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						var arr_ = [
+						new LuiText({ value: "Enter the URL. The URL must end in \".png\".", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
+						new LuiInput({ height: 40, max_length: undefined, offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("label", e_, , true); }),
+						new LuiButton({ text: "Download Image!", height: 40, }).addEvent(LUI_EV_CLICK, function () { 
+							var result = soup_checkout("label", false, true).get();
+							if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid URL.", , 270, , , snd_error, , , true); exit; }
+				
+							http(result, , , { get_file: true }, function (_, result) { //Success!
+								var temp_ = soup_checkout("label", false, true).get(); //Get URL
+								var fname_ = filename_name(temp_); //Get the filename of the URL (just the .png part)
+								buffer_save(result, fname_); //Temp save file
+								var myname_ = string_exclude(string_replace(string_replace(fname_, "_strip", ""), ".png", ""), "0123456789"); spr_ = external_ensure(myname_, fname_, fname_, 2, false); //Add file
+								soup_checkout("mainui2", false, true).destroy();
+								soup_checkout("datafunc", false)();
+								file_delete(fname_);
+							}, function () { //Failure!
+								soupy_popup("Couldn't download image.", , "OK", , , , snd_error, fnt_abaddon, true);
+							});
+						}),
+					];
+		
+					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
 			);
 		#endregion
