@@ -52,7 +52,7 @@
 
 //Whether to automatically scale sprites to fit into the line of text. This is based on the font
 //height of the current font.
-#macro SCRIBBLE_AUTOFIT_INLINE_SPRITES  false
+#macro SCRIBBLE_AUTOFIT_INLINE_SPRITES  global.pref.autoscale
 
 //Whether to automatically scale surfaces to fit into the line of text. This is based on the font
 //height of the current font.
@@ -60,7 +60,7 @@
 
 //Whether to automatically scale textures to fit into the line of text. This is based on the font
 //height of the current font.
-#macro SCRIBBLE_AUTOFIT_INLINE_TEXTURES  false
+#macro SCRIBBLE_AUTOFIT_INLINE_TEXTURES  true
 
 // Controls how in-line sprites are positioned on a line of text. The position is based on the
 // font's ascender and ascender offset as well as the sprite's overall height. The sprite height

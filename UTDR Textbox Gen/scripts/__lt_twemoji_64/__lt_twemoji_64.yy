@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__lt_twemoji_64",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__lt_twemoji_64",
+  "parent":{
+    "name":"twemoji_64",
+    "path":"folders/Extensions/Emobble/twemoji/twemoji_64.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

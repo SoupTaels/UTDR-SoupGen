@@ -24,6 +24,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "pausesymbols"]; global.pref.pausesymbols = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "soupyicon"]; global.pref.soupyicon = !is_undefined(get_) ? get_ : true;
+				var get_ = pref_[$ "autoscale"]; global.pref.autoscale = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "presets"]; global.pref.presets = !is_undefined(get_) ? get_ : {};
 				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : true; dial_point_auto = global.pref.autopoint;
@@ -150,7 +151,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 					if ( !lined.forced_break ) { dial_wrap_count++; } //Account for cases where there's a line wrap and a break
 					dial_wrap_count++;
 				}
-				if ( !point_visible && mychr2 != "" ) { point_visible = true; }
+				if ( !point_visible && mychr2 != "" && mychr2 != " " ) { point_visible = true; }
 			#endregion
 		
 			#region Animate Face

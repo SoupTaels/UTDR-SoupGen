@@ -1,5 +1,5 @@
 {
-  "game_version":"1.4.2",
+  "game_version":"1.5.0",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- fixed small issue with not being able to export|if your dialogue only consists of foreign characters",
+  "changelog":"- added emoji support via emobble!|you can either use emojis directly, or type in their name|- added an option to auto-scale sprites within dialogue|- borders will now animate on their own if|they have animated sprites|- android keyboard improvements",
 }

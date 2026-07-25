@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_abaddon",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":12,
   "ascenderOffset":0,

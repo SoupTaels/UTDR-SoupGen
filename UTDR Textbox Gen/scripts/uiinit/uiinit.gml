@@ -71,7 +71,7 @@ function ui_init() {
 					quill_soup_active.fonts.mainfont = SYSTEMUI.ui_mainfont;
 					QuillSetTheme(quill_soup_active);
 					keyboard_string = "";
-					keyboard_virtual_show(kbv_type_default, kbv_returnkey_next, kbv_autocapitalize_none, false);
+					keyboard_virtual_show(kbv_type_default, kbv_returnkey_next, kbv_autocapitalize_none, true);
 				})
 			
 				#region Context Menu
@@ -428,6 +428,11 @@ function ui_init() {
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Symbols Delay:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Always add a delay to the typewriter\nwhen encountering symbols?\nThis may get in the way when it comes\nto characters that talk in\nunconventional ways.", true, , true),
 					new LuiToggleSwitch({ value: global.pref.pausesymbols, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "pausesymbols").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { global.pref.pausesymbols = e_.get(); SYSTEMUI.save_pref(); }),
+				]),
+				
+				new LuiRow().setFlexGrow(1).centerContent().addContent([
+					new LuiText({ value: "Auto-Scale Sprites:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether to automatically scale inline\nsprites according to their font height.\nScaling can still be manipulated using [c_yellow][[scale,#]", true, , true),
+					new LuiToggleSwitch({ value: global.pref.autoscale, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(global.pref, "autoscale").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { global.pref.autoscale = e_.get(); scribble_refresh_everything(); SYSTEMUI.save_pref(); }),
 				]),
 			
 				new LuiHorizontalRule({ height: 5, }),

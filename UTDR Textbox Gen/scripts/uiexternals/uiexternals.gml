@@ -20,6 +20,7 @@ pref = {
 	soupyicon: true, //Whether to enable dynamic icon changing
 	pausesymbols: true, //Whether to always delay when encountering symbols
 	presets: {}, //Config presets
+	autoscale: true, //Whether to automatically scale sprites according to the font height
 	macros: { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }, //Macros for reusable text
 }
 #region Add External Faces
@@ -621,6 +622,7 @@ pref = {
 						var myname = e_.params.id_, bord_ = global.bords_dict[$ myname];
 						if ( !is_undefined(bord_) ) { bord_[$ "NEW SPRITE"] = false; }
 						sfx_play(snd_updated); soup_checkout("datainputB", false, true).set(myname); soup_checkout("dataimageB", false, true).set(e_.get()); soup_checkout("datafunc", false)();
+						 if ( sprite_get_number(e_.get()) > 1 && SYSTEMUI.bord_spd == 0 ) { SYSTEMUI.bord_spd = 0.15; }
 					})
 				);
 			bords_i++; }
