@@ -1,5 +1,5 @@
 {
-  "game_version":"1.4.1",
+  "game_version":"1.4.2",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- fixed auto-asterisk not working when|starting out with symbols or accents|- added the combined flowers icon|- you can add sprites via a URL now!|- fixed preview portraits sometimes not showing up",
+  "changelog":"- fixed small issue with not being able to export|if your dialogue only consists of foreign characters",
 }

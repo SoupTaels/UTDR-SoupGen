@@ -82,7 +82,7 @@
 								var stacked_ = soup_checkout("stacked", false), page_ = soup_checkout("pageat", false), out_ = soup_checkout("bordout", false), vis_ = soup_checkout("bordvisible", false), xx_ = soup_checkout("xoff", false), yy_ = soup_checkout("yoff", false);
 								var mainfunc = soup_checkout("export dialogue func", false), maincan = soup_checkout("maincan", false);
 								if ( stacked_ && SYSTEMUI.dial_text_page_c <= 1 ) { SYSTEMUI.ui_paused = false; soupy_message("You must have more than one page.", "Go Back", 300, , , snd_error, , , true); exit; }
-								if ( string_lettersdigits(dial_text) == "" ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
+								if ( string_length(dial_text) <= 0 ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
 								if ( string_lettersdigits(page_) == "" ) { page_ = 0; } if ( string_lettersdigits(xx_) == "" ) { xx_ = 0; } if ( string_lettersdigits(yy_) == "" ) { yy_ = 0; }
 								if ( page_ > SYSTEMUI.dial_text_page_c ) { SYSTEMUI.ui_paused = false; soupy_message("Starting page can't be greater|than your page count.", "Go Back", 300, , , snd_error, , , true); exit; } else if ( page_ == "" || page_ == 0 ) { page_ = 1; } 
 								if ( xx_ == "" ) { xx_ = 0; } if ( yy_ == "" ) { yy_ = 0; }
@@ -153,7 +153,7 @@
 										var mainfunc = soup_checkout("export dialogue func", false), maincan = soup_checkout("maincan", false);
 										if ( string_lettersdigits(page_) == "" ) { page_ = 0; } if ( string_lettersdigits(timer_) == "" ) { timer_ = 180; } if ( string_lettersdigits(delay_) == "" ) { delay_ = 60; } if ( string_lettersdigits(quant_) == "" ) { quant_ = 1; }
 										if ( page_ > SYSTEMUI.dial_text_page_c ) { SYSTEMUI.ui_paused = false; soupy_message("Starting page can't be greater|than your page count.", "Go Back", 300, , , snd_error, , , true); exit; } else if ( page_ == "" || page_ == 0 ) { page_ = 1; }
-										if ( string_lettersdigits(dial_text) == "" ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
+										if ( string_length(dial_text) <= 0 ) { SYSTEMUI.ui_paused = false; soupy_message("You haven't even written any|dialogue yet!!", "Go Back", 300, , , snd_error, , , true); exit; }
 										quant_ = clamp(quant_, 0, 3);
 						
 										with ( SYSTEMUI ) { dial_text_page = real(page_ - 1); ui_export(typewrite ? 1 : 2, timer_, delay_, quant_); bord_box_visible = vis_; bord_out = out_; }
@@ -178,10 +178,10 @@
 	#region Quick Exports
 		if ( keyboard_check(vk_control) && !ui_paused && !screenshot && !record.enabled ) {
 			var valid_ = false;
-			if ( keyboard_check_pressed(ord("Q")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(); ui_mini(); valid_ = true; } //Static
-			if ( keyboard_check_pressed(ord("W")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(1); valid_ = true; } //Typewriter
-			if ( keyboard_check_pressed(ord("E")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } if ( dial_text_page_c <= 1 ) { soupy_message("You must have more than one page.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(3); ui_mini(); valid_ = true; } //Stack
-			if ( keyboard_check_pressed(ord("R")) ) { if ( dial_text == "" ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(2); valid_ = true; } //Animated
+			if ( keyboard_check_pressed(ord("Q")) ) { if ( string_length(dial_text) <= 0 ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(); ui_mini(); valid_ = true; } //Static
+			if ( keyboard_check_pressed(ord("W")) ) { if ( string_length(dial_text) <= 0 ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(1); valid_ = true; } //Typewriter
+			if ( keyboard_check_pressed(ord("E")) ) { if ( string_length(dial_text) <= 0 ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } if ( dial_text_page_c <= 1 ) { soupy_message("You must have more than one page.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(3); ui_mini(); valid_ = true; } //Stack
+			if ( keyboard_check_pressed(ord("R")) ) { if ( string_length(dial_text) <= 0 ) { soupy_message("You should enter some text.", "Cancel", 300, , , snd_error, , , ui_paused); exit; } ui_export(2); valid_ = true; } //Animated
 			if ( keyboard_check_pressed(ord("1")) ) { ui_updateref(); } //Update Ref
 			if ( keyboard_check_pressed(ord("2")) ) { var func_ = ui_viewing ? ui_unviewref : ui_viewref; func_(); if ( ui_viewing ) { sfx_play(snd_enc1); } } //View Ref
 			if ( valid_ ) { bord_box_visible = true; bord_out = true; }
