@@ -1729,7 +1729,7 @@ function __QuillCore() constructor {
 
 		if (!_read_only) {
 			if (_multiline) {
-				if (__TextInputKeyRepeat(_tb, vk_enter)) {
+				if (__TextInputKeyRepeat(_tb, vk_enter) && !is_android() ) {
 					__TextAreaInsertAutoIndentNewline(_tb, _cfg);
 				}
 			}
@@ -1751,7 +1751,7 @@ function __QuillCore() constructor {
 				}
 			}
 
-			if (__TextInputKeyRepeat(_tb, vk_backspace) && _cfg[$ "backspace_enabled"] == true) {
+			if (__TextInputKeyRepeat(_tb, vk_backspace) && _cfg[$ "backspace_enabled"] == true && !is_android() ) {
 				if (__TextInputHasSelection(_tb)) {
 					__TextInputDeleteSelection(_tb, _cfg);
 				}

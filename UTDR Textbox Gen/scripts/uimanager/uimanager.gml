@@ -182,10 +182,10 @@ function ui_manage() {
 			}
 			
 			if ( is_android() ) { 
-				//if ( keyboard_check_pressed(vk_backspace) ) { var c_ = textinput.GetCaret(), str_ = string_delete(textinput.GetValue(), c_, 1); textinput.SetValue(str_); textinput.SetCaret(c_ - 1); keyboard_string = ""; }
+				if ( keyboard_check_pressed(vk_backspace) ) { var c_ = textinput.GetCaret(), str_ = string_delete(textinput.GetValue(), c_, 1); textinput.SetValue(str_); textinput.SetCaret(c_ - 1); keyboard_string = ""; sfx_play(snd_bump, , , random_range(0.7, 1.3)); }
 				if ( keyboard_string != "" ) { 
 					var c_ = textinput.GetCaret(), str_ = string_insert(keyboard_string, textinput.GetValue(), c_ + 1); textinput.SetValue(str_); textinput.SetCaret(c_ + 1);
-					keyboard_string = "";
+					keyboard_string = ""; 
 				}
 				
 				//Since virtual keyboards are weird, we have to catch whether the textbox was updated or not
