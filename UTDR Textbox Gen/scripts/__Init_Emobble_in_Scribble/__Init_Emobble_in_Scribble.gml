@@ -18,7 +18,7 @@ function EmobbleInit() {
 	
 	scribble_add_macro("emoji", function(_emoji_name) {
 		var _emoji_str = emobble_get_emoji(_emoji_name);
-		var _string = __emobble_preprocesser(_emoji_str)
+		var _string = _emoji_str != "" ? __emobble_preprocesser(_emoji_str) : "?";
 		return _string;
 	})
 	

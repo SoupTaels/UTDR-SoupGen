@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.5.0" //Current game version
+	#macro GAME_VERSION "1.5.1" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -98,6 +98,7 @@ function TextChange(txt, point) : UndoableChange() constructor { //Handle undo/ 
 		dial_text = other.mytxt; dial_text_page_c = scribble(dial_text).get_page_count();
 		textinput.SetValue(dial_text);
 		
+		if ( file_exists(LAST_SAVED) ) { file_delete(LAST_SAVED); }
 		var lasttyped = file_text_open_write(LAST_SAVED);
 		file_text_write_string(lasttyped, dial_text); //Save what the user last typed
 		file_text_close(lasttyped);
