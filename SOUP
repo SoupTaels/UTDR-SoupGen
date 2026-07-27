@@ -1,5 +1,5 @@
 {
-  "game_version":"1.5.1",
+  "game_version":"1.5.2",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- added failsafe for entering an invalid emoji",
+  "changelog":"- added two new borders, speech and phone",
 }

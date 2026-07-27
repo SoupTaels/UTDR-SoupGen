@@ -297,6 +297,7 @@
   "styleName":"Regular",
   "tags":[
     "emoji",
+    "fonts",
   ],
   "textureGroupId":{
     "name":"Default",
