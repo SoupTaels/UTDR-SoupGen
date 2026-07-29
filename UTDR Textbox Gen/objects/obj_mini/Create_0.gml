@@ -21,7 +21,7 @@ doublec = false;
 draw = method(self, function() {
 	if ( SYSTEMUI.dial_text_page != page || SYSTEMUI.ui_paused || SYSTEMUI.ui_tab > 0 || !SYSTEMUI.bord_visible ) { exit; }
 	var shake = destroying ? random_range(2, -2) : 0;
-	draw_sprite_ensure(face, index, round(x + xoff) + shake, round(y) + shake, 1, 1, 0, destroying ? c_red : c_white, alpha);
-	var xx = x + ( sprite_get_width(face)/ 2 ) + 10, yy = y - ( sprite_get_height(face)/ 2 );
-	scrib.blend(destroying ? c_red : c_white, alpha).starting_format(font).draw(round(xx + xoff) - shake, round(yy) - shake);
+	draw_sprite_ensure(face, index, round(x + xoff) + shake, round(y) + shake, sticker ? 2 : 1, sticker ? 2 : 1, 0, destroying ? c_red : c_white, alpha);
+	var xx = x + ( ( sprite_get_width(face) * ( sticker ? 2 : 1 ) )/ 2 ) + 10, yy = y - ( ( sprite_get_height(face) * ( sticker ? 2 : 1 ) )/ 2 );
+	scrib.blend(destroying ? c_red : c_white, alpha).scale(sticker ? 2 : 1 ).starting_format(font).draw(round(xx + xoff) - shake, round(yy) - shake);
 });

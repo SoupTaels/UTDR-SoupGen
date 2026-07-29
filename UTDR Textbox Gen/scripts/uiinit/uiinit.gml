@@ -20,6 +20,7 @@ function ui_init() {
 		ui_finished = false; //Whether we finished recording the GIF
 		ui_finished_y = -100; //UI animation
 		ui_preview = false; //Whether we're previewing animated dialogue
+		ui_captial = false; //Whether to auto-captialize
 		if ( !is_android() ) { var tinysoup = "icons\\tinysoupy.png"; if ( file_exists(tinysoup) ) { widget_set_icon(tinysoup); } file_dropper_init(); }
 		undo_stack_create(); //History of undo changes
 		scribble_font_set_default("fnt_determination_nomono");
@@ -105,6 +106,8 @@ function ui_init() {
 					.ContextMenuAddItem(QuillContextMenuItem("Insert Page", method(self, soupy_context_page), "soupy_page").SetShortcut("Ctrl+D"))
 					.ContextMenuAddItem(QuillContextMenuItem("Add As Macro", method(self, soupy_context_macro), "soupy_macro").SetShortcut("Ctrl+P"))
 					.on_blur();
+					
+					if ( is_android() ) { textinput.ContextMenuAddItem(QuillContextMenuItem("Auto-Cap", function () { ui_captial = !ui_captial; sfx_play(snd_equip); }, "soupy_captial").SetShortcut("CAPS-LOCK")); }
 				#endregion
 		#endregion
 	#endregion
@@ -795,6 +798,7 @@ function ui_init() {
 			ui_export = function(type_ = 0, fmax_ = 180, delay_ = 60, quant_ = 1, xoff_ = 0, yoff_ = 0) {
 				if ( !ui_preview && !ui_finished ) { soup_store("tablast", ui_tab, , true); ui_tab = -1; ui_reset(false); ui_visible = false; soup_store("lastpage", dial_text_page, , true); }
 				if ( !bord_visible ) { sfx_play(snd_enc1, 0, , 1.3); bord_visible = true; } sfx_play(snd_equip);
+				if ( instance_exists(obj_mini) ) { with ( obj_mini ) { if ( sticker ) { once = true; alpha = 1; active = true; } } }
 				soupy_alarm_set("failsafe", "timer", 15);
 					
 				switch ( type_ ) {

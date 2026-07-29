@@ -185,7 +185,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			typist_spd = typist_spd_orig; //Switch back to the original typewriter speed
 			
 			if ( !instance_exists(obj_mini) ) { exit; }
-			with ( obj_mini ) { if ( page == other.dial_text_page ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
+			with ( obj_mini ) { if ( page == other.dial_text_page && !sticker ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
 		typist_reset = function () { soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes

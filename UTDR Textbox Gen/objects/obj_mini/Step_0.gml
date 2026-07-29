@@ -4,7 +4,7 @@ if ( SYSTEMUI.ui_paused || SYSTEMUI.ui_tab > 0 || !SYSTEMUI.bord_visible ) { alp
 if ( SYSTEMUI.dial_text_page != page ) { alpha = 1; once = false; exit; }
 else { 
 	if ( SYSTEMUI.screenshot ) { active = true; exit; } //Instantly show for screenshots
-	else if ( SYSTEMUI.record.enabled && SYSTEMUI.record.type == 0 ) { active = true; if ( !once ) { once = true; alpha = 1; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } //Show animation
+	else if ( SYSTEMUI.record.enabled && SYSTEMUI.record.type == 0 ) { active = true; if ( !once ) { once = true; alpha = 1; if ( !sticker ) { TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } } //Show animation
 } 
 
 index += spd; 
@@ -35,7 +35,7 @@ if ( !SYSTEMUI.record.enabled && !SYSTEMUI.screenshot ) {
 	
 	soupy_alarm("double", 15);
 	if ( mouse_pressed && near && !doublec ) { soupy_alarm_set("double", "timer", 15); doublec = true; } //Double click to edit
-	else if ( doublec && soupy_alarm_get("double", "timer", false) > 0 && mouse_pressed ) { external_choose_mini(face, index, text, font, smooth, x, y, id, name, spd); doublec = false; drag = false; }
+	else if ( doublec && soupy_alarm_get("double", "timer", false) > 0 && mouse_pressed ) { external_choose_mini(face, index, text, font, smooth, x, y, id, name, spd, sticker); doublec = false; drag = false; }
 	soupy_alarm_run("double", 0, function () { doublec = false; });
 }
 else { if ( !active ) { alpha = 0; once = false; } }
