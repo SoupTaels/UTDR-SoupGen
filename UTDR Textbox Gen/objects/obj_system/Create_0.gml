@@ -118,6 +118,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	dial_text_halign = 0; //Text H alignment
 	dial_text_valign = 0; //Text V alignment
 	dial_rtl = false; //Right-to-left text
+	dial_rand = false; //Randomized animation
 	dial_gradient = false; //Text gradient
 	dial_gradient_orig = dial_gradient; //Text gradient original
 	dial_gradient_clr = c_white; //Text gradient color
@@ -187,7 +188,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			with ( obj_mini ) { if ( page == other.dial_text_page ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
-		typist_reset = function () { dial_face_xoff_static = dial_face_xoff_static_orig; dial_face_yoff_static = dial_face_yoff_static_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
+		typist_reset = function () { soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
 			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 0, };
@@ -243,9 +244,17 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			var func_ = function(_, param) { //Change the positioning of the dialogue portrait
 				var xoff = ( array_length(param) > 0 && real_ext(param[0]) != "" ? real_ext(param[0]) : 0 );
 				var yoff = ( array_length(param) > 1 && real_ext(param[1]) != "" ? real_ext(param[1]) : 0 );
+				soup_checkout("offset", , true); soupy_alarm_set("offset", "timer", 2);
 				dial_face_xoff_static = xoff; dial_face_yoff_static = yoff;
 			}
 			scribble_typists_add_event("offset_portrait", func_); scribble_typists_add_event("offset_p", func_); scribble_typists_add_event("offset_face", func_);
+			
+			var func_ = function(_, param) { //Change the positioning of the text shadow
+				var xoff = ( array_length(param) > 0 && real_ext(param[0]) != "" ? real_ext(param[0]) : 0 );
+				var yoff = ( array_length(param) > 1 && real_ext(param[1]) != "" ? real_ext(param[1]) : 0 );
+				dial_text_shdw_x = xoff; dial_text_shdw_y = yoff;
+			}
+			scribble_typists_add_event("offset_shadow", func_); scribble_typists_add_event("offset_s", func_); scribble_typists_add_event("offset_shdw", func_);
 			
 			var func_ = function(_, param) { var value_ = real_ext(param[0]); bord_spd = value_ == "" ? 0 : value_; } 
 			scribble_typists_add_event("border_speed", func_); scribble_typists_add_event("border_spd", func_); //Change the animation speed of borders
@@ -288,7 +297,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				var value_ = real_ext(( array_length(param) > 12 ? param[12] : dial_choices_deltarunelike )); dial_choices_deltarunelike = value_ == "" ? 0 : value_;
 			});
 			var func_ = function(_, param) { var value_ = real_ext(( array_length(param) > 0 ? param[0] : "0" )); dial_choices_menu = value_ == "" ? 0 : value_; }
-			scribble_typists_add_event("choicer_select", func_); scribble_typists_add_event("choicer_option", func_); scribble_typists_add_event("choicer_on", func_);//Select a choice
+			scribble_typists_add_event("choicer_select", func_); scribble_typists_add_event("choicer_option", func_); scribble_typists_add_event("choicer_on", func_); //Select a choice
 		#endregion
 		
 		#region Face & Border Effects
@@ -332,6 +341,15 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 						var getclr = real_ext(len > 1 ? param[1] : "255"), getclr2 = real_ext(len > 2 ? param[2] : "255"), getclr3 = real_ext(len > 3 ? param[3] : "255"), time_ = real_ext(len > 4 ? param[4] : "15");
 						var myclr = make_color_rgb(getclr != "" ? getclr : 255, getclr2 != "" ? getclr2 : 255, getclr3 != "" ? getclr3 : 255);
 						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 15}", TPCol("dial_striket"), dial_striket, myclr); delayfunc();
+					} break;
+					case "colorshadow": case "blendshadow": { //Make the shadow blend to a different [effect,colorshadow,r,g,b,frames,r2,g2,b2,frames2]
+						var getclr = real_ext(len > 1 ? param[1] : "255"), getclr2 = real_ext(len > 2 ? param[2] : "255"), getclr3 = real_ext(len > 3 ? param[3] : "255"), time_ = real_ext(len > 4 ? param[4] : "15");
+						var myclr = make_color_rgb(getclr != "" ? getclr : 255, getclr2 != "" ? getclr2 : 255, getclr3 != "" ? getclr3 : 255);
+						
+						var getclr2 = real_ext(len > 5 ? param[5] : "255"), getclr22 = real_ext(len > 6 ? param[6] : "255"), getclr32 = real_ext(len > 7 ? param[7] : "255"), time_2 = real_ext(len > 8 ? param[8] : "15");
+						var myclr2 = make_color_rgb(getclr2!= "" ? getclr2 : 255, getclr22 != "" ? getclr22 : 255, getclr32 != "" ? getclr32 : 255);
+						dial_text_shdw = true;
+						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 15}", TPCol("dial_text_shdw_clr"), dial_text_shdw_clr, myclr); TweenFire("?", obj_system, $"${time_2 != "" ? time_2 : 15}", TPCol("dial_text_shdw_clr_g"), dial_text_shdw_clr_g, myclr2); delayfunc();
 					} break;
 					case "colorgrad": case "blendgrad": case "colorgradient": case "blendgradient": { //Make the gradient blend to a different [effect,colorgrad,r,g,b,frames]
 						var getclr = real_ext(len > 1 ? param[1] : "255"), getclr2 = real_ext(len > 2 ? param[2] : "255"), getclr3 = real_ext(len > 3 ? param[3] : "255"), time_ = real_ext(len > 4 ? param[4] : "15");
@@ -431,10 +449,10 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 
 #region Dialogue Shadow
 	dial_text_shdw = false; //Whether text should have a shadow
-	dial_text_shdw_clr = c_deltarune; //Shadow Color
-	dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); //Shadow gradient color
-	dial_text_shdw_x = 1; //Shadow x offset
-	dial_text_shdw_y = 1; //Shadow y offset
+	dial_text_shdw_clr = c_deltarune; dial_text_shdw_clr_orig = dial_text_shdw_clr; //Shadow Color
+	dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); dial_text_shdw_clr_g_orig = dial_text_shdw_clr_g; //Shadow gradient color
+	dial_text_shdw_x = 1; dial_text_shdw_x_orig = 1; //Shadow x offset
+	dial_text_shdw_y = 1; dial_text_shdw_y_orig = 1; //Shadow y offset
 #endregion
 
 #region Dialogue Face

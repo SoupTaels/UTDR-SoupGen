@@ -38,7 +38,7 @@ if ( os_is_network_connected(true) ) {
 						new LuiText({ value: "There's a [rainbow]new update available![/] [tinysoupy]", font: fnt_abaddon, scribbletext: true, }),
 						new LuiText({ value: $"Current Version: [c_yellow]{GAME_VERSION}[/] | New Version: [c_lime]{updateversion.game_version}", font: fnt_abaddon, scribbletext: true, }),
 						new LuiText({ value: "Would you like to update now?", font: fnt_abaddon, }),
-						new LuiButton({ text: "Time for some new soup!", height: 35, font: fnt_abaddon, }).setData("link", updateversion.game_page).addEvent(LUI_EV_CLICK, function(e_) { soupy_url(e_.getData("link"), , , 0); }),
+						new LuiButton({ text: "Time for some new soup!", height: 35, font: fnt_abaddon, }).setData("link", updateversion.game_page).addEvent(LUI_EV_CLICK, function(e_) { soupy_url(e_.getData("link"), , , 0, false); }),
 						new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.", font: fnt_abaddon, }),
 						new LuiText({ value: "CHANGELOG:", font: fnt_abaddon, }),
 					];

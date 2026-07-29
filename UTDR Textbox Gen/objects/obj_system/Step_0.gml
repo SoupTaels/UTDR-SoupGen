@@ -41,6 +41,13 @@ if ( dial_text_outline != -1 && !string_search(dial_font, "outline", true) ) { d
 			if ( canshake.y_ ) { dial_face_yoff = random_range(-canshake.off_, canshake.off_); }
 		}
 	#endregion
+	
+	#region Reset offset
+		if ( !is_undefined(soup_checkout("offset", false, true)) ) {
+			soupy_alarm("offset", 2);
+			soupy_alarm_run("offset", 0, function() { dial_face_xoff_static = dial_face_xoff_static_orig; dial_face_yoff_static = dial_face_yoff_static_orig; soupy_alarm_set("offset", "timer", 2); });
+		}
+	#endregion
 #endregion
 
 #region Fullscreen, Effects

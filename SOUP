@@ -1,5 +1,5 @@
 {
-  "game_version":"1.5.2",
+  "game_version":"1.6.0",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- added two new borders, speech and phone",
+  "changelog":"- no jitter when using the offset_p command repeatedly|- new commands for changing the text shadow colors and offset|- color picker now has an input box for RRGGBB|- fixed crash on ctrl+right click on the dialog box to change its color|- no webview for update dialog|- added a style option to randomize dialogue animation",
 }

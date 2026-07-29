@@ -440,10 +440,90 @@ function is_android()
 	return result;
 }
 
-
 ///@desc Makes code run based on an on and off timer
 ///@param {real} offTime When code doesn't run
 ///@param {real} onTime When code runs
 ///@param {real} phaseShift Timer offset
 ///@param {real} clock Timer (default: current_time(milliseconds))
 function blink(offTime = 500, onTime = offTime, phaseShift = 0, clock = current_time) { return ( clock + phaseShift ) mod ( offTime + onTime ) >= offTime; }
+
+/// @func   hex_to_dec(hex)
+///
+/// @desc   Returns an integer converted from an hexadecimal string.
+///
+/// @param  {string}    hex         hexadecimal digits
+///
+/// @return {real}      positive integer
+///
+/// GMLscripts.com/license
+function hex_to_dec(hex) 
+{
+    var dec = 0;
+
+    var dig = "0123456789ABCDEF";
+    var len = string_length(hex);
+    for (var pos = 1; pos <= len; pos += 1) {
+        dec = dec << 4 | (string_pos(string_char_at(hex, pos), dig) - 1);
+    }
+
+    return dec;
+}
+
+//  Returns an RGB color from a given hexadecimal color code.
+//  Depends on hex_to_dec().
+//
+//      hex         hexadecimal color in RRGGBB format, string
+//
+/// GMLscripts.com/license
+function hex_to_color(hex_)
+{
+    var hex,dec,col;
+    hex = hex_;
+    dec = hex_to_dec(hex);
+    col = (dec & 16711680) >> 16 | (dec & 65280) | (dec & 255) << 16;
+    return col;
+}
+
+//  Returns a given color as a hexadecimal string in RRGGBB format.
+//  Depends on dec_to_hex().
+//
+//      color       RGB color, real
+//
+/// GMLscripts.com/license
+function color_to_hex(color_)
+{
+    var color,dec;
+    color = color_;
+    dec = (color & 16711680) >> 16 | (color & 65280) | (color & 255) << 16;
+    return dec_to_hex(dec);
+}
+
+/// @func   dec_to_hex(dec, len)
+///
+/// @desc   Returns a given value as a string of hexadecimal digits.
+///         Hexadecimal strings can be padded to a minimum length.
+///         Note: If the given value is negative, it will
+///         be converted using its two's complement form.
+///
+/// @param  {real}      dec         integer
+/// @param  {real}      [len=1]     minimum number of digits
+///
+/// @return {string}    hexadecimal digits
+///
+/// GMLscripts.com/license
+function dec_to_hex(dec, len = 1)
+{
+    var hex = "";
+
+    if (dec < 0) {
+        len = max(len, ceil(logn(16, 2 * abs(dec))));
+    }
+
+    var dig = "0123456789ABCDEF";
+    while (len-- || dec) {
+        hex = string_char_at(dig, (dec & $F) + 1) + hex;
+        dec = dec >> 4;
+    }
+
+    return hex;
+}

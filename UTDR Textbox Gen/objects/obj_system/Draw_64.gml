@@ -77,7 +77,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 				
 				#region Name Tag
 					if ( string_lettersdigits(dial_nametag) != "" ) { 
-						var nametag_ = scribble(dial_nametag).starting_format("fnt_tiny", dial_text_c).scale(2), x_ = bordx + 30, y_ = bordy - ( dltrn ? -5 : 2 );
+						var nametag_ = scribble(dial_nametag).starting_format("fnt_tiny", dial_text_c).scale(2).randomize_animation(dial_rand), x_ = bordx + 30, y_ = bordy - ( dltrn ? -5 : 2 );
 						var bbox_ = nametag_.get_bbox(x_, y_);
 						draw_sprite_ext(spr_pixel, 0, x_ - 2, y_, bbox_.width + 2, bbox_.height - 3, 0, c_black, 1);
 						nametag_.draw(x_, y_);
@@ -99,7 +99,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 							var scrib_dial = scribble(dial_text) //Dialogue Text
 							scrib_dial.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline)
 							.right_to_left(dial_rtl).gradient(dial_text_shdw_clr_g, 1)
-							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v)
+							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v).randomize_animation(dial_rand)
 							
 							scrib_dial.draw(( tx_x + dial_text_xoff ) + dial_text_shdw_x, ( yy_ + dial_text_yoff ) + dial_text_shdw_y, dial_text_gif ? typist : undefined);
 						}
@@ -109,7 +109,7 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 							dial_text_page = clamp(dial_text_page, 0, dial_text_page_c - 1);
 							scrib_dial.starting_format(dial_font, dial_text_c).scale(dial_text_scale).outline(dial_text_outline)
 							.allow_line_data_getter().allow_glyph_data_getter().right_to_left(dial_rtl).gradient(dial_gradient_clr, dial_gradient).allow_text_getter()
-							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v)
+							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v).randomize_animation(dial_rand)
 							
 							#region Effects with Regions
 								var regions_ = scrib_dial.region_get_bboxes(), regions_len = array_length(regions_), regions_i = 0;
@@ -189,13 +189,13 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 											if ( dial_text_shdw ) {
 												var scrib_point = scribble(dial_point_chr) //Dialogue Point
 												.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_text_shdw_clr_g, 1)
-												.allow_line_data_getter()
+												.allow_line_data_getter().randomize_animation(dial_rand)
 												scrib_point.draw(( p_x + dial_text_xoff ) + dial_text_shdw_x, ( p_y + dial_text_yoff ) + dial_text_shdw_y);
 											}
 											
 											var scrib_point = scribble(dial_point_chr) //Dialogue Point
 												.starting_format(dial_font, dial_point_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_gradient_clr, dial_gradient)
-												.allow_line_data_getter()
+												.allow_line_data_getter().randomize_animation(dial_rand)
 												scrib_point.draw(p_x + dial_text_xoff, p_y + dial_text_yoff);
 										}
 									#endregion

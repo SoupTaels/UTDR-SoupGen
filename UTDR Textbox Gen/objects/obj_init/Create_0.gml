@@ -9,7 +9,8 @@ loading_func = function() {
 		case 2: { load_icons(); break; }
 		case 3: { load_ref(); break; }
 		case 4: { load_fonts(); break; }
-		case 5: { EmobbleInit(); room_goto_next(); break; }
+		case 5: { EmobbleInit(); loading_state++; alarm[0] = 1; break; }
+		case 6: { room_goto_next(); break; }
 	}
 }
 alarm[0] = 5;

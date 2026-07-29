@@ -247,7 +247,7 @@ function ui_init() {
 						spr_.set(getface == -1 ? spr_border_undertale : getface); spr_.subimg = SYSTEMUI.bord_index;
 						SYSTEMUI.spr_bord = (getface == -1 ? spr_border_undertale : getface); SYSTEMUI.bord_prev = SYSTEMUI.spr_bord; bord_name = (getface == -1 ? "spr_border_undertale" : e_.get()); if ( getface != -1 ) { sfx_play(snd_updated); }
 					}),
-					new LuiImage({ value: SYSTEMUI.spr_bord, maintain_aspect: false, xscale: 0, yscale: 0, }).setSize(70, 70).addEvent(LUI_EV_SHOW, function(e_) { soup_store("dataimageB", e_, , true); e_.bounce = SYSTEMUI.bord_anim; e_.color_blend = SYSTEMUI.bord_clr; }).addEvent(LUI_EV_SHOW, function(e_) { 
+					new LuiImage({ value: SYSTEMUI.spr_bord, maintain_aspect: false, xscale: 0, yscale: 0, }).setSize(70, 70).addEvent(LUI_EV_SHOW, function(e_) { soup_store("dataimageB", e_, , true); e_.bounce = SYSTEMUI.bord_anim; e_.color_blend = SYSTEMUI.bord_clr; }).addEvent(LUI_EV_CREATE, function(e_) { soup_store("dataimageB", e_, , true); e_.bounce = SYSTEMUI.bord_anim; e_.color_blend = SYSTEMUI.bord_clr; }).addEvent(LUI_EV_SHOW, function(e_) { 
 						var input_ = soup_checkout("datainputB", false, true);
 						e_.set(SYSTEMUI.spr_bord).setSubimg(SYSTEMUI.bord_index).setColor(SYSTEMUI.bord_clr);
 						input_.set(bord_name); 
@@ -419,6 +419,11 @@ function ui_init() {
 					new LuiText({ value: "Right-To-Left:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether dialogue should be read right-to-left.", true, , true),
 					new LuiToggleSwitch({ value: dial_rtl, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_rtl"),
 				]),
+				
+				new LuiRow().setFlexGrow(1).centerContent().addContent([
+					new LuiText({ value: "Randomize:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether dialogue effects should be randomized.\nBest for glitchy characters.", true, , true),
+					new LuiToggleSwitch({ value: dial_rand, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_rand"),
+				]),
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Deltarune Choicer:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether the typewriter choicer\nshould act similarly to Deltarune's.\nThis value can be [rainbow]changed dynamically[/] if using\n[c_yellow][[choicer,1,2,3,4,startat,icon,frame,scale,angle,r,g,b,DELTARUNE-LIKE][/].", true, , true),
@@ -463,26 +468,26 @@ function ui_init() {
 					new LuiText({ value: "Shadow Color:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the shadow.\n[c_yellow]Only works if text shadows are enabled.", true, , true),
 					new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_shadow),
 					new LuiImage({ value: spr_pixel, maintain_aspect: false, color: dial_text_shdw_clr }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datashadow", e_, , true); }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
-					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_text_shdw_clr = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_deltarune ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_deltarune); SYSTEMUI.dial_text_shdw_clr = c_deltarune; sfx_play(snd_hurtpowerful); }),
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_text_shdw_clr = e_.color_blend; SYSTEMUI.dial_text_shdw_clr_orig = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_deltarune ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_deltarune); SYSTEMUI.dial_text_shdw_clr = c_deltarune; SYSTEMUI.dial_text_shdw_clr_orig = c_deltarune; sfx_play(snd_hurtpowerful); }),
 				]),
 				
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Choosing a color
 					new LuiText({ value: "Gradient Color:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the shadow's gradient.\n[c_yellow]Only works if text shadows are enabled.", true, , true),
 					new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_shadow_g),
 					new LuiImage({ value: spr_pixel, maintain_aspect: false, color: dial_text_shdw_clr_g }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datashadow_g", e_, , true); }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
-					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_text_shdw_clr_g = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == make_color_rgb(36, 36, 36) ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(make_color_rgb(36, 36, 36)); SYSTEMUI.dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); sfx_play(snd_hurtpowerful); }),
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_text_shdw_clr_g = e_.color_blend; SYSTEMUI.dial_text_shdw_clr_g_orig = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == make_color_rgb(36, 36, 36) ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(make_color_rgb(36, 36, 36)); SYSTEMUI.dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); SYSTEMUI.dial_text_shdw_clr_g_orig = make_color_rgb(36, 36, 36); sfx_play(snd_hurtpowerful); }),
 				]),
 				
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "X off:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the shadow's x offset.", true, , true),
 					new LuiInput({ value: dial_text_shdw_x, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_shdw_x); })
-					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1 : value_; SYSTEMUI.dial_text_shdw_x = index_; }),
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1 : value_; SYSTEMUI.dial_text_shdw_x = index_; SYSTEMUI.dial_text_shdw_x_orig = index_; }),
 				]),
 				
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Y off:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the shadow's y offset.", true, , true),
 					new LuiInput({ value: dial_text_shdw_y, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_text_shdw_y); })
-					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1 : value_; SYSTEMUI.dial_text_shdw_y = index_; }),
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1 : value_; SYSTEMUI.dial_text_shdw_y = index_; SYSTEMUI.dial_text_shdw_y_orig = index_; }),
 				]),
 			
 				new LuiHorizontalRule({ height: 5, }),
