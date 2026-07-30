@@ -16,7 +16,7 @@ pref = {
 	confirmexport: true, //Whether to press confirm to export once dialogue is finished
 	autopoint: true, //Whether auto-asterisk is enabled
 	themeclr: c_orange, //UI theme color
-	gifbgclr: c_lime, //GIF BG color
+	gifbgclr: c_fuchsia, //GIF BG color
 	soupyicon: true, //Whether to enable dynamic icon changing
 	pausesymbols: true, //Whether to always delay when encountering symbols
 	presets: {}, //Config presets
