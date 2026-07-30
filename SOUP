@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.1",
+  "game_version":"1.6.2",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- mini speeches can now also function like stickers!|stickers show up instantly, making it easier to do|stuff like multiple dialogue portraits without wrestling with commands|- android now has an auto captialization option when|you double tap on the raw text field",
+  "changelog":"- GIFs can now be rendered without colored background",
 }
