@@ -81,7 +81,7 @@
     {"$GMExtensionFile":"v1","%Name":"","constants":[
         {"$GMExtensionConstant":"","%Name":"IS_FILE","hidden":false,"name":"IS_FILE","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"0",},
         {"$GMExtensionConstant":"","%Name":"IS_SAF","hidden":false,"name":"IS_SAF","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"1",},
-      ],"copyToTargets":3035461389054378222,"filename":"AndroidExternalFile.gml","final":"","functions":[
+      ],"copyToTargets":8,"filename":"AndroidExternalFile.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"integrated_file_copy","argCount":4,"args":[1,1,1,1,2,2,],"documentation":"","externalName":"integrated_file_copy","help":"integrated_file_copy(src_path, src_name, dst_path, dst_name, src_type, dst_type)","hidden":false,"kind":2,"name":"integrated_file_copy","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"integrated_file_path","argCount":3,"args":[1,1,2,],"documentation":"","externalName":"integrated_file_path","help":"integrated_file_path(path, name, type)","hidden":false,"kind":2,"name":"integrated_file_path","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
       ],"init":"","kind":2,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},

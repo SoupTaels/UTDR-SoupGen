@@ -535,7 +535,7 @@ pref = {
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = spr_face_blank; FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set("spr_face_blank"); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(element_.getData("face")); soup_checkout("datafunc", false)(); })
 			);
-			array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
+			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
 				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_yellow; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
@@ -555,7 +555,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "face", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			);
+			); }
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -629,7 +629,7 @@ pref = {
 		#endregion
 		
 		#region Add Default Options
-			array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
+			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_yellow; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { 
@@ -642,7 +642,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "border", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			);
+			); }
 			
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -721,7 +721,7 @@ pref = {
 		#endregion
 		
 		#region Add Default Options
-			array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).setData("customs", custom_).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
+			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).setData("customs", custom_).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_yellow; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { 
@@ -737,7 +737,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "font", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			);
+			); }
 			
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })

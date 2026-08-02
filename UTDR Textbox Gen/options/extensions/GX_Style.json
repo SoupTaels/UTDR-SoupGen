@@ -1,0 +1,73 @@
+{
+  "$GMExtensionConfigSet": "GMExtensionConfigSet",
+  "configurables": {
+    "405b8b95-f27e-47fd-95e1-7948734496d9": null,
+    "27d7da4a-8cf0-44ba-a495-3e5badb2fd3a": {
+      "Default": {
+        "value": "./wasm/"
+      }
+    },
+    "cf71f7f4-f10f-47e2-9ba6-ef60bac478c0": null,
+    "cf8e2354-be71-448f-b180-5737d25b802c": null,
+    "bbd9f061-d129-45f3-b256-54179e4b886a": null,
+    "8988c057-e1f7-4294-9f17-c50f8bfb3a42": null,
+    "7baedbd4-f9f5-4501-b920-e28d89c93031": {
+      "Default": {
+        "value": "#000000"
+      }
+    },
+    "07289b15-0d4f-4c78-8217-1acfb7a16062": {
+      "Default": {
+        "value": "#000000"
+      }
+    },
+    "e685f8b3-491e-4e29-a6f3-2bb15ce04419": {
+      "Default": {
+        "value": "none !important"
+      }
+    },
+    "c5a54ce2-ed31-41fe-a569-1cb889e87e1d": null,
+    "1f8c493f-2c70-47dc-934b-414153bf051c": {
+      "Default": {
+        "value": "0px solid #ffffff"
+      }
+    },
+    "ca4acf49-efe4-4410-9bef-835bdab3c18f": {
+      "Default": {
+        "value": "0px solid #888888"
+      }
+    },
+    "d785cdb4-356b-4d18-81be-aed5982d3551": {
+      "Default": {
+        "value": "0%"
+      }
+    },
+    "fef0849a-3432-41c5-876f-6b56c0a84181": {
+      "Default": {
+        "value": "300px"
+      }
+    },
+    "a9301841-e890-4712-a677-e67e4865bc2c": {
+      "Default": {
+        "value": "300px"
+      }
+    },
+    "ad30ec1b-22a2-40de-a344-6fcdeea0a885": {
+      "Default": {
+        "value": "none"
+      }
+    },
+    "12aa7c18-ed93-43e0-949d-f09fd9f08278": {
+      "Default": {
+        "value": "url(\\\"soup.png\\\")"
+      }
+    },
+    "87e7a346-57e3-406c-a4a6-44779e092cf5": {
+      "Default": {
+        "value": "cover"
+      }
+    },
+    "5056aacf-6f4a-4a34-8bfd-d8ddf78fcf5f": null,
+    "1816e239-2764-445a-aa8c-d88c56c4b163": null
+  }
+}

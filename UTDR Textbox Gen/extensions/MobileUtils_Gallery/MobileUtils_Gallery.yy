@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"1.0.8",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"MobileMedia_Gallery.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_Gallery.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"MobileMedia_Gallery.ext","constants":[],"copyToTargets":12,"filename":"MobileMedia_Gallery.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Gallery_Open","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_Gallery_Open","help":"MobileUtils_Gallery_Open()","hidden":false,"kind":11,"name":"MobileUtils_Gallery_Open","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Gallery_Open_PNG","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_Gallery_Open_PNG","help":"MobileUtils_Gallery_Open_PNG()","hidden":false,"kind":4,"name":"MobileUtils_Gallery_Open_PNG","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":4,"name":"MobileMedia_Gallery.ext","origname":"extensions\\CameraClass.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},

@@ -23,6 +23,7 @@
     {"$GMFolder":"","%Name":"twemoji_64","folderPath":"folders/Extensions/Emobble/twemoji/twemoji_64.yy","name":"twemoji_64","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"GMLive","folderPath":"folders/Extensions/GMLive.yy","name":"GMLive","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Gumshoe","folderPath":"folders/Extensions/Gumshoe.yy","name":"Gumshoe","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"GX Styles","folderPath":"folders/Extensions/GX Styles.yy","name":"GX Styles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"http.gml","folderPath":"folders/Extensions/http.gml.yy","name":"http.gml","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Limekys","folderPath":"folders/Extensions/Limekys.yy","name":"Limekys","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"LimeUI","folderPath":"folders/Extensions/Limekys/LimeUI.yy","name":"LimeUI","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -1095,7 +1096,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.0.0.16",
+    "IDEVersion":"2026.100.0.1110",
   },
   "name":"UTDR Textbox Gen",
   "resources":[
@@ -1108,6 +1109,9 @@
     {"id":{"name":"ExtensionCore","path":"extensions/ExtensionCore/ExtensionCore.yy",},},
     {"id":{"name":"file_dropper","path":"extensions/file_dropper/file_dropper.yy",},},
     {"id":{"name":"GMLive_fallback","path":"extensions/GMLive_fallback/GMLive_fallback.yy",},},
+    {"id":{"name":"GX_Cut","path":"extensions/GX_Cut/GX_Cut.yy",},},
+    {"id":{"name":"GX_Recommence","path":"extensions/GX_Recommence/GX_Recommence.yy",},},
+    {"id":{"name":"GX_Style","path":"extensions/GX_Style/GX_Style.yy",},},
     {"id":{"name":"libdlgmod","path":"extensions/libdlgmod/libdlgmod.yy",},},
     {"id":{"name":"libfilesystem","path":"extensions/libfilesystem/libfilesystem.yy",},},
     {"id":{"name":"MobileUtils_Gallery","path":"extensions/MobileUtils_Gallery/MobileUtils_Gallery.yy",},},

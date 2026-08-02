@@ -15,12 +15,14 @@ if ( !abort ) {
 	soupy_ui_success(soupstack_fname, , soupstack_path);
 	if ( global.pref.openresult ) {
 		if ( !is_android() ) { 
-			soupy_url($"{executable_get_directory()}{soupstack_folder}", , , 6); //Open the directory (Windows only)
-			soupy_url(soupstack_path, , , 6); //Open the image in the PC's default photo viewer (Windows only)
+			if ( !is_wasm() ) {
+				soupy_url($"{executable_get_directory()}{soupstack_folder}", , , 6); //Open the directory (Windows only)
+				soupy_url(soupstack_path, , , 6); //Open the image in the PC's default photo viewer (Windows only)
+			}
 		}
 		else { file_copy(soupstack_path, $"{soupstack_fname}_.png"); MobileUtils_Share_Open("Here's your good soup!", "image/png", $"{soupstack_fname}_.png"); }
 	}
-	clipboard_set_text(soupstack_path);
+	if ( !is_wasm() ) { clipboard_set_text(soupstack_path); } else { var uri = data_uri(soupstack_path); if ( uri != -1 ) { soupy_url(uri); clipboard_set_text(uri); soup_store("datauri", uri, , true); } else { show_message_async("Error! Couldn't make Data URI!"); } }
 	if ( !is_android() ) { var temp = sprite_add(soupstack_path, 0, 0, 0, 0, 0); clipboard_set_sprite(temp); sprite_delete(temp); }
 	window_progress(window_progress_none); window_flash(window_flash_tray, 3, 350);
 }

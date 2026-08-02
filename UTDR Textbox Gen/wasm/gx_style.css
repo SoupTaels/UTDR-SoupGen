@@ -1,0 +1,26 @@
+progress {
+    all: unset !important;
+	appearance: none;
+	-moz-appearance: none;
+}
+
+#progress {
+  display: none;
+}
+
+#progress {
+  visibility: hidden;
+}
+
+progress[value]::-webkit-progress-bar {
+	all: unset !important;
+}
+	  
+progress[value]::-webkit-progress-value {
+	all: unset !important;
+	background-image: transparent;
+}
+
+div.emscripten {
+	Font-size: 0rem;
+}

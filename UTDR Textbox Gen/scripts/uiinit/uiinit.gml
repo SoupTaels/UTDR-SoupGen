@@ -623,7 +623,7 @@ function ui_init() {
 					new LuiText({ value: "GIF BG Color:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the [c_lime]green screen[/] for GIFs.\nGIFs don't support transparency, so this is needed.", true, , true),
 					new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_gifcolor),
 					new LuiImage({ value: spr_pixel, maintain_aspect: false, color: screenshot_back }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datagifcolor", e_, , true); }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
-					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.screenshot_back = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); global.pref.gifbgclr = screenshot_back; save_pref(); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_lime ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_lime); SYSTEMUI.screenshot_back = c_lime; sfx_play(snd_hurtpowerful); }),
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.screenshot_back = e_.color_blend; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); global.pref.gifbgclr = screenshot_back; save_pref(); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_fuchsia ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_fuchsia); SYSTEMUI.screenshot_back = c_fuchsia; sfx_play(snd_hurtpowerful); }),
 				]),
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
@@ -821,19 +821,22 @@ function ui_init() {
 			}
 		
 			ui_updateref = function() {
-				if ( sprite_exists(global.refimg) ) { sprite_delete(global.refimg); global.refimg = -1; }
-				if ( !is_android() ) {
-					var fname = $"reference{PATHSEP}reference_image.png", fnamedebug = string_replace(fname, $"reference{PATHSEP}", ""), enabler = false;
-					 if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); enabler = true; }
-					else {
-						var result = get_open_filename_ext("Image File (.png, .jpg, .gif)|*.png;*.jpg;*.jpeg;*.gif", "", directory_get_pictures_path(), "Select a sprite to import.");
-						if ( result == -1 || result == "" ) { sfx_play(snd_error); exit; }
-						else { global.refimg = sprite_add_ext(result, 1, 0, 0, true); show_debug_message($"Added \"{filename_name(result)}\" from {result}!"); enabler = true; }
+				if ( !is_wasm() ) { 
+					if ( sprite_exists(global.refimg) ) { sprite_delete(global.refimg); global.refimg = -1; }
+					if ( !is_android() ) {
+						var fname = $"reference{PATHSEP}reference_image.png", fnamedebug = string_replace(fname, $"reference{PATHSEP}", ""), enabler = false;
+						 if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); enabler = true; }
+						else {
+							var result = get_open_filename_ext("Image File (.png, .jpg, .gif)|*.png;*.jpg;*.jpeg;*.gif", "", directory_get_pictures_path(), "Select a sprite to import.");
+							if ( result == -1 || result == "" ) { sfx_play(snd_error); exit; }
+							else { global.refimg = sprite_add_ext(result, 1, 0, 0, true); show_debug_message($"Added \"{filename_name(result)}\" from {result}!"); enabler = true; }
+						}
+						sfx_play(snd_updated); ui_refclr = c_white; TweenFire("?", SYSTEMUI, "$30", "+60", TPCol("ui_refclr>"), $15101c);
+						if ( enabler ) { if ( !global.pref.sizematters ) { global.pref.sizematters = true; sfx_play(snd_bump, , , 1.3); }; }
 					}
-					sfx_play(snd_updated); ui_refclr = c_white; TweenFire("?", SYSTEMUI, "$30", "+60", TPCol("ui_refclr>"), $15101c);
-					if ( enabler ) { if ( !global.pref.sizematters ) { global.pref.sizematters = true; sfx_play(snd_bump, , , 1.3); }; }
+					else { soup_store("asynctype", "reference", , true); TweenScript(id, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				}
-				else { soup_store("asynctype", "reference", , true); TweenScript(id, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+				else { soupy_message("[wave]Sorry[/], but this feature [shake]isn't[/] available for the [slant]web export.", "I see.", , , , snd_error, fnt_abaddon, , , true); } 
 			}
 		
 			ui_mini = function () {

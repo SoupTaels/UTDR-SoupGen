@@ -11,7 +11,7 @@
   "androidsourcedir":"",
   "author":"",
   "classname":"",
-  "copyToTargets":6442451174,
+  "copyToTargets":64,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"1.0.0",
@@ -27,7 +27,7 @@
         {"$GMExtensionConstant":"","%Name":"file_dropper_effect_copy","hidden":false,"name":"file_dropper_effect_copy","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"1",},
         {"$GMExtensionConstant":"","%Name":"file_dropper_effect_move","hidden":false,"name":"file_dropper_effect_move","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"2",},
         {"$GMExtensionConstant":"","%Name":"file_dropper_effect_link","hidden":false,"name":"file_dropper_effect_link","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"4",},
-      ],"copyToTargets":9223372036854775807,"filename":"file_dropper.dll","final":"","functions":[
+      ],"copyToTargets":64,"filename":"file_dropper.dll","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"file_dropper_init_raw","argCount":2,"args":[1,2,],"documentation":"","externalName":"file_dropper_init_raw","help":"","hidden":true,"kind":11,"name":"file_dropper_init_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"file_dropper_get_allow_raw","argCount":0,"args":[],"documentation":"","externalName":"file_dropper_get_allow_raw","help":"","hidden":true,"kind":11,"name":"file_dropper_get_allow_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"file_dropper_set_allow_raw","argCount":1,"args":[2,],"documentation":"","externalName":"file_dropper_set_allow_raw","help":"","hidden":true,"kind":11,"name":"file_dropper_set_allow_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -41,10 +41,10 @@
       ],"init":"","kind":1,"name":"","origname":"extensions\\file_dropper.dll","ProxyFiles":[
         {"$GMProxyFile":"","%Name":"file_dropper_x64.dll","name":"file_dropper_x64.dll","resourceType":"GMProxyFile","resourceVersion":"2.0","TargetMask":6,},
       ],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"file_dropper.gml","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":64,"filename":"file_dropper.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"file_dropper_prepare_buffer","argCount":1,"args":[2,],"documentation":"","externalName":"file_dropper_prepare_buffer","help":"","hidden":true,"kind":11,"name":"file_dropper_prepare_buffer","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":2,"name":"","origname":"extensions\\gml.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":64,"filename":"autogen.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"file_dropper_init","argCount":0,"args":[],"documentation":"","externalName":"file_dropper_init","help":"file_dropper_init()->bool","hidden":false,"kind":2,"name":"file_dropper_init","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"file_dropper_get_allow","argCount":0,"args":[],"documentation":"","externalName":"file_dropper_get_allow","help":"file_dropper_get_allow()->bool","hidden":false,"kind":2,"name":"file_dropper_get_allow","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"file_dropper_set_allow","argCount":1,"args":[2,],"documentation":"","externalName":"file_dropper_set_allow","help":"file_dropper_set_allow(allow:bool)","hidden":false,"kind":2,"name":"file_dropper_set_allow","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -68,7 +68,7 @@
   "ioscodeinjection":"",
   "iosdelegatename":"",
   "iosplistinject":"",
-  "iosProps":true,
+  "iosProps":false,
   "iosSystemFrameworkEntries":[],
   "iosThirdPartyFrameworkEntries":[],
   "license":"Proprietary",

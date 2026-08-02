@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"1.0.7",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"Share.ext","constants":[],"copyToTargets":52777614151918,"filename":"Share.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"Share.ext","constants":[],"copyToTargets":12,"filename":"Share.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Share_Open","argCount":2,"args":[1,1,1,],"documentation":"","externalName":"MobileUtils_Share_Open","help":"MobileUtils_Share_Open(title,path,MIME)","hidden":false,"kind":11,"name":"MobileUtils_Share_Open","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":4,"name":"Share.ext","origname":"extensions\\Share.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],

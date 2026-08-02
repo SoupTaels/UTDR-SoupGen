@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"1.0.8",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"MobileMedia_ImageTools.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_ImageTools.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"MobileMedia_ImageTools.ext","constants":[],"copyToTargets":12,"filename":"MobileMedia_ImageTools.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Image_Width","argCount":1,"args":[1,],"documentation":"","externalName":"MobileUtils_Image_Width","help":"MobileUtils_Image_Width(path)","hidden":false,"kind":11,"name":"MobileUtils_Image_Width","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Image_Height","argCount":-1,"args":[1,],"documentation":"","externalName":"MobileUtils_Image_Height","help":"MobileUtils_Image_Height()","hidden":false,"kind":11,"name":"MobileUtils_Image_Height","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Image_Resize","argCount":0,"args":[1,2,2,],"documentation":"","externalName":"MobileUtils_Image_Resize","help":"MobileUtils_Image_Resize(path,w,h)","hidden":false,"kind":4,"name":"MobileUtils_Image_Resize","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},

@@ -24,7 +24,7 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"Clipboard.dll","constants":[],"copyToTargets":-1,"filename":"Clipboard.dll","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"Clipboard.dll","constants":[],"copyToTargets":64,"filename":"Clipboard.dll","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"clipboard_set_bitmap","argCount":0,"args":[1,2,2,],"documentation":"","externalName":"setClipboardBitmap","help":"clipboard_set_bitmap(bitmap, width, height)","hidden":false,"kind":1,"name":"clipboard_set_bitmap","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"clipboard_get_bitmap","argCount":0,"args":[1,1,],"documentation":"","externalName":"getClipboardBitmap","help":"","hidden":false,"kind":1,"name":"clipboard_get_bitmap","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"clipboard_get_bitmap_size","argCount":0,"args":[1,],"documentation":"","externalName":"getClipboardBitmapSize","help":"","hidden":false,"kind":1,"name":"clipboard_get_bitmap_size","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
