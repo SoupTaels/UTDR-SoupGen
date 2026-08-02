@@ -2,13 +2,13 @@
 function __QuillRenderPushScissorGui(_x1, _y1, _x2, _y2) {
 	var _prev = gpu_get_scissor();
 
-	var _gw = display_get_gui_width();
-	var _gh = display_get_gui_height();
-	var _pos = application_get_position();
+	var _gw = !is_wasm() ? display_get_gui_width() : 640;
+	var _gh = !is_wasm() ? display_get_gui_height() : 480;
+	var _pos = !is_wasm() ? application_get_position() : [];
 	var _ax = 0;
 	var _ay = 0;
-	var _aw = display_get_width();
-	var _ah = display_get_height();
+	var _aw = !is_wasm() ? display_get_width() : 640;
+	var _ah = !is_wasm() ? display_get_height() : 480;
 	if (is_array(_pos) && array_length(_pos) >= 4) {
 		_ax = _pos[0];
 		_ay = _pos[1];

@@ -527,3 +527,21 @@ function dec_to_hex(dec, len = 1)
 
     return hex;
 }
+
+///@desc Returns whether the game is running on Opera GX(aka WebAssembly). This check only needs to be done once, so a static is used.
+function is_wasm() {
+	static wasmcheck = undefined;
+	if ( !is_undefined(wasmcheck) ) { return wasmcheck; }
+	
+	wasmcheck = ( os_type == os_operagx );
+	return wasmcheck;
+}
+
+///@desc Returns a Data URI of the sprite.
+function data_uri(sprite_) {
+	var buffer = buffer_load(sprite_);
+	if ( buffer == -1 ) { return -1; }
+	var bufferBase64 = buffer_base64_encode(buffer, 0, buffer_get_size(buffer));
+	buffer_delete(buffer);
+	return "data:image/png;base64," + bufferBase64;
+}
