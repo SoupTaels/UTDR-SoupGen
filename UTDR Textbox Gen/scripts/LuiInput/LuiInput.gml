@@ -264,6 +264,7 @@ function LuiInput(_params = {}) : LuiBase(_params) constructor {
         if os_type == os_android || os_type == os_ios {
             keyboard_virtual_show(kbv_type_default, kbv_returnkey_default, kbv_autocapitalize_none, false);
         }
+		if ( is_android(true) ) { soup_store("wasmtype", _e, , true); soup_store("keywasm", get_string_async("Type here:", _e.get()), , true); }
     });
     
     self.addEvent(LUI_EV_FOCUS_REMOVE, function(_e) {

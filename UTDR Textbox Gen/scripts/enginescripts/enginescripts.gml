@@ -424,20 +424,36 @@ function game_restart_alt() {
 }
 
 ///@desc Checks once whether the game is running on Android or mobile browser.
-function is_android()
+function is_android(wasm_ = false)
 {
-	static result = undefined;
-	if ( !is_undefined(result) ) { return result; }
+	if ( !wasm_ ) { 
+		static result = undefined;
+		if ( !is_undefined(result) ) { return result; }
 		
-	var mobileb = false;
-	if ( os_type == os_gxgames ) { //Check if we're running in a browser using the WASM/ Opera GX export
-		var osinfo = os_get_info();
-		mobileb = bool(osinfo[? "mobile"]);
-		ds_map_destroy(osinfo);
-	}
+		var mobileb = false;
+		if ( os_type == os_gxgames ) { //Check if we're running in a browser using the WASM/ Opera GX export
+			var osinfo = os_get_info();
+			mobileb = bool(osinfo[? "mobile"]);
+			ds_map_destroy(osinfo);
+		}
 
-	result = ( os_type == os_android || mobileb );
-	return result;
+		result = ( os_type == os_android || mobileb );
+		return result;
+	}
+	else {
+		static result = undefined;
+		if ( !is_undefined(result) ) { return result; }
+		
+		var mobileb = false;
+		if ( os_type == os_gxgames ) { //Check if we're running in a browser using the WASM/ Opera GX export
+			var osinfo = os_get_info();
+			mobileb = bool(osinfo[? "mobile"]);
+			ds_map_destroy(osinfo);
+		}
+
+		result = mobileb;
+		return result;
+	}
 }
 
 ///@desc Makes code run based on an on and off timer

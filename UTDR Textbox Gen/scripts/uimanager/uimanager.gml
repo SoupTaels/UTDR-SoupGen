@@ -153,7 +153,8 @@ function Button(datastruct_ = undefined) constructor {
 
 ///@desc Platform-based url opening
 function soupy_url(path_, args_ = "", act_ = "", cmd_ = 5, webview_ = true) {
-	if ( !is_android() ) { if ( !is_wasm() ) { execute_shell_simple(path_, args_, act_, cmd_); } else { url_open(path_); } } else { if ( webview_ ) { webview_open_url(path_); webview_allow_swipe_refresh(true); webview_set_borderless(true); webview_button_set_auto_close(webview_button_create(30, WebViewButtonGravity.CenterHorizontal | WebViewButtonGravity.Top), true); } else { url_open(path_); } }
+	if ( !is_android() ) { if ( !is_wasm() ) { execute_shell_simple(path_, args_, act_, cmd_); } else { url_open(path_); } } 
+	else { if ( webview_ ) { if ( !is_android(true) ) { webview_open_url(path_); webview_allow_swipe_refresh(true); webview_set_borderless(true); webview_button_set_auto_close(webview_button_create(30, WebViewButtonGravity.CenterHorizontal | WebViewButtonGravity.Top), true); } else { url_open(path_); } } else { url_open(path_); } }
 }
 
 ///@desc Manages state for UI tabs.

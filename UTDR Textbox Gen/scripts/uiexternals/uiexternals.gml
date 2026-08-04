@@ -44,7 +44,7 @@ pref = {
 			return folder_arr;
 		}
 	
-		var findfaces = !is_android() ? gumshoe("faces", ".png") : find_faces_func(), faces_i = 0, faces_count = 0, faces_len = array_length(findfaces);
+		var findfaces = !is_android() ? gumshoe("faces", ".png") : ( is_android(true) ? gumshoe("faces", ".png") : find_faces_func() ), faces_i = 0, faces_count = 0, faces_len = array_length(findfaces);
 		repeat ( faces_len ) {
 			var faces_cur = findfaces[faces_i]; //Current face path we're looking at
 			var faces_dir = filename_dir_name(faces_cur); //Get directory name
