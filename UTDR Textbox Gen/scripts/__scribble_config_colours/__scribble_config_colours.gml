@@ -14,7 +14,7 @@ function __scribble_config_colours() {
 		c_blue:    c_blue, c_b: c_blue, 
 		c_dkgray:  c_dkgray, c_dkg: c_dkgray,
 		c_dkgrey:  c_dkgrey,
-		c_fuchsia: c_fuchsia, c_f: c_fuchsia,
+		c_pink: #fb8f94, c_p: #fb8f94,
 		c_gray:    c_gray, c_gr: c_gray,
 		c_green:   c_green, c_g: c_green,
 		c_grey:    c_grey,

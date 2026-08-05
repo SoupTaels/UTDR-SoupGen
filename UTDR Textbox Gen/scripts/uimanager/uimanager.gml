@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.6.2" //Current game version
+	#macro GAME_VERSION "1.6.3" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -326,7 +326,7 @@ function ui_manage() {
 		if ( variable_instance_get(obj_system, "colors_get") == undefined ) { variable_instance_set(obj_system, "colors_get", __scribble_config_colours()); }
 		draw_sprite_ext(spr_pixel, 0, 158 - 2, 68 - 2, 429 + 4, 14 + 4, 0, c_white, 1); //Palette Outline White
 		draw_sprite_ext(spr_pixel, 0, 158, 68, 429, 14, 0, rgb(39, 31, 54), 1); //Palette Back
-		var colors_ = ["c_red", "c_yellow", "c_blue", "c_lime", "c_aqua", "c_cyan", "c_purple", "c_orange", "c_maroon", "c_fuchsia", "c_gold", "c_white", "c_ltgray", "c_gray", "c_dkgray", "c_black"], colors_i = 0, colors_len = array_length(colors_); //Available colors
+		var colors_ = ["c_red", "c_yellow", "c_blue", "c_lime", "c_aqua", "c_cyan", "c_purple", "c_orange", "c_maroon", "c_pink", "c_gold", "c_white", "c_ltgray", "c_gray", "c_dkgray", "c_black"], colors_i = 0, colors_len = array_length(colors_); //Available colors
 		repeat ( colors_len ) {
 			var colors_cur = colors_[colors_i]; //Current color
 			var butt_data = { x: 160 + ( 27 * colors_i ), y: 70, sprite: spr_color_button, draw_nine: false, leeway: 3, color_butt: colors_get[$ colors_cur], color_butt_hover: merge_color(colors_get[$ colors_cur], color_get_value(colors_get[$ colors_cur]) > 150 ? c_black : c_white, 0.3), on_click: method({ colors_cur }, function () { SYSTEMUI.butt_func(colors_cur, true); }), on_click_right: method({ colors_cur }, function () { 

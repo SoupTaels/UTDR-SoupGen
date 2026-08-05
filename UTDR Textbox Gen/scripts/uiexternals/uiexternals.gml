@@ -555,7 +555,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "face", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			); }
+			); 
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -584,7 +584,15 @@ pref = {
 		
 					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
-			);
+			); }
+			else {
+				array_push(options_, new LuiText({ value: "About Custom Sprites...", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						soupy_message("Due to [c_red]Cross-Origin Resource Sharing(CORS)[/], this feature|[shake]isn't available on the web build.[/]|Consider switching to the [c_y]Windows or Android build[/] instead,|or use Wine to run SoupGen on Mac or Linux.|[wheel]Sorry![/]", "That's so unfair... fuck browsers dude.", , , , snd_error, fnt_abaddon, , true, true);
+					})
+			); }
 			array_push(options_, new LuiText({ value: "Clear Page Face", font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_red, }).setPadding(5)
 				.setData("inputsoup_", inputsoup_).setData("inputglobal_", inputglobal_).setData("imagesoup_", imagesoup_).setData("imageglobal_", imageglobal_).setData("clear_", clear_)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -642,7 +650,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "border", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			); }
+			); 
 			
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -671,7 +679,15 @@ pref = {
 		
 					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
-			);
+			); }
+			else {
+				array_push(options_, new LuiText({ value: "About Custom Sprites...", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						soupy_message("Due to [c_red]Cross-Origin Resource Sharing(CORS)[/], this feature|[shake]isn't available on the web build.[/]|Consider switching to the [c_y]Windows or Android build[/] instead,|or use Wine to run SoupGen on Mac or Linux.|[wheel]Sorry![/]", "That's so unfair... fuck browsers dude.", , , , snd_error, fnt_abaddon, , true, true);
+					})
+			); }
 		#endregion
 		
 		var dataarr = [
@@ -737,7 +753,7 @@ pref = {
 					}
 					else { soup_store("asynctype", "font", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				})
-			); }
+			); 
 			
 			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
@@ -766,7 +782,15 @@ pref = {
 		
 					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
-			);
+			); }
+			else {
+				array_push(options_, new LuiText({ value: "About Custom Sprites...", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+				.addEvent(LUI_EV_CLICK, function(element_) {
+						soupy_message("Due to [c_red]Cross-Origin Resource Sharing(CORS)[/], this feature|[shake]isn't available on the web build.[/]|Consider switching to the [c_y]Windows or Android build[/] instead,|or use Wine to run SoupGen on Mac or Linux.|[wheel]Sorry![/]", "That's so unfair... fuck browsers dude.", , , , snd_error, fnt_abaddon, , true, true);
+					})
+			); }
 		#endregion
 		
 		var dataarr = [
