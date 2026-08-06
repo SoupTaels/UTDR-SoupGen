@@ -73,7 +73,7 @@ function ui_init() {
 					QuillSetTheme(quill_soup_active);
 					keyboard_string = "";
 					keyboard_virtual_show(kbv_type_default, kbv_returnkey_next, kbv_autocapitalize_none, true);
-					if ( is_android(true) ) { soup_store("keywasm", get_string_async("Type here:", SYSTEMUI.textinput.GetValue()), , true); }
+					if ( is_android_wasm(true) ) { soup_store("keywasm", get_string_async("Type here:", SYSTEMUI.textinput.GetValue()), , true); }
 				})
 			
 				#region Context Menu

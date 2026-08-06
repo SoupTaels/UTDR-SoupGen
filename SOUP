@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.3",
+  "game_version":"1.6.4",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- removed add from url option on the web export thanks to CORS.|sadly, custom sprites can't be added, not for now anyway|- replaced fuchsia with pink in the quick color palette|since fuchsia is used for the gif bg green screen tool",
+  "changelog":"- accidently removed the ability for gifs to remove its colored|bg due to compiling for the wrong gamemaker version, whoops.",
 }
