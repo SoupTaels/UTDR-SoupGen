@@ -554,3 +554,13 @@ function data_uri(sprite_) {
 	buffer_delete(buffer);
 	return "data:image/png;base64," + bufferBase64;
 }
+
+function sine_wave(time, period, amplitude, midpoint) {
+    return sin(time * 2 * pi / period) * amplitude + midpoint;
+}
+
+function sine_between(time, period, minimum, maximum) {
+    var midpoint = mean(minimum, maximum);
+    var amplitude = maximum - midpoint;
+    return sine_wave(time, period, amplitude, midpoint);
+}

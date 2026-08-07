@@ -506,6 +506,25 @@ function ui_init() {
 					new LuiImage({ value: spr_pixel, maintain_aspect: false, color: dial_gradient_clr }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("datagradient", e_, , true); }).addEvent(LUI_EV_SHOW, function(e_) { e_.color_blend = SYSTEMUI.dial_gradient_clr; }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
 					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_gradient_clr = e_.color_blend; SYSTEMUI.dial_gradient_clr_orig = SYSTEMUI.dial_gradient_clr; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_white ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_white); SYSTEMUI.dial_gradient_clr = c_white; SYSTEMUI.dial_gradient_clr_orig = SYSTEMUI.dial_gradient_clr; sfx_play(snd_hurtpowerful); }),
 				]),
+				
+				new LuiHorizontalRule({ height: 5, }),
+				new LuiRow().setFlexGrow(1).centerContent().addContent([
+					new LuiText({ value: "Text Glow:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether [c_yellow][wheel]all[/] text should have a glow.", true, , true),
+					new LuiToggleSwitch({ value: dial_glow, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_glow").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { dial_glow_orig = e_.get(); }),
+				]),
+			
+				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Choosing a color
+					new LuiText({ value: "Glow Color:", width: 140, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the color of the glow.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[fx,colorglow,r,g,b,frames,time][/].", true, , true),
+					new LuiButton({ text: "Pick...", height: 40, }).addEvent(LUI_EV_CLICK, soupy_color_picker_glow),
+					new LuiImage({ value: spr_pixel, maintain_aspect: false, color: dial_glow_clr }).setSize(80, 40).addEvent(LUI_EV_CREATE, function(e_) { soup_store("dataglow", e_, , true); }).addEvent(LUI_EV_SHOW, function(e_) { e_.color_blend = SYSTEMUI.dial_glow_clr; }).addEvent(LUI_EV_MOUSE_LEFT_PRESSED, function(element_) { element_.main_ui.animate(element_, "xscale", 0, 1, global.Ease.OutElastic, 10); element_.main_ui.animate(element_, "yscale", 0, 1, global.Ease.OutElastic, 5); sfx_play(snd_squish); })
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { e_.set(spr_pixel); SYSTEMUI.dial_glow_clr = e_.color_blend; SYSTEMUI.dial_glow_clr_orig = SYSTEMUI.dial_glow_clr; audio_stop_sound(snd_equip2); sfx_play(snd_equip2, , , 1.3); }).addEvent(LUI_EV_CLICK_R, function(e_) { if ( e_.color_blend == c_white ) { exit; } e_.main_ui.animate(e_, "xscale", 0, 1, global.Ease.OutElastic, 10); e_.main_ui.animate(e_, "yscale", 0, 1, global.Ease.OutElastic, 5); e_.setColor(c_white); SYSTEMUI.dial_glow_clr = c_white; SYSTEMUI.dial_glow_clr_orig = SYSTEMUI.dial_glow_clr; sfx_play(snd_hurtpowerful); }),
+				]),
+				
+				new LuiRow().setFlexGrow(1).centerContent().addContent([
+					new LuiText({ value: "Pulse Speed:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the speed of the pulsating glow.\nThe lower the number, the faster the pulsating will be.\nThis value can be [rainbow]changed dynamically[/]\nif using [c_yellow][[fx,colorglow,r,g,b,frames,TIME][/].", true, , true),
+					new LuiInput({ value: dial_glow_time, height: 40, placeholder: "123456", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, }).addEvent(LUI_EV_SHOW, function(e_) { e_.set(SYSTEMUI.dial_glow_time); })
+					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { var value_ = real_ext(e_.get()), index_ = value_ == "" ? 1000 : value_; SYSTEMUI.dial_glow_time = index_; }),
+				]),
 			
 				new LuiHorizontalRule({ height: 5, }),
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Choosing a color

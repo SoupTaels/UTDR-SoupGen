@@ -95,14 +95,30 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 						var tx_x = AUTO_ASTERISK ? xx_ + 28 : xx_, wrapcalc = dial_auto_wrap ? ( 585 - xx_ ) : -1;
 						var align_ = scribble_alignment(dial_text_halign, dial_text_valign);
 						
-						if ( dial_text_shdw ) {
-							var scrib_dial = scribble(dial_text) //Dialogue Text
-							scrib_dial.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline)
-							.right_to_left(dial_rtl).gradient(dial_text_shdw_clr_g, 1)
-							.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v).randomize_animation(dial_rand)
+						#region Text Shadow
+							if ( dial_text_shdw ) {
+								var scrib_dial = scribble(dial_text) //Dialogue Text
+								scrib_dial.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline)
+								.right_to_left(dial_rtl).gradient(dial_text_shdw_clr_g, 1)
+								.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v).randomize_animation(dial_rand)
 							
-							scrib_dial.draw(( tx_x + dial_text_xoff ) + dial_text_shdw_x, ( yy_ + dial_text_yoff ) + dial_text_shdw_y, dial_text_gif ? typist : undefined);
-						}
+								scrib_dial.draw(( tx_x + dial_text_xoff ) + dial_text_shdw_x, ( yy_ + dial_text_yoff ) + dial_text_shdw_y, dial_text_gif ? typist : undefined);
+							}
+						#endregion
+						
+						#region Text Glow
+							if ( dial_glow ) { 
+								var scrib_dial = scribble(dial_text) //Dialogue Text
+								scrib_dial.starting_format(dial_font, dial_glow_clr).scale(dial_text_scale).right_to_left(dial_rtl).blend(c_white, sine_between(current_time / dial_glow_time, 2, 0.5, 0.9))
+								.line_spacing(line_sp).page(dial_text_page).wrap(wrapcalc, -1).align(align_.h, align_.v).randomize_animation(dial_rand).gradient(0, 0)
+							
+								scrib_dial.draw(( tx_x + dial_text_xoff ), ( yy_ + dial_text_yoff ) - 2, dial_text_gif ? typist : undefined); //u
+								scrib_dial.draw(( tx_x + dial_text_xoff ), ( yy_ + dial_text_yoff ) + 2, dial_text_gif ? typist : undefined); //d
+								scrib_dial.draw(( tx_x + dial_text_xoff ) - 2, ( yy_ + dial_text_yoff ), dial_text_gif ? typist : undefined); //l
+								scrib_dial.draw(( tx_x + dial_text_xoff ) + 2, ( yy_ + dial_text_yoff ), dial_text_gif ? typist : undefined); //r
+								scrib_dial.blend(c_white, 1);
+							}
+						#endregion
 						
 						var scrib_dial = scribble(dial_text) //Dialogue Text
 							dial_text_page_c = scrib_dial.get_page_count();
@@ -186,12 +202,27 @@ if ( dial_text_page > dial_text_page_c - 1 && dial_text_page_c > 1 && screenshot
 										var p_x = xx_ - 4, p_y = yy_ + lined.y;
 										if ( dial_text_gif && dial_miniface[i] > 0 ) { draw_sprite_ensure(dial_miniface[i], dial_miniface_index[i], xx_ + dial_text_xoff, ( p_y + 12 ) + dial_text_yoff, dial_text_scale, dial_text_scale, 0, dial_point_clr, 1); }
 										else {
-											if ( dial_text_shdw ) {
-												var scrib_point = scribble(dial_point_chr) //Dialogue Point
-												.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_text_shdw_clr_g, 1)
-												.allow_line_data_getter().randomize_animation(dial_rand)
-												scrib_point.draw(( p_x + dial_text_xoff ) + dial_text_shdw_x, ( p_y + dial_text_yoff ) + dial_text_shdw_y);
-											}
+											#region Text Shadow
+												if ( dial_text_shdw ) {
+													var scrib_point = scribble(dial_point_chr) //Dialogue Point
+													.starting_format(dial_font, dial_text_shdw_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_text_shdw_clr_g, 1)
+													.allow_line_data_getter().randomize_animation(dial_rand)
+													scrib_point.draw(( p_x + dial_text_xoff ) + dial_text_shdw_x, ( p_y + dial_text_yoff ) + dial_text_shdw_y);
+												}
+											#endregion
+											
+											#region Text Glow
+												if ( dial_glow ) {
+													var scrib_point = scribble(dial_point_chr) //Dialogue Point
+													.starting_format(dial_font, dial_glow_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(0, 0)
+													.randomize_animation(dial_rand).blend(c_white, sine_between(current_time / dial_glow_time, 2, 0.5, 0.9))
+													scrib_point.draw(( p_x + dial_text_xoff ), ( p_y + dial_text_yoff ) - 2); //u
+													scrib_point.draw(( p_x + dial_text_xoff ), ( p_y + dial_text_yoff ) + 2); //d
+													scrib_point.draw(( p_x + dial_text_xoff ) - 2, ( p_y + dial_text_yoff )); //l
+													scrib_point.draw(( p_x + dial_text_xoff ) + 2, ( p_y + dial_text_yoff )); //r
+													scrib_point.blend(c_white, 1);
+												}
+											#endregion
 											
 											var scrib_point = scribble(dial_point_chr) //Dialogue Point
 												.starting_format(dial_font, dial_point_clr).scale(dial_text_scale).outline(dial_text_outline).gradient(dial_gradient_clr, dial_gradient)

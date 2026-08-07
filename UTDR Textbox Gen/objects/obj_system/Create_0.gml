@@ -135,6 +135,10 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 	dial_striket = c_white; dial_striket_orig = dial_striket; //Strikethrough text
 	dial_nametag = ""; //Character speaking
 	
+	dial_glow = false; dial_glow_orig = false; //Whether text can glow
+	dial_glow_clr = c_white; dial_glow_clr_orig = c_white; //Glow clr
+	dial_glow_time = 1000; dial_glow_time_orig = 1000; //Glow pulse timer
+	
 	#region Typist
 		typist = scribble_typist(); //Dialogue Engine
 		typist_spd = 0.5; //Typewriter speed
@@ -188,7 +192,7 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 			with ( obj_mini ) { if ( page == other.dial_text_page && !sticker ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
-		typist_reset = function () { soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
+		typist_reset = function () { dial_glow_time = dial_glow_time_orig; dial_glow = dial_glow_orig; dial_glow_clr = dial_glow_clr_orig; soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
 			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 0, };
@@ -357,6 +361,12 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 						if ( !dial_gradient ) { dial_gradient = true; }
 						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 15}", TPCol("dial_gradient_clr"), dial_gradient_clr, myclr); delayfunc();
 					} break;
+					case "colorglow": case "blendglow": { //Make the glow blend to a different [effect,colorglow,r,g,b,frames,time]
+						var getclr = real_ext(len > 1 ? param[1] : "255"), getclr2 = real_ext(len > 2 ? param[2] : "255"), getclr3 = real_ext(len > 3 ? param[3] : "255"), time_ = real_ext(len > 4 ? param[4] : "15"), time_2 = real_ext(len > 5 ? param[5] : "1000");
+						var myclr = make_color_rgb(getclr != "" ? getclr : 255, getclr2 != "" ? getclr2 : 255, getclr3 != "" ? getclr3 : 255);
+						if ( !dial_glow ) { dial_glow = true; } dial_glow_time = time_2 != "" ? time_2 : 1000;
+						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 15}", TPCol("dial_glow_clr"), dial_glow_clr, myclr); delayfunc();
+					} break;
 					case "fade": case "ghost": case "opacity": { //Make the face fade out to the specified target number [effect,fade,#,frames]
 						var getamt = real_ext(len > 1 ? param[1] : "0"), time_ = real_ext(len > 2 ? param[2] : "30");
 						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 30}", "dial_face_alpha>", getamt != "" ? getamt : 0); delayfunc();
@@ -516,7 +526,7 @@ ui_init();
 			//Text
 			dial_font, dial_text_scale, dial_text_c, dial_text_outline, dial_point_chr, dial_point_clr, dial_point_clr_anim, dial_point_clr_anim_alpha, dial_text_line_spacing, dial_text_xoff, dial_text_yoff, dial_text_halign, dial_text_valign, dial_rtl, dial_gradient,
 			dial_gradient_clr, dial_indicator, dial_indicator_index,dial_indicator_spd, dial_indicator_anim, dial_indicator_visible, dial_indicator_scale, dial_indicator_xoff, dial_indicator_yoff, dial_indicator_angle, dial_indicator_blink,
-			typist_spd, typist_smooth, typist_ease, dial_gradient_orig, dial_gradient_clr_orig, 
+			typist_spd, typist_smooth, typist_ease, dial_gradient_orig, dial_gradient_clr_orig, dial_glow, dial_glow_clr, dial_glow_time,
 			
 			//Shadow
 			dial_text_shdw, dial_text_shdw_clr, dial_text_shdw_clr_g, dial_text_shdw_x, dial_text_shdw_y,

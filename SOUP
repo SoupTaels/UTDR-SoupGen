@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.4",
+  "game_version":"1.6.5",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- accidently removed the ability for gifs to remove its colored|bg due to compiling for the wrong gamemaker version, whoops.",
+  "changelog":"- added text glow style and associated fx command",
 }
