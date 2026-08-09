@@ -21,7 +21,7 @@ function ui_init() {
 		ui_finished_y = -100; //UI animation
 		ui_preview = false; //Whether we're previewing animated dialogue
 		ui_captial = false; //Whether to auto-captialize
-		if ( !is_android() ) { var tinysoup = "icons\\tinysoupy.png"; if ( file_exists(tinysoup) ) { widget_set_icon(tinysoup); } file_dropper_init(); }
+		if ( !is_android() && !is_android_wasm() ) { var tinysoup = "icons\\tinysoupy.png"; if ( file_exists(tinysoup) ) { widget_set_icon(tinysoup); } file_dropper_init(); }
 		undo_stack_create(); //History of undo changes
 		scribble_font_set_default("fnt_determination_nomono");
 		instance_create_depth(0, 0, -2, obj_updatechecker);
@@ -39,7 +39,7 @@ function ui_init() {
 			butt[i] = new Button({ id_: i, text: "Extras      [spr_gui_icons,3]", x: x_, y: y_, yoff: 0, padd_multi: padd_, sprite: spr_, color_butt: clr_, color: clr_, on_hover: -1, on_enter: -1, on_leave: -1, on_click: -1, centered: false, });
 			with ( butt[i++].data ) { self[$ "on_hover"] = method(self, on_hover_); self[$ "on_enter"] = method(self, on_enter_); self[$ "on_leave"] = method(self, on_leave_); self[$ "on_click"] = method(self, on_click_); }
 		
-			if ( is_android() ) {
+			if ( is_android() || is_android_wasm() ) {
 				butt[i] = new Button({ id_: i, text: "[rainbow]Export[/rainbow]      [spr_gui_icons,6]", x: x_, y: y_, yoff: 0, padd_multi: padd_, sprite: spr_, color_butt: c_white, color: c_white, on_hover: -1, on_enter: -1, on_leave: -1, on_click: -1, centered: false, });
 				with ( butt[i++].data ) { self[$ "on_hover"] = method(self, on_hover_); self[$ "on_enter"] = method(self, on_enter_a); self[$ "on_leave"] = method(self, on_leave_); self[$ "on_click"] = function () { soup_store("androidexport", , , true); } }
 			}

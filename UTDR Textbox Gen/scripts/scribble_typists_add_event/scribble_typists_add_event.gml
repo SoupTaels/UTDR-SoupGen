@@ -1,5 +1,11 @@
 // Feather disable all
-/// Defines an event - a script that can be executed (with parameters) by an in-line command tag
+/// Defines an event - a function that can be executed (with parameters) by an in-line command tag.
+/// The function will be executed with the following parameters:
+/// 
+/// argument0 = Scribble element that's executing the event
+/// argument1 = Event data as found in the command tag. This is an array of strings
+/// argument2 = Position of the event in the text. Position 0 is before the first character; position `n` is after the last character
+/// argument3 = Scribble typist that's executing the event
 /// 
 /// @param name              Name of the new formatting tag to add e.g. portrait adds the tag [portrait] for use
 /// @param function/method   Function or method to execute
@@ -11,8 +17,7 @@ function scribble_typists_add_event(_name, _function)
     static _macros_map            = _system.__macros_map;
     static _typewriter_events_map = _system.__typewriter_events_map;
     
-    if ( _typewriter_events_map[? _name] != undefined ) { exit; }
-	if (!is_string(_name))
+    if (!is_string(_name))
     {
         __scribble_error("Event names should be strings.\n(Input to script was \"", _name, "\")");
         exit;

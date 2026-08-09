@@ -156,7 +156,6 @@ function __scribble_class_page() constructor
         else if (_index >= __glyph_count-1)
         {
             _index = __glyph_count-2;
-			if ( _index < 0 ) { _index = 0; }
             
             return {
                 unicode:  0,

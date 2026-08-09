@@ -572,17 +572,17 @@ function __scribble_class_typist(_per_line) constructor
                     }
                 break;
                 
-                //Probably a current event
+               //Probably a current event
                 default:
                     //Otherwise try to find a custom event
                     var _function = _typewriter_events_map[? _event_name];
                     if (is_method(_function))
                     {
-                        with(_function_scope) _function(_target_element, _event_data, _event_position);
+                        with(_function_scope) _function(_target_element, _event_data, _event_position, other);
                     }
                     else if ((_function != undefined) && script_exists(_function))
                     {
-                        with(_function_scope) script_execute(_function, _target_element, _event_data, _event_position);
+                        with(_function_scope) script_execute(_function, _target_element, _event_data, _event_position, other);
                     }
                     else
                     {

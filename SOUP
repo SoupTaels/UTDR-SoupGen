@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.5",
+  "game_version":"1.6.6",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- added text glow style and associated fx command",
+  "changelog":"- updated scribble|- added two new borders|- small fixes for the online build for mobile users",
 }
