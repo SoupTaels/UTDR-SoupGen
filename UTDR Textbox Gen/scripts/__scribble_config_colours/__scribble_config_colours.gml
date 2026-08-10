@@ -18,7 +18,7 @@ function __scribble_config_colours() {
 		c_gray:    c_gray, c_gr: c_gray,
 		c_green:   c_green, c_g: c_green,
 		c_grey:    c_grey,
-		c_lime:    c_lime, c_l: c_lime,
+		"c_lime":    #41da67, c_l: #41da67,
 		c_ltgray:  c_ltgray, c_ltg: c_ltgray, 
 		c_ltgrey:  c_ltgrey,
 		c_maroon:  c_maroon, c_m: c_maroon,

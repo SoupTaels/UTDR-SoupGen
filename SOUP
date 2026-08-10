@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.6",
+  "game_version":"1.6.7",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- updated scribble|- added two new borders|- small fixes for the online build for mobile users",
+  "changelog":"- fixed ralsei sometimes appearing monochrome in gifs|due to his pink being green screened out|- if this happens with other characters,|try messing with the GIF BG Color",
 }

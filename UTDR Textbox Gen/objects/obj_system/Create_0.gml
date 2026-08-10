@@ -21,12 +21,13 @@ if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
 				var get_ = pref_[$ "openresult"]; global.pref.openresult = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "bg3d"]; global.pref.bg3d = !is_undefined(get_) ? get_ : ( is_android() ? false : true );
 				var get_ = pref_[$ "showfps"]; global.pref.showfps = !is_undefined(get_) ? get_ : false;
+				var get_ = pref_[$ "fix"]; global.pref.fix = !is_undefined(get_) ? get_ : false;
 				var get_ = pref_[$ "confirmexport"]; global.pref.confirmexport = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "pausesymbols"]; global.pref.pausesymbols = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "soupyicon"]; global.pref.soupyicon = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "autoscale"]; global.pref.autoscale = !is_undefined(get_) ? get_ : true;
 				var get_ = pref_[$ "presets"]; global.pref.presets = !is_undefined(get_) ? get_ : {};
-				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_fuchsia; screenshot_back = global.pref.gifbgclr;
+				var get_ = pref_[$ "gifbgclr"]; global.pref.gifbgclr = !is_undefined(get_) ? get_ : c_lime; if ( global.pref.gifbgclr == c_fuchsia && !global.pref.fix ) { global.pref.gifbgclr = c_lime; global.pref.fix = true; } screenshot_back = global.pref.gifbgclr;
 				var get_ = pref_[$ "autopoint"]; global.pref.autopoint = !is_undefined(get_) ? get_ : true; dial_point_auto = global.pref.autopoint;
 				var get_ = pref_[$ "macros"]; global.pref.macros = !is_undefined(get_) ? get_ : { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }; 
 				var get_ = pref_[$ "themeclr"]; global.pref.themeclr = !is_undefined(get_) ? get_ : c_orange; if ( !global.pref.randomclr && is_android() ) { 

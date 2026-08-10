@@ -16,11 +16,12 @@ pref = {
 	confirmexport: true, //Whether to press confirm to export once dialogue is finished
 	autopoint: true, //Whether auto-asterisk is enabled
 	themeclr: c_orange, //UI theme color
-	gifbgclr: c_fuchsia, //GIF BG color
+	gifbgclr: c_lime, //GIF BG color
 	soupyicon: true, //Whether to enable dynamic icon changing
 	pausesymbols: true, //Whether to always delay when encountering symbols
 	presets: {}, //Config presets
 	autoscale: true, //Whether to automatically scale sprites according to the font height
+	fix: false,
 	macros: { example: "[c_go][wave][pulse]I'm so soupy!![/]", example2: "This is a really long macrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", }, //Macros for reusable text
 }
 #region Add External Faces
