@@ -841,11 +841,15 @@ function ui_init() {
 			}
 		
 			ui_updateref = function() {
-				if ( !is_wasm() ) { 
-					if ( sprite_exists(global.refimg) ) { sprite_delete(global.refimg); global.refimg = -1; }
+				if ( sprite_exists(global.refimg) ) { sprite_delete(global.refimg); global.refimg = -1; }
+				if ( is_wasm() || is_android_wasm() ) {
+					soup_filepicker();
+					soup_checkout("wasmimport", , true); soup_store("wasmimport", "reference", , true);
+				}
+				else {
 					if ( !is_android() ) {
 						var fname = $"reference{PATHSEP}reference_image.png", fnamedebug = string_replace(fname, $"reference{PATHSEP}", ""), enabler = false;
-						 if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); enabler = true; }
+							if ( file_exists(fname) ) { global.refimg = sprite_add_ext(fname, 1, 0, 0, true); show_debug_message($"Added \"{fnamedebug}\" from {fname}!"); enabler = true; }
 						else {
 							var result = get_open_filename_ext("Image File (.png, .jpg, .gif)|*.png;*.jpg;*.jpeg;*.gif", "", directory_get_pictures_path(), "Select a sprite to import.");
 							if ( result == -1 || result == "" ) { sfx_play(snd_error); exit; }
@@ -856,7 +860,6 @@ function ui_init() {
 					}
 					else { soup_store("asynctype", "reference", , true); TweenScript(id, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
 				}
-				else { soupy_message("[wave]Sorry[/], but this feature [shake]isn't[/] available for the [slant]web export.", "I see.", , , , snd_error, fnt_abaddon, , , true); } 
 			}
 		
 			ui_mini = function () {

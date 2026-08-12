@@ -3,6 +3,7 @@ undo_stack_destroy();
 outlinesoup_cleanup();
 window_set_cursor(cr_default);
 soupyclipm_cleanup();
+if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 soupy_lui.destroy(); 
 
 #region Destroy Faces

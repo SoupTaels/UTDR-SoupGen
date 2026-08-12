@@ -2,6 +2,7 @@
 //if ( live_call() ) { return live_result; } 
 android_path = ""; //Safe path to save stuff in
 if ( !is_android() ) { instance_create_depth(0, 0, -2, obj_windows_icon); }
+if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 #region Loading Preferences
 	ui_loadprefs = function () { 
 			if ( file_exists(PREF_SOUP) ) {

@@ -69,6 +69,7 @@
     {"$GMFolder":"","%Name":"File Dropper","folderPath":"folders/Extensions/Windows Specific/File Dropper.yy","name":"File Dropper","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Samuel Venable","folderPath":"folders/Extensions/Windows Specific/Samuel Venable.yy","name":"Samuel Venable","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"GX Types","folderPath":"folders/Extensions/GX Types.yy","name":"GX Types","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Notes","folderPath":"folders/Notes.yy","name":"Notes","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -1096,7 +1097,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.100.0.1110",
+    "IDEVersion":"2026.0.0.16",
   },
   "name":"UTDR Textbox Gen",
   "resources":[
@@ -1112,6 +1113,7 @@
     {"id":{"name":"GX_Cut","path":"extensions/GX_Cut/GX_Cut.yy",},},
     {"id":{"name":"GX_Recommence","path":"extensions/GX_Recommence/GX_Recommence.yy",},},
     {"id":{"name":"GX_Style","path":"extensions/GX_Style/GX_Style.yy",},},
+    {"id":{"name":"gx_types","path":"extensions/gx_types/gx_types.yy",},},
     {"id":{"name":"libdlgmod","path":"extensions/libdlgmod/libdlgmod.yy",},},
     {"id":{"name":"libfilesystem","path":"extensions/libfilesystem/libfilesystem.yy",},},
     {"id":{"name":"MobileUtils_Gallery","path":"extensions/MobileUtils_Gallery/MobileUtils_Gallery.yy",},},
