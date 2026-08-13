@@ -205,7 +205,7 @@ function soupy_ui_credits() {
 	credits_add("LimeUI: [slant][c_gold]Limekys", "https://github.com/Limekys", true);
 	credits_add("Quill: [slant][c_gold]RefresherTowelGames", "https://github.com/RefresherTowel", true);
 	credits_add("DialogModule, FileManager: [slant][c_gold]Samuel Venable", "https://itch.io/profile/samuel-venable", true);
-	credits_add("HTTP.gml: [slant][c_gold]Sidorakh", "https://github.com/Sidorakh", true);
+	credits_add("HTTP.gml, GX-Types: [slant][c_gold]Sidorakh", "https://github.com/Sidorakh", true);
 	credits_add("Emobble: [slant][c_gold]tinkerer-red", "https://github.com/tinkerer-red", true);
 	credits_add("Android External File Control: [slant][c_gold]Corin Choi", "https://github.com/CorinChoi31/AndroidExternalFile-Extension", true);
 	credits_add("Windows Clipboard Functionality: [slant][c_gold]MakhamDev", "https://github.com/Ttanasart-pt/Pixel-Composer", true);

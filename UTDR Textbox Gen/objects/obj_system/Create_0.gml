@@ -194,7 +194,7 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 			with ( obj_mini ) { if ( page == other.dial_text_page && !sticker ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
-		typist_reset = function () { dial_glow_time = dial_glow_time_orig; dial_glow = dial_glow_orig; dial_glow_clr = dial_glow_clr_orig; soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
+		typist_reset = function () { dial_text_shdw = dial_text_shdw_orig; dial_glow_time = dial_glow_time_orig; dial_glow = dial_glow_orig; dial_glow_clr = dial_glow_clr_orig; soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
 			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 0, };
@@ -460,7 +460,7 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 #endregion
 
 #region Dialogue Shadow
-	dial_text_shdw = false; //Whether text should have a shadow
+	dial_text_shdw = false; dial_text_shdw_orig = false; //Whether text should have a shadow
 	dial_text_shdw_clr = c_deltarune; dial_text_shdw_clr_orig = dial_text_shdw_clr; //Shadow Color
 	dial_text_shdw_clr_g = make_color_rgb(36, 36, 36); dial_text_shdw_clr_g_orig = dial_text_shdw_clr_g; //Shadow gradient color
 	dial_text_shdw_x = 1; dial_text_shdw_x_orig = 1; //Shadow x offset

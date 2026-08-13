@@ -396,14 +396,14 @@ function ui_init() {
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Text HAlign:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the dialogue's horizontal alignment.\n[c_yellow]0[/] - Left, [c_yellow]1[/] - Center, [c_yellow]2[/] - Right\n[c_red]This will disable [c_yellow]auto-asterisk[/].", true, , true),
-					new LuiInput({ height: 40, placeholder: "0 - Left, 1 - Center, 2 - Right", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, max_length: 1, }).bindVariable(self, "dial_text_halign")
+					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 2, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).bindVariable(self, "dial_text_halign")
 					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { soup_checkout("dataalignh", false, true).setSubimg(real(e_.get() == "" ? "0" : e_.get())); dial_text_halign = real(e_.get() == "" ? "0" : e_.get()); }),
 					new LuiImage({ value: spr_gui_alignment_h, maintain_aspect: false }).setSize(32, 32).addEvent(LUI_EV_CREATE, function(e_) { soup_store("dataalignh", e_, , true); }),
 				]),
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Text VAlign:", width: 110, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Changes the dialogue's vertical alignment.\n[c_yellow]0[/] - Top, [c_yellow]1[/] - Middle, [c_yellow]2[/] - Bottom\n[c_red]This will disable [c_yellow]auto-asterisk[/].", true, , true),
-					new LuiInput({ height: 40, placeholder: "0 - Top, 1 - Middle, 2 - Bottom", offset: 12, type_sfx: snd_txttype, color_normal: c_white, color_hover: c_gray, input_mode: LUI_INPUT_MODE.numbers, max_length: 1, }).bindVariable(self, "dial_text_valign")
+					new LuiSlider({ min_value: 0, color_text: c_black, color_text_drag: c_white, max_value: 2, rounding: true, display_value: true, bar_sprite: spr_border_header, bar_sprite_back: spr_border_header, }).bindVariable(self, "dial_text_valign")
 					.addEvent(LUI_EV_VALUE_UPDATE, function(e_) { soup_checkout("dataalignv", false, true).setSubimg(real(e_.get() == "" ? "0" : e_.get())); dial_text_valign = real(e_.get() == "" ? "0" : e_.get()); }),
 					new LuiImage({ value: spr_gui_alignment_v, maintain_aspect: false }).setSize(32, 32).addEvent(LUI_EV_CREATE, function(e_) { soup_store("dataalignv", e_, , true); }),
 				]),
@@ -465,7 +465,7 @@ function ui_init() {
 				new LuiHorizontalRule({ height: 5, }),
 				new LuiRow().setFlexGrow(1).centerContent().addContent([
 					new LuiText({ value: "Text Shadow:", width: 130, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip("Whether text should cast a shadow.", true, , true),
-					new LuiToggleSwitch({ value: dial_text_shdw, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_text_shdw"),
+					new LuiToggleSwitch({ value: dial_text_shdw, ease: global.Ease.OutBack, sound_click: snd_bump, sound_click_pitch: 1.3,  }).bindVariable(self, "dial_text_shdw").addEvent(LUI_EV_VALUE_UPDATE, function(e_) { SYSTEMUI.dial_text_shdw_orig = e_.get(); }),
 				]),
 			
 				new LuiRow().setFlexGrow(1).centerContent().addContent([ //Choosing a color

@@ -636,22 +636,28 @@ pref = {
 		#endregion
 		
 		#region Add Default Options
-			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
+			array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_yellow; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { 
-					if ( !is_android() ) {
-						sfx_play(snd_equip); 
-						var result = get_open_filename_ext("Image File (.PNG Only)|*.png", "", directory_get_pictures_path(), "Select a sprite to import."), myname_;
-						if ( result == -1 || result == "" ) { result = spr_border_undertale; myname_ = "spr_border_undertale"; } else { myname_ = string_exclude(string_replace(string_replace(filename_name(result), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, 1, false); }
-						SYSTEMUI.spr_bord = result; SYSTEMUI.bord_name = myname_; SYSTEMUI.bord_prev = SYSTEMUI.spr_bord;
-						sfx_play(snd_updated); soup_checkout("datainputB", false, true).set(myname_); soup_checkout("dataimageB", false, true).set(result); soup_checkout("datafunc", false)();
+					if ( is_wasm() || is_android_wasm() ) { //If online version
+						soup_filepicker();
+						soup_checkout("wasmimport", , true); soup_store("wasmimport", "border", , true); soup_store("wasmimporttype", 1, , true);
 					}
-					else { soup_store("asynctype", "border", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+					else {
+						if ( !is_android() ) {
+							sfx_play(snd_equip); 
+							var result = get_open_filename_ext("Image File (.PNG Only)|*.png", "", directory_get_pictures_path(), "Select a sprite to import."), myname_;
+							if ( result == -1 || result == "" ) { result = spr_border_undertale; myname_ = "spr_border_undertale"; } else { myname_ = string_exclude(string_replace(string_replace(filename_name(result), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, 1, false); }
+							SYSTEMUI.spr_bord = result; SYSTEMUI.bord_name = myname_; SYSTEMUI.bord_prev = SYSTEMUI.spr_bord;
+							sfx_play(snd_updated); soup_checkout("datainputB", false, true).set(myname_); soup_checkout("dataimageB", false, true).set(result); soup_checkout("datafunc", false)();
+						}
+						else { soup_store("asynctype", "border", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+					}
 				})
 			); 
 			
-			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) {
@@ -678,14 +684,6 @@ pref = {
 		
 					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
-			); }
-			else {
-				array_push(options_, new LuiText({ value: "About Custom Sprites...", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
-				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
-				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
-				.addEvent(LUI_EV_CLICK, function(element_) {
-						soupy_message("Due to [c_red]Cross-Origin Resource Sharing(CORS)[/], this feature|[shake]isn't available on the web build.[/]|Consider switching to the [c_y]Windows or Android build[/] instead,|or use Wine to run SoupGen on Mac or Linux.|[wheel]Sorry![/]", "That's so unfair... fuck browsers dude.", , , , snd_error, fnt_abaddon, , true, true);
-					})
 			); }
 		#endregion
 		
@@ -736,25 +734,31 @@ pref = {
 		#endregion
 		
 		#region Add Default Options
-			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).setData("customs", custom_).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
+			array_push(options_, new LuiText({ value: "Add From File... [->]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_yellow, }).setPadding(5).setData("customs", custom_).addEvent(LUI_EV_CREATE, function (e_) { if ( is_android() ) { soup_store("element_", e_, , true); } })
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_yellow; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { 
-					if ( !is_android() ) { 
-						sfx_play(snd_equip); 
-						var result = get_open_filename_ext("GameMaker Strip (_strip#.PNG Only)|*.png", "", directory_get_pictures_path(), "Select a spritefont to import."), myname_;
-						if ( result == -1 || result == "" ) { result = "fnt_determination"; myname_ = result; } else { myname_ = string_exclude(string_replace(string_replace(string_replace(filename_name(result), "spr_", ""), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, 2, false); }
-						if ( result == -1 || result == "" ) { result = "fnt_determination"; myname_ = result; }
-						var custom_ = element_.getData("customs");
-						if ( custom_ ) { soup_checkout(SYSTEMUI.ui_tab != 4 ? "datainputS" : "datainputbox", false, true).set(myname_); soup_checkout(SYSTEMUI.ui_tab != 4 ? "datafont" : "datafontbox", false, true).font = myname_; sfx_play(snd_updated); }
-						else { soup_checkout(soup_checkout("getfont", false, true), false, true).font = myname_; }
-						soup_checkout("datafunc", false)();
+					if ( is_wasm() || is_android_wasm() ) { //If online version
+						soup_filepicker();
+						soup_checkout("wasmimport", , true); soup_store("wasmimport", "font", , true); soup_store("wasmimporttype", 2, , true);
 					}
-					else { soup_store("asynctype", "font", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+					else {
+						if ( !is_android() ) { 
+							sfx_play(snd_equip); 
+							var result = get_open_filename_ext("GameMaker Strip (_strip#.PNG Only)|*.png", "", directory_get_pictures_path(), "Select a spritefont to import."), myname_;
+							if ( result == -1 || result == "" ) { result = "fnt_determination"; myname_ = result; } else { myname_ = string_exclude(string_replace(string_replace(string_replace(filename_name(result), "spr_", ""), "_strip", ""), ".png", ""), "0123456789"); result = external_ensure(myname_, filename_name(result), result, 2, false); }
+							if ( result == -1 || result == "" ) { result = "fnt_determination"; myname_ = result; }
+							var custom_ = element_.getData("customs");
+							if ( custom_ ) { soup_checkout(SYSTEMUI.ui_tab != 4 ? "datainputS" : "datainputbox", false, true).set(myname_); soup_checkout(SYSTEMUI.ui_tab != 4 ? "datafont" : "datafontbox", false, true).font = myname_; sfx_play(snd_updated); }
+							else { soup_checkout(soup_checkout("getfont", false, true), false, true).font = myname_; }
+							soup_checkout("datafunc", false)();
+						}
+						else { soup_store("asynctype", "font", , true); TweenScript(SYSTEMUI, 0, 30, function () { MobileUtils_Gallery_Open_PNG(); }); }
+					}
 				})
 			); 
 			
-			array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
+			if ( !is_wasm() ) { array_push(options_, new LuiText({ value: "Add From URL... [^]", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) {
@@ -781,14 +785,6 @@ pref = {
 		
 					var mainui2 = soupy_popup(arr_, , "Cancel", , , , snd_dimbox, fnt_abaddon, true); soup_store("mainui2", mainui2, , true);
 				})
-			); }
-			else {
-				array_push(options_, new LuiText({ value: "About Custom Sprites...", truncate: false, font: fnt_speech, text_halign: fa_center, text_valign: fa_middle, color: c_cyan, }).setPadding(5)
-				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_orange; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
-				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_cyan; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
-				.addEvent(LUI_EV_CLICK, function(element_) {
-						soupy_message("Due to [c_red]Cross-Origin Resource Sharing(CORS)[/], this feature|[shake]isn't available on the web build.[/]|Consider switching to the [c_y]Windows or Android build[/] instead,|or use Wine to run SoupGen on Mac or Linux.|[wheel]Sorry![/]", "That's so unfair... fuck browsers dude.", , , , snd_error, fnt_abaddon, , true, true);
-					})
 			); }
 		#endregion
 		

@@ -1,5 +1,5 @@
 {
-  "game_version":"1.6.7",
+  "game_version":"1.7.0",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- fixed ralsei sometimes appearing monochrome in gifs|due to his pink being green screened out|- if this happens with other characters,|try messing with the GIF BG Color",
+  "changelog":"- text align ui uses sliders instead of text input|- online version can now import custom sprites!|now online version is on par with the Android version.|never become a web dev. it's a pain in the ass.|- also, don't support vibecoded/ ai-assisted projects|or people that use generative ai, even if|it's as small as ai coding assistance.|you'd be trusting a dumbass that could potentially put viruses on your devices!!|avoid gen ai users like the plague!",
 }
