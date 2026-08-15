@@ -13,7 +13,7 @@
 <p align="center"><img src="https://files.catbox.moe/jew38r.png" style="display:block; margin:auto;"></p>
 <p align="center">Available for Windows and Android natively, but also runs just fine on Linux and Mac through Wine and Whisky. There's also an experimental online version.</p>
 <p align="center"><img src="https://files.catbox.moe/bat3y2.gif" style="display:block; margin:auto;"></p>
-<p align="center"><a href="https://soup-taels.itch.io/utdr-soupgen">Try out the experimental online version!</a></p> <p align="center"><a href="https://gamejolt.com/games/utdrgoodsoupgen/1072959">Alternative link for the online version.</a></p>
+<p align="center"><a href="https://soup-taels.itch.io/utdr-soupgen">Try out the online version!</a></p> <p align="center"><a href="https://gamejolt.com/games/utdrgoodsoupgen/1072959">Alternative link for the online version.</a></p>
 <p align="center"><img src="https://files.catbox.moe/m2peu9.gif" style="display:block; margin:auto;"></p>
 <p align="center"><a href="https://github.com/SoupTaels/UTDR-Textbox-Soup/releases">Get the latest release/ download here!</a></p>
 <hr />
