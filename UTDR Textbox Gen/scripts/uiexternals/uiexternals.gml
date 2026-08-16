@@ -27,6 +27,7 @@ pref = {
 #region Add External Faces
 	global.faces_dict = {};
 	global.faces_dict_alt = {};
+	global.faces_dict_meta = {}; //For folder metadata
 	
 	function load_faces() {
 		///@desc Because for some reason, Android doesn't have subfolder included files.
@@ -51,6 +52,18 @@ pref = {
 			var faces_dir = filename_dir_name(faces_cur); //Get directory name
 			if ( faces_dir != "" ) { //Not trying to load a file outside a folder
 				if ( !struct_exists(global.faces_dict, faces_dir) ) { global.faces_dict[$ faces_dir] = {}; } //Create new struct face dictionary
+				
+				#region Folder Metadata
+					var meta_ = $"faces{PATHSEP}{faces_dir}{PATHSEP}metadata.soupy";
+					if ( file_exists(meta_) ) {
+						if ( is_undefined(global.faces_dict_meta[$ faces_dir]) ) {
+							var file_ = buffer_load(meta_), data_ = buffer_read(file_, buffer_text);
+							global.faces_dict_meta[$ faces_dir] = json_parse(data_);
+							buffer_delete(file_);
+						}
+					}
+				#endregion
+				
 				var temp_ = string_replace(faces_cur, $"faces{PATHSEP}{faces_dir}{PATHSEP}", ""); //Remove faces/(folder name)/
 				var imgnum = string_between(temp_, "_strip", ".png"); imgnum = imgnum == "" ? 1 : real(imgnum); //Get the image number if it's a strip file
 				var faces_emote = string_exclude(string_replace(string_replace(string_replace(temp_, $"_strip", ""), $"spr_{faces_dir}_", ""), ".png", ""), "1234567890"); //Get face expression
@@ -485,7 +498,7 @@ pref = {
 						.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_yellow; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 						.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = get_face(element_.params.id_) != -1 ? c_cyan : c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 						.addEvent(LUI_EV_CLICK, function(element_) { //Once clicked on, create new scroll panel and populate it with face sprites
-							var get_ = soup_checkout("scrollmain", false); soup_checkout("scrollsub", false).destroy(); 
+							var get_ = soup_checkout("scrollmain", false); soup_checkout("scrollsub", false).destroy(); soup_checkout("metadata");
 							global.faces_dict[$ element_.params.id_][$ "NEW SPRITE"] = false; sfx_play(snd_select);
 							//Exit early if the sprite already exists(for external sprites added through drag & drop)
 							var early_ = get_face(element_.params.id_); if ( sprite_exists(early_) ) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = early_; FACE_ORIGINAL = FACE_CURRENT; } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.params.id_); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(early_); soup_checkout("datafunc", false)(); exit; }
@@ -494,6 +507,16 @@ pref = {
 							repeat ( spr_len ) {
 								var exp_ = spr_exp[spr_i], finalname = $"spr_{cur_}_{exp_}", myspr = get_face(finalname);
 								if ( exp_ != "NEW SPRITE" ) {
+									if ( !is_undefined(global.faces_dict_meta[$ cur_]) && !soup_store_undefined("metadata") ) {
+										var mdata_ = global.faces_dict_meta[$ cur_], str_ = $"\nNote: {mdata_.note}";
+										array_push(spr_, 
+											new LuiText({ value: $"Author: {mdata_.author}", color: c_white, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip($"[rainbow]{mdata_.page}[/]{mdata_.note == "" ? "" : str_ }", true, , true).setData("link", mdata_.page)
+												.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_lime; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+												.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+												.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_equip); soupy_url(element_.getData("link")); })
+										);
+										soup_store("metadata");
+									}
 									array_push(spr_, new LuiImageButton({ value: myspr, draw_normal: true, }).setSize(sprite_get_width(myspr), sprite_get_height(myspr)).setData("face", myspr).setData("facename", finalname).setFlexAlignSelf(flexpanel_align.center).setTooltip($"{finalname}\n[face,{finalname}]", true)
 									.setData("inputsoup_", element_.getData("inputsoup_")).setData("inputglobal_", element_.getData("inputglobal_")).setData("imagesoup_", element_.getData("imagesoup_")).setData("imageglobal_", element_.getData("imageglobal_")).setData("clear_", element_.getData("clear_"))
 									.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = element_.getData("face"); FACE_ORIGINAL = FACE_CURRENT; FACE_INTERNAL = element_.getData("facename"); } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.getData("facename")); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(element_.getData("face")); soup_checkout("datafunc", false)(); })
