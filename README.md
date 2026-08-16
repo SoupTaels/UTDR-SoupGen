@@ -19,6 +19,7 @@
 <hr />
 <p align="center"><a href="https://rentry.co/utdrsoupguides">Help guide is hosted here!</a></p>
 <p align="center"><a href="https://rentry.co/utdrsoupguides#alternatives-to-consider">Alternatives to consider</a></p>
+<p align="center"><a href="https://rentry.co/utdrsoupguides#requesting-custom-sprites-be-officially-added">Community-made sprites</a></p>
 <hr />
 &nbsp;
 &nbsp;
