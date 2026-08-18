@@ -1,4 +1,4 @@
-///@desc 
+///@desc WASM Android
 var result = async_load;
 if ( result[? "id"] == soup_checkout("keywasm", , true) ) { 
 	if ( is_undefined(soup_checkout("wasmtype", false, true)) ) { //We're dealing with the main textbox

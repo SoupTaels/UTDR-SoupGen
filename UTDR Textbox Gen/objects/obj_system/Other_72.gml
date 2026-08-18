@@ -11,6 +11,18 @@ if ( !is_undefined(info_) && get_[?"id"] == info_.id ) {
 			var faces_dir = filename_dir_name(faces_cur); //Get directory name
 			if ( faces_dir != "" && faces_dir != string_replace(info_.fname, ".zip", "") ) { //Not trying to load a file outside a folder
 				if ( !struct_exists(global.faces_dict, faces_dir) ) { global.faces_dict[$ faces_dir] = {}; } //Create new struct face dictionary
+				
+				#region Folder Metadata
+					var files_2 = gumshoe(info_.finalpath, ".soupy");
+					if ( filename_name(files_2[0]) == "metadata.soupy" ) {
+						if ( is_undefined(global.faces_dict_meta[$ faces_dir]) ) {
+							var file_ = buffer_load(files_2[0]), data_ = buffer_read(file_, buffer_text);
+							global.faces_dict_meta[$ faces_dir] = json_parse(data_);
+							buffer_delete(file_);
+						}
+					}
+				#endregion
+				
 				var temp_ = string_replace(faces_cur, filename_path(faces_cur), ""); //Remove faces/(folder name)/
 				var imgnum = string_between(temp_, "_strip", ".png"); imgnum = imgnum == "" ? 1 : real(imgnum); //Get the image number if it's a strip file
 				var faces_emote = string_exclude(string_replace(string_replace(string_replace(temp_, $"_strip", ""), $"spr_{faces_dir}_", ""), ".png", ""), "1234567890"); //Get face expression
