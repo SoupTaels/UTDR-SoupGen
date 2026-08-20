@@ -507,16 +507,18 @@ pref = {
 							repeat ( spr_len ) {
 								var exp_ = spr_exp[spr_i], finalname = $"spr_{cur_}_{exp_}", myspr = get_face(finalname);
 								if ( exp_ != "NEW SPRITE" ) {
-									if ( !is_undefined(global.faces_dict_meta[$ cur_]) && !soup_store_undefined("metadata") ) {
-										var mdata_ = global.faces_dict_meta[$ cur_], str_ = $"\nNote: {mdata_.note}";
-										array_push(spr_, 
-											new LuiText({ value: $"Author: {mdata_.author}", color: c_white, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip($"[rainbow]{mdata_.page}[/]{mdata_.note == "" ? "" : str_ }", true, , true).setData("link", mdata_.page)
-												.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_lime; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
-												.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
-												.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_equip); soupy_url(element_.getData("link")); })
-										);
-										soup_store("metadata");
-									}
+									#region Metadata
+										if ( !is_undefined(global.faces_dict_meta[$ cur_]) && !soup_store_undefined("metadata") ) {
+											var mdata_ = global.faces_dict_meta[$ cur_], str_ = $"\nNote: {mdata_.note}";
+											array_push(spr_, 
+												new LuiText({ value: $"Author: {mdata_.author}", color: c_white, text_halign: fa_center, text_valign: fa_middle, font: fnt_speech, }).setTooltip($"[rainbow]{mdata_.page}[/]{mdata_.note == "" ? "" : str_ }", true, , true, 600).setData("link", mdata_.page)
+													.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.color = c_lime; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
+													.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.color = c_white; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
+													.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_equip); soupy_url(element_.getData("link")); })
+											);
+											soup_store("metadata");
+										}
+									#endregion
 									array_push(spr_, new LuiImageButton({ value: myspr, draw_normal: true, }).setSize(sprite_get_width(myspr), sprite_get_height(myspr)).setData("face", myspr).setData("facename", finalname).setFlexAlignSelf(flexpanel_align.center).setTooltip($"{finalname}\n[face,{finalname}]", true)
 									.setData("inputsoup_", element_.getData("inputsoup_")).setData("inputglobal_", element_.getData("inputglobal_")).setData("imagesoup_", element_.getData("imagesoup_")).setData("imageglobal_", element_.getData("imageglobal_")).setData("clear_", element_.getData("clear_"))
 									.addEvent(LUI_EV_CLICK, function(element_) { sfx_play(snd_updated); if ( element_.getData("clear_") ) { FACE_CURRENT = element_.getData("face"); FACE_ORIGINAL = FACE_CURRENT; FACE_INTERNAL = element_.getData("facename"); } soup_checkout(element_.getData("inputsoup_"), false, element_.getData("inputglobal_")).set(element_.getData("facename")); soup_checkout(element_.getData("imagesoup_"), false, element_.getData("imageglobal_")).set(element_.getData("face")); soup_checkout("datafunc", false)(); })

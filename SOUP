@@ -1,5 +1,5 @@
 {
-  "game_version":"1.7.1",
+  "game_version":"1.7.2",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- adds custom spamton sprites|- folders can now have a metadata file",
+  "changelog":"- text wrapping on the metadata tooltip|- the program will restore your last typed text on startup rather than on crash|- new randomized tips & tricks on startup!",
 }

@@ -491,6 +491,7 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 #endregion
 
 ui_init();
+TweenScript(self, 0, 60, function () { instance_create_depth(16, -20, -2, obj_tips, { image_alpha: 0, }); });
 
 #region Error Handling
 	errname = $"{directory_get_temporary_path()}error_log.soupy";

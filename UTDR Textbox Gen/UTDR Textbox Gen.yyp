@@ -1177,6 +1177,7 @@
     {"id":{"name":"obj_stacker","path":"objects/obj_stacker/obj_stacker.yy",},},
     {"id":{"name":"obj_success","path":"objects/obj_success/obj_success.yy",},},
     {"id":{"name":"obj_system","path":"objects/obj_system/obj_system.yy",},},
+    {"id":{"name":"obj_tips","path":"objects/obj_tips/obj_tips.yy",},},
     {"id":{"name":"obj_updatechecker","path":"objects/obj_updatechecker/obj_updatechecker.yy",},},
     {"id":{"name":"obj_windows_icon","path":"objects/obj_windows_icon/obj_windows_icon.yy",},},
     {"id":{"name":"oSteadyDeltaTime","path":"objects/oSteadyDeltaTime/oSteadyDeltaTime.yy",},},

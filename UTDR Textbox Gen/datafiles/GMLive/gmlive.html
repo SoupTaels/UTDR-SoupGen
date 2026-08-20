@@ -31,10 +31,12 @@ body {
 	background: #ffffff;
 	margin: 0 auto;
 	padding: 8px;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 	min-height: 100%;
 	min-height: 100vh;
 	box-sizing: border-box;
+}
+.page, .navmenu {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 .page > p:first-child {
 	margin-top: 0;
@@ -62,7 +64,6 @@ body {
 	padding-left: 4px;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 }
@@ -91,6 +92,9 @@ body {
 }
 #doc section.empty > header::before {
 	content: " "; /*"·"*/
+}
+#doc section.link > header::before {
+	content: "→";
 }
 
 #doc header:hover,
@@ -251,6 +255,7 @@ body {
 pre.gmlmd .md { color: #7A81A9 } /* #define */
 pre.gmlmd .kw { color: #008; font-weight: bold } /* keyword */
 pre.gmlmd .co { color: #080 } /* comment */
+pre.gmlmd .cm { color: #914BAF } /* comment meta */
 pre.gmlmd .nu { color: #F03232 } /* number */
 pre.gmlmd .nx { color: #00f } /* hex */
 pre.gmlmd .st { color: #00f } /* string */
@@ -277,6 +282,7 @@ pre.gmlmd a.sf, #doc pre a.sv {
 
 #night:checked + .main pre.gmlmd .op { color: #CCCCCC }
 #night:checked + .main pre.gmlmd .co { color: #5B995B }
+#night:checked + .main pre.gmlmd .cm { color: #A7B }
 #night:checked + .main pre.gmlmd .kw { color: #FFB871 }
 #night:checked + .main pre.gmlmd .md { color: #FFB871 }
 #night:checked + .main pre.gmlmd .cb { color: #FFB871 }
@@ -307,8 +313,10 @@ pre.gmlmd a.sf, #doc pre a.sv {
 #night:checked + .main {
 	background-color: #424242;
 }
-#night:checked + .main .page {
+#night:checked + .main .page,
+#night:checked + .main .navmenu {
 	background-color: #1c1c1c;
+	border-color: #1c1c1c;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	color: white;
 }
@@ -330,6 +338,7 @@ pre.gmlmd a.sf, #doc pre a.sv {
 #night:checked + .main #doc section + p,
 #night:checked + .main #doc hr,
 #night:checked + .main #doc ul,
+#night:checked + .main #doc ol,
 #night:checked + .main #doc table,
 #night:checked + .main #doc table td,
 #night:checked + .main #doc table th
@@ -426,7 +435,7 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 
 <style>
 .main { background-color: #899FC6 }
-.page { box-shadow: 0 0 8px rgba(0, 0, 0, 0.3) }
+.page, .navmenu { box-shadow: 0 0 8px rgba(0, 0, 0, 0.3) }
 #night:checked + .main { background-color: #405070 }
 #night:checked + .main .page { background-color: #1A202D }
 </style>
@@ -459,16 +468,23 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 	</li><li>	<a href="https://yal.cc/docs/gm/gmlive/gms23/">GameMaker Studio 2.3.x</a>
 	</li></ul></article></section><section><header id="use2"><a href="#use2" title="(permalink)">Using GMLive.gml</a></header><article><a class="sticky-side" href="#use2" title="Using GMLive.gml"><span>Using GMLive.gml</span></a><section><header id="gms2-setup"><a href="#gms2-setup" title="(permalink)">Initial setup</a></header><article><ul>
 		<li><p>	Import the GMLive asset the project: </p><ul>
-			<li>	If you bought the asset on GM Marketplace, you can import it using menu:Marketplace➜My Library.
-			</li><li>	If you bought the asset on itch.io, you can import it using menu:Tools➜Import Local Asset Package,
+			<li>	If you bought the asset on itch.io, you can import it using menu:Tools➜Import Local Asset Package,
 				or by dragging and dropping the <code>.yymps</code> file onto the workspace area (where the resource editor windows show up) of the GameMaker window.<br/>
 				<strong>Note:</strong> <code>.yymp</code> is for GMS2.2.x, <code>.yymps</code> is for the current versions.
+			</li><li>	If you bought the asset on GM Marketplace,
+				you should send me an email with your Purchase Reference
+				so that I can generate you an itch key - as Marketplace has been sunset,
+				it no longer accepts extension updates.
 			</li></ul></li><li>	Import the assets (extension, object, and included files) from the package.<br/>
 			<strong>Note:</strong> On Mac/Linux, omit importing Windows-specific <code>exe</code> and <code>ndll</code> files.
 		</li><li>	On Mac/Linux, install <a href="https://nekovm.org/download/">Neko VM</a> if you haven't already.<br/>
 			Neko VM is a tiny (1.5 .. 3.2MB) runtime for cross-platform applications that I use
 			for GMLive's server application.
 		</li><li>	Place <code>obj_gmlive</code> in the first room of the project.
+		</li><li>	Disable Game Options ➜ Main ➜ Automatically remove unused assets when compiling.<br/>
+			This is not <i>required</i> for GMLive to work,
+			but otherwise you will not be able to use anything in the "live" code that didn't
+			already make it to the build.
 		</li></ul></article></section><section><header id="gms2-start"><a href="#gms2-start" title="(permalink)">Starting up (Windows)</a></header><article><ul>
 			<li>	Open your project directory using menu:Help ➜ Open project in Explorer<br/>
 				(or navigate to it manually)
@@ -649,6 +665,11 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 <span class="cb">}</span>
 </pre><p>
 		and that's it.
+	</p></article></section><section><header id="live_auto_call_nr"><a href="#live_auto_call_nr" title="(permalink)">live_auto_call_nr</a></header><article><p>
+		Same as above, but does an <code>exit</code> instead of <code>return live_result</code>.
+		</p><p>
+		You can use this one if the linter gets angry about you trying to <code>return</code>
+		in a place that should not return anything.
 	</p></article></section><section><header id="live_defcall"><a href="#live_defcall" title="(permalink)">live_defcall(...arguments, default_value)</a></header><article><p>
 		Same as <a href="#live_call">live_call</a> but returns <code>default_value</code> instead of <code>0</code> if execution fails.
 		</p><p>
@@ -667,7 +688,7 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 		Stores the returned value from the last <a href="#live_call">live_call</a>
 		(or other "live" group functions) if execution succeeded.
 		</p><p>
-		If the code did not return anything, holds <code>0</code> (GM default for <code>exit</code>).
+		If the code did not return anything, holds <code>undefined</code> (GM default for <code>exit</code>).
 	</p></article></section><section><header id="live_name"><a href="#live_name" title="(permalink)">live_name</a></header><article><p>
 		In GMS2.3+, it can be hard for GMLive to tell apart nested functions due to their
 		automatic naming. To mitigate this, a <code>live_name</code> variable is available and can be set
@@ -842,7 +863,11 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 				</p><pre class="gmlmd">
 <span class="sv">live_blank_object</span> <span class="op">=</span> <span class="ri">obj_blank</span><span class="op">;</span>
 <span class="sv">live_blank_room</span> <span class="op">=</span> <span class="ri">rm_blank</span><span class="op">;</span>
-</pre></li></ul></article></section><section><header id="room_set_live"><a href="#room_set_live" title="(permalink)">room_set_live(room, enable)</a></header><article><p>
+</pre></li><li>	In GameMaker 2024.14 / LTS2026 and newer, you may have to enable
+				"Allow instance_change and position_change"
+				in Game Options ➜ Main ➜ General ➜ Deprecated behaviours.<br/>
+				
+			</li></ul></article></section><section><header id="room_set_live"><a href="#room_set_live" title="(permalink)">room_set_live(room, enable)</a></header><article><p>
 			Enables/disables live reload for a specific room. Don't forget to <a href="#room-setup">setup helper resources</a> first.
 			</p><p>
 			For example,
@@ -899,7 +924,7 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 			</p><p>
 			For example,
 			</p><pre class="gmlmd">
-<a class="sf" href="#shader_set_live">shader_set_live</a><span class="op">(</span><span class="uv">sh_test</span><span class="op">,</span> <span class="sv">true</span><span class="op">)</span><span class="op">;</span>
+<a class="sf" href="#shader_set_live">shader_set_live</a><span class="op">(</span><span class="ri">sh_test</span><span class="op">,</span> <span class="sv">true</span><span class="op">)</span><span class="op">;</span>
 </pre><p>
 			Can be called at runtime, including from "live" code.
 		</p></article></section></article></section></article></section><section><header id="api"><a href="#api" title="(permalink)">API functions</a></header><article><a class="sticky-side" href="#api" title="API functions"><span>API functions</span></a><p>
@@ -914,12 +939,16 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 		</p><p>
 		<code>signature</code> is function signature, including the name, such as: </p><ul>
 		<li>	<code>clamp(a, b, c)</code> (normal),
-		</li><li>	<code>instance_destroy(?id, ?execEvent)</code> (prepend optional arguments with <code>?</code>)
+		</li><li>	<code>variable_clone(var, ?depth)</code> (prepend optional arguments with <code>?</code>)
 		</li><li>	<code>max(...values)</code> (include <code>...</code> for trailing arguments).
 		</li></ul><p>
 		Trailing content (such as the various characters from <code>fnames</code>) is allowed,
 		but will be ignored.
 		</p><p>
+		A function may also have the following prefixes: </p><ul>
+		<li>	<code>:</code>: function uses <code>self</code> (e.g. <code>:place_meeting(x,y,obj)</code>)
+		</li><li>	<code>::</code>: function uses <code>self</code> and <code>other</code> (e.g. <code>::event_perform(type,numb)</code>)
+		</li></ul><p>
 		<code>impl</code> (a script in 2.2, a function in 2.3)
 		will then be called with provided arguments as normal.
 		</p><p>
@@ -930,7 +959,7 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 <span class="cb">}</span><span class="op">)</span><span class="op">;</span>
 </pre><p>
 		You may call <a href="#live_throw_error">live_throw_error</a> to hand an error back to the executing "live" code
-		(such as noting that arguments are mis-typed if this would result in a catastrophic error otherwise).
+		(such as noting that arguments are mistyped if this would result in a catastrophic error otherwise).
 	</p></article></section><section><header id="live_variable_add"><a href="#live_variable_add" title="(permalink)">live_variable_add(signature, impl)</a></header><article><p>
 		Registers a global built-in variable for use in GMLive.
 		</p><p>
@@ -972,7 +1001,42 @@ Click on sections to expand/collapse them.<br>Quick display controls:
 		There isn't much to this one - name and value.
 		</p><pre class="gmlmd">
 <a class="sf" href="#live_constant_add">live_constant_add</a><span class="op">(</span><span class="st">"MATCHMAKING_SESSION"</span><span class="op">,</span> <span class="uv">MATCHMAKING_SESSION</span><span class="op">)</span><span class="op">;</span>
-</pre></article></section><section><header id="live_throw_error"><a href="#live_throw_error" title="(permalink)">live_throw_error(text)</a></header><article><p>
+</pre></article></section><section><header id="live_constant_add_multi"><a href="#live_constant_add_multi" title="(permalink)">live_constant_add_multi(struct)</a></header><article><p>
+		A convenience wrapper for above, adds key-value pairs from the given struct as constants.
+		</p><p>
+		So you can do something like
+		</p><pre class="gmlmd">
+<a class="sf" href="#live_constant_add">live_constant_add</a><span class="op">(</span><span class="cb">{</span>
+    <span class="st">"gxc_input_record_mouse"</span><span class="op">:</span> <span class="uv">gxc_input_record_mouse</span><span class="op">,</span>
+    <span class="st">"gxc_input_record_keyboard"</span><span class="op">:</span> <span class="uv">gxc_input_record_keyboard</span><span class="op">,</span>
+<span class="cb">}</span><span class="op">)</span><span class="op">;</span>
+</pre><p>
+		But, since modern GML (GM2023+) supports struct shorthands, you can also do
+		</p><pre class="gmlmd">
+<a class="sf" href="#live_constant_add">live_constant_add</a><span class="op">(</span><span class="cb">{</span> <span class="uv">gxc_input_record_mouse</span><span class="op">,</span> <span class="uv">gxc_input_record_keyboard</span> <span class="cb">}</span><span class="op">)</span><span class="op">;</span>
+</pre><p>
+		to the same effect.
+	</p></article></section><section><header id="live_enum_add"><a href="#live_enum_add" title="(permalink)">live_enum_add(enum_name, values)</a></header><article><p>
+		Adds an enum for use in live code. You can use this if something isn't picked up
+		or for platform-specific enums.
+		</p><p>
+		<code>values</code> is a struct of constant names-values.
+		</p><p>
+		So you could do something like this:
+		</p><pre class="gmlmd">
+<a class="sf" href="#live_enum_add">live_enum_add</a><span class="op">(</span><span class="st">"flexpanel_wrap"</span><span class="op">,</span> <span class="cb">{</span>
+    <span class="uv">no_wrap</span><span class="op">:</span> <span class="uv">flexpanel_wrap</span><span class="op">.</span><span class="fd">no_wrap</span><span class="op">,</span>
+    <span class="uv">wrap</span><span class="op">:</span> <span class="uv">flexpanel_wrap</span><span class="op">.</span><span class="fd">wrap</span><span class="op">,</span>
+    <span class="uv">reverse</span><span class="op">:</span> <span class="uv">flexpanel_wrap</span><span class="op">.</span><span class="fd">reverse</span><span class="op">,</span>
+<span class="cb">}</span><span class="op">)</span><span class="op">;</span>
+</pre></article></section><section><header id="live_enum_add_constant"><a href="#live_enum_add_constant" title="(permalink)">live_enum_add_constant(enum_name, const_name, value)</a></header><article><p>
+		Adds a constant to an existing enum, like so:
+		</p><pre class="gmlmd">
+<a class="sf" href="#live_enum_add_constant">live_enum_add_constant</a><span class="op">(</span><span class="st">"flexpanel_unit"</span><span class="op">,</span> <span class="st">"new_thing"</span><span class="op">,</span> <span class="nu">400</span><span class="op">)</span><span class="op">;</span>
+</pre><p>
+		Generally you'll only have to do this when using GameMaker betas
+		that might add new constants to existing enums.
+	</p></article></section><section><header id="live_throw_error"><a href="#live_throw_error" title="(permalink)">live_throw_error(text)</a></header><article><p>
 		When ran from a function that is being ran by live code / snippet,
 		this passes an error message to GMLive, which will abort code execution.
 		</p><p>
@@ -1240,7 +1304,8 @@ neko gmlive-server.n
 		</p><p>
 		The issue seems to be fixed as of GM2022.
 	</p></article></section></article></section></p><!--doc>-->
-</section></main></div>
+</section>
+</main></div>
 <script type="text/javascript">(function() {
 	var doc, headers;
 	//
@@ -1255,11 +1320,12 @@ neko gmlive-server.n
 	//
 	function h3bind(h3) {
 		var node = h3.parentNode;
+		var isLink = node.classList.contains("link");
 		var snip = node.children[1];
 		var id = h3.id || h3.textContent;
 		h3.snip = snip;
 		h3.doc_set = function(z) {
-			if (z) node.classList.add("open"); else node.classList.remove("open");
+			if (isLink) {} else if (z) node.classList.add("open"); else node.classList.remove("open");
 			if (state) {
 				state[id] = z;
 				window.localStorage.setItem(path, JSON.stringify(state));

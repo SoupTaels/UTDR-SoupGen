@@ -117,6 +117,7 @@
     {"name":"obj_quill_core","order":2,"path":"objects/obj_quill_core/obj_quill_core.yy",},
     {"name":"obj_stacker","order":1,"path":"objects/obj_stacker/obj_stacker.yy",},
     {"name":"obj_success","order":6,"path":"objects/obj_success/obj_success.yy",},
+    {"name":"obj_tips","order":9,"path":"objects/obj_tips/obj_tips.yy",},
     {"name":"obj_updatechecker","order":5,"path":"objects/obj_updatechecker/obj_updatechecker.yy",},
     {"name":"obj_windows_icon","order":7,"path":"objects/obj_windows_icon/obj_windows_icon.yy",},
     {"name":"oSteadyDeltaTime","order":2,"path":"objects/oSteadyDeltaTime/oSteadyDeltaTime.yy",},

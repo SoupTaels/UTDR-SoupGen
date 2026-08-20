@@ -6,12 +6,12 @@ if ( file_exists(errname) ) {
 	file_delete(errname); //Delete the file so the game doesn't constantly show this error screen
 	instance_create_depth(0, 0, 0, obj_errhandler, { err_ });
 	
-	if ( file_exists(LAST_SAVED) ) {
-		var lasttyped = file_text_open_read(LAST_SAVED);
-		var result = file_text_read_string(lasttyped); //Get what the user last typed
-		dial_text = result; textinput.SetValue(dial_text);
-		file_text_close(lasttyped);
-	}
-	
 	instance_deactivate_object(self);
+}
+
+if ( file_exists(LAST_SAVED) ) {
+	var lasttyped = file_text_open_read(LAST_SAVED);
+	var result = file_text_read_string(lasttyped); //Get what the user last typed
+	dial_text = result; textinput.SetValue(dial_text); dial_updatet = 1;
+	file_text_close(lasttyped);
 }
