@@ -15,7 +15,7 @@ txt = choose(
 	"You can add an end dialogue indicator to your dialogue!|Find that setting in the [c_yellow]Style tab![/]",
 	"You can add a nametag to your dialogue!|Find that setting in the [c_yellow]Portrait tab![/]",
 	"Did you know that SoupGen can export your dialogue to a|resolution of [c_cyan]640x480[/]?|Tick on [c_lime]Bigger Resolution[/] in the [c_yellow]Extras tab![/]|With this setting enabled, any reference image you add will show on export!",
-	"You can change the UI color to your liking by tinkering with the [slant]UI Color[/] setting in the [c_yellow]Extras tab![/].",
+	"You can change the UI color to your liking by tinkering with|the [slant]UI Color[/] setting in the [c_yellow]Extras tab![/].",
 	"SoupGen's icon, on Windows, [rainbow]changes dynamically[/] based|on your theme color, or if [slant]Random Theme[/] is enabled, the icon will|[rainbow][wave]cycle through the colors of the rainbow![/]|But in case you don't want that, turn off [c_yellow]Dynamic Icon[/].|These settings can be found in the [c_yellow]Extras tab![/]",
 	"You can change the font the textbox editor uses by changing|the Editor Font parameter in the [c_yellow]Extras tab.[/]",
 	"Do you edit dialogue style for a particular character a lot?|Well don't forget you can [c_y]save those settings[/] using [c_lime]Config Presets![/]|Find that setting in the [c_yellow]Extras tab![/]",
