@@ -1,6 +1,6 @@
-<p align="center"><img src="https://files.catbox.moe/1o2oj2.png" style="display:block; margin:auto; width:300px"></p>
+<p align="center"><img src="image.png" style="display:block; margin:auto; width:300px"></p>
 <hr />
-<p align="center"><img alt="UTDR SoupGen" src="image.png" /></p>
+<p align="center"><img alt="UTDR SoupGen" src="https://github.com/user-attachments/assets/d106070e-9ddc-4238-b29f-0fdcb53590f1" /></p>
 
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/SoupTaels/UTDR-SoupGen) ![GitHub last commit](https://img.shields.io/github/last-commit/SoupTaels/UTDR-SoupGen) ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/SoupTaels/UTDR-SoupGen) ![GitHub License](https://img.shields.io/github/license/SoupTaels/UTDR-SoupGen) ![GitHub repo size](https://img.shields.io/github/repo-size/SoupTaels/UTDR-SoupGen) ![Static Badge](https://img.shields.io/badge/So%20Soupy%3F-Absolutely!!%20%F0%9F%8D%B2-orange)
