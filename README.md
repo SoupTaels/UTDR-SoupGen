@@ -1,4 +1,5 @@
-<p align="center"><img src="https://files.catbox.moe/1o2oj2.png" style="display:block; margin:auto; width:300px"></p>
+<p align="center"><img width=300px alt="generatorico" src="https://github.com/user-attachments/assets/9fc74282-316c-44e6-bc90-71f4f409ddbf" /></p>
+
 <hr />
 <p align="center"><img alt="UTDR SoupGen" src="https://github.com/user-attachments/assets/d106070e-9ddc-4238-b29f-0fdcb53590f1" /></p>
 
@@ -16,15 +17,18 @@
 <p align="center"><a href="https://soup-taels.itch.io/utdr-soupgen">Try out the online version!</a></p> <p align="center"><a href="https://gamejolt.com/games/utdrgoodsoupgen/1072959">Alternative link for the online version.</a></p>
 <p align="center"><img src="https://files.catbox.moe/m2peu9.gif" style="display:block; margin:auto;"></p>
 <p align="center"><a href="https://github.com/SoupTaels/UTDR-Textbox-Soup/releases">Get the latest release/ download here!</a></p>
+
 <hr />
 <p align="center"><a href="https://rentry.co/utdrsoupguides">Help guide is hosted here!</a></p>
 <p align="center"><a href="https://rentry.co/utdrsoupguides#alternatives-to-consider">Alternatives to consider</a></p>
 <p align="center"><a href="https://rentry.co/utdrsoupguides#requesting-custom-sprites-be-officially-added">Community-made sprites</a></p>
 <hr />
+
 &nbsp;
 &nbsp;
 <p align="center">Have you always wanted to make really cool UTDR animations, but found making a typewriter to be exhausting work? Or perhaps you're a comic maker that finds making panels to be time-consuming due to needing to line up sprites perfectly? Are old, bulky servers slowing you down from making your AUs? Well that's where SoupGen comes in! SoupGen is a lot more powerful than the leading dialogue generator, especially with the introduction of <i><b>Typewriter Mode!</b></i></p>
 <p align="center"><i>Note: Despite how the marketing comes across, SoupGen isn't meant to replace every other textbox generator. I am just providing another option. I mean no ill-intent!! Check out the alternatives to consider above.</i></p>
+
 <h1 align="center">Features:</h1>
 <p align="center"><img src="https://files.catbox.moe/qc9hes.gif" style="display:block; margin:auto;"></p>
 <p align="center">Lots of exporting options, including...:</p>
@@ -45,3 +49,7 @@
 <p align="center">Live-updating text. Icons within dialogue! You can even add your own custom icons too. For example, the tool includes Tenna's funnytext.</p>
 <p align="center"><img src="https://github.com/user-attachments/assets/f1e7a6bd-4b67-4d74-899d-aa2f4ceb1ff9" style="display:block; margin:auto;"></p>
 <p align="center">And that only scratches the surface. Play around with the settings to tune your dialogue scenes to your liking! Don't like any of this? Well fork this repo and make your own changes! The world is your oyster. The beauty of open-source projects is community.</p>
+
+<hr />
+<h1 align="center">Contributing:</h1>
+<p align="center">You must use the Pull Request feature. I will not allow vibecoded/ Ai-assisted PRs. You will also be background checked. If you are found to be in support of crypto, gen ai, NFTs, etc., you will be blocked.</p>
