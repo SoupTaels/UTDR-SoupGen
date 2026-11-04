@@ -1,5 +1,5 @@
 {
-  "game_version":"1.7.2",
+  "game_version":"1.7.3",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- text wrapping on the metadata tooltip|- the program will restore your last typed text on startup rather than on crash|- new randomized tips & tricks on startup!",
+  "changelog":"- added napstablook, monster kid, and mettaton|- added pink's ut portraits|- fixes some sprite errors with most portraits,|provided by PerseveredDT(Kaizo Knight)!",
 }
