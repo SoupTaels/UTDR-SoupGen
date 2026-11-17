@@ -1,5 +1,5 @@
 {
-  "$GMExtension":"",
+  "$GMExtension":"v1",
   "%Name":"WebView",
   "androidactivityinject":"",
   "androidclassname":"GMWebView",
@@ -80,8 +80,10 @@
     {"$GMExtensionFrameworkEntry":"","%Name":"GMWebView.xcframework","embed":0,"name":"GMWebView.xcframework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
   ],
   "license":"",
+  "maccodeinjection":"",
   "maccompilerflags":"",
   "maclinkerflags":"-ObjC",
+  "macProps":false,
   "macsourcedir":"",
   "name":"WebView",
   "options":[],

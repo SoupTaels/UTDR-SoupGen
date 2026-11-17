@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"v1",
+  "$GMNotes":"v2",
   "%Name":"TGMX_Terms_of_Use",
   "name":"TGMX_Terms_of_Use",
   "parent":{

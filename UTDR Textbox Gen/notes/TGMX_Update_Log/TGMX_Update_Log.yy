@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"v1",
+  "$GMNotes":"v2",
   "%Name":"TGMX_Update_Log",
   "name":"TGMX_Update_Log",
   "parent":{

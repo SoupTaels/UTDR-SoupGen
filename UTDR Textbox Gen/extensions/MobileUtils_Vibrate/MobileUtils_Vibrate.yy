@@ -1,5 +1,5 @@
 {
-  "$GMExtension":"",
+  "$GMExtension":"v1",
   "%Name":"MobileUtils_Vibrate",
   "androidactivityinject":"",
   "androidclassname":"MobileUtils_Vibrate",
@@ -61,8 +61,10 @@
   ],
   "iosThirdPartyFrameworkEntries":[],
   "license":"",
+  "maccodeinjection":"",
   "maccompilerflags":"",
   "maclinkerflags":"",
+  "macProps":false,
   "macsourcedir":"",
   "name":"MobileUtils_Vibrate",
   "options":[],

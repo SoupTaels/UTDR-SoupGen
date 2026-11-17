@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"v1",
+  "$GMNotes":"v2",
   "%Name":"Quill_LICENSE",
   "name":"Quill_LICENSE",
   "parent":{

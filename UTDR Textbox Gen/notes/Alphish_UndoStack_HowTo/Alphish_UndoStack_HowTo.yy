@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"v1",
+  "$GMNotes":"v2",
   "%Name":"Alphish_UndoStack_HowTo",
   "name":"Alphish_UndoStack_HowTo",
   "parent":{
