@@ -1185,7 +1185,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.100.0.1121",
+    "IDEVersion":"2026.1.0.27",
   },
   "name":"UTDR Textbox Gen",
   "resources":[
@@ -1490,6 +1490,7 @@
     {"id":{"name":"TGMX_Experimental","path":"scripts/TGMX_Experimental/TGMX_Experimental.yy",},},
     {"id":{"name":"TGMX_System","path":"scripts/TGMX_System/TGMX_System.yy",},},
     {"id":{"name":"uiexternals","path":"scripts/uiexternals/uiexternals.yy",},},
+    {"id":{"name":"uifaceselector","path":"scripts/uifaceselector/uifaceselector.yy",},},
     {"id":{"name":"uiinit","path":"scripts/uiinit/uiinit.yy",},},
     {"id":{"name":"uimanager","path":"scripts/uimanager/uimanager.yy",},},
     {"id":{"name":"utils_Exceptions","path":"scripts/utils_Exceptions/utils_Exceptions.yy",},},

@@ -24,4 +24,5 @@ txt = choose(
 	"On Windows, you can drag & drop an image or zip file|directly onto the program!",
 	"Before asking any questions, please check out the guide!|There's examples for everything that SoupGen offers.",
 	"You should go through every setting at least once.|You will find that SoupGen is quite powerful and customizable|if you give it a chance!",
+	"To quickly select a portrait, press CTRL + Left Click|near the portrait box!|CTRL + Right Click to quickly change its color.|This also works if you're near the dialogue box!",
 );

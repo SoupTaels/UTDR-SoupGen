@@ -1,4 +1,4 @@
-if ( !UI_MESSAGE ) { exit; }
+if ( !UI_MESSAGE || ( SYSTEMUI.screenshot || SYSTEMUI.record.enabled ) ) { exit; }
 if ( range_within(mouse_x_gui, bbox_left - 10, bbox_right + 10) && range_within(mouse_y_gui, bbox_top - 10, bbox_bottom + 10) ) {
 	image_xscale = lerp(image_xscale, 1.5, 0.30);
 	image_yscale = image_xscale;

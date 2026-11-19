@@ -71,6 +71,10 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 	bord_xoff = 0; //Arb Border X off
 	bord_yoff = 0; //Arb Border Y off
 	bord_angle = 0; //Arb Border Angle
+	bord_xanim = 0; //Border X Offset for animation
+	bord_xanim_orig = 0;
+	bord_yanim = 0; //Border Y Offset for animation
+	bord_yanim_orig = 0;
 #endregion
 
 #region Dialogue Text
@@ -194,7 +198,7 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 			with ( obj_mini ) { if ( page == other.dial_text_page && !sticker ) { active = true; TweenFire("$13", $"~{smooth ? "ocirc" : "linear"}", "xoff", 30, 0, "alpha", 0, 1); } } 
 		});
 		
-		typist_reset = function () { dial_text_shdw = dial_text_shdw_orig; dial_glow_time = dial_glow_time_orig; dial_glow = dial_glow_orig; dial_glow_clr = dial_glow_clr_orig; soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
+		typist_reset = function () { bord_xanim = bord_xanim_orig; bord_yanim = bord_yanim_orig; dial_text_shdw = dial_text_shdw_orig; dial_glow_time = dial_glow_time_orig; dial_glow = dial_glow_orig; dial_glow_clr = dial_glow_clr_orig; soup_store("offset", , , true); dial_text_shdw_clr = dial_text_shdw_clr_orig; dial_text_shdw_clr_g = dial_text_shdw_clr_g_orig; dial_choices = ["", "", "", ""]; dial_choices_scaleoff = 0; dial_striket = dial_striket_orig; dial_underline = dial_underline_orig; dial_highlight = dial_highlight_orig; dial_wrap_count = 1; dial_miniface = [-1]; dial_miniface_index = [0]; dial_miniface_set = [-1]; dial_indicator_visible = false; dial_gradient = dial_gradient_orig; dial_gradient_clr = dial_gradient_clr_orig; dial_face_angle = dial_face_angle_orig; dial_face_alpha = dial_face_alpha_orig; dial_face_xoff = 0; dial_face_yoff = 0; dial_face_xscale_off = 0; dial_face_yscale_off = 0; } //Function to reset portrait modifications after dialogue finishes
 		
 		#region Ease Builder
 			typist_ease = { type: SCRIBBLE_EASE.LINEAR, x: 0, y: 0, xscale: 1, yscale: 1, angle: 0, alpha: 0, };
@@ -393,6 +397,10 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 						var getamt = real_ext(len > 1 ? param[1] : "0"), getamt2 = real_ext(len > 2 ? param[2] : "0"), time_ = real_ext(len > 3 ? param[3] : "30"), smooth_ = real_ext(len > 4 ? param[4] : "0"); smooth_ = smooth_ != "" ? bool(smooth_) : false;
 						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 30}", $"~{!smooth_? "linear" : "oquad"}", "dial_face_xoff>", getamt != "" ? getamt : 0, "dial_face_yoff>", getamt2 != "" ? getamt2 : 0); delayfunc();
 					} break;
+					case "slideb": case "moveb": case "xyb": { //Make the border slide to the specified target number [effect,slideb,#,#,frames,issmooth]
+						var getamt = real_ext(len > 1 ? param[1] : "0"), getamt2 = real_ext(len > 2 ? param[2] : "0"), time_ = real_ext(len > 3 ? param[3] : "30"), smooth_ = real_ext(len > 4 ? param[4] : "0"); smooth_ = smooth_ != "" ? bool(smooth_) : false;
+						TweenFire("?", obj_system, $"${time_ != "" ? time_ : 30}", $"~{!smooth_? "linear" : "oquad"}", "bord_xanim>", getamt != "" ? getamt : 0, "bord_yanim>", getamt2 != "" ? getamt2 : 0); delayfunc();
+					} break;
 					case "shake": case "rumble": { //Make the shake in place for some time [effect,shake,x,y,frames,intensity]
 						var x_ = real_ext(len > 1 ? param[1] : "0"), y_ = real_ext(len > 2 ? param[2] : "0"), time_ = real_ext(len > 3 ? param[3] : 5), off_ = real_ext(len > 4 ? param[4] : 2)
 						 x_ = x_ != "" ? bool(x_) : false; y_ = y_ != "" ? bool(y_) : false; time_ = time_ == "" ? 5 : time_; off_ = off_ == "" ? 2 : off_;
@@ -436,6 +444,9 @@ if ( file_exists("soupysprite.png") ) { file_delete("soupysprite.png"); }
 					case "choicer": { return "[choicer,Test Option,Test Option 2,Test Option 3,Test Option 4][newl][wait,2][newl][choicer_on,1][wait][newl][choicer_on,2][wait][newl][choicer_on,3][wait][newl][choicer_on,4][wait,2][newl][choicer_on,0][wait]"; break; }
 					
 					case "basic": { return "Test text 1, 2, 3.[newl]Test text 4, 5, 6.[newl]Test text 7, 8, 9.[/page][c_red]Test text 1, 2, 3.[newl]Test text 4, 5, 6.[newl]Test text 7, 8, 9."; break; }
+					
+					//Move border
+					case "border": { return "[fx,xyb,,250,0][fx,xyb][wait]Border[fx,xyb,350,,,1][wait] move[fx,xyb,,,,1][wait] test."; break; }
 					default: { return "Testing suite ID not found."; }
 				}
 			});

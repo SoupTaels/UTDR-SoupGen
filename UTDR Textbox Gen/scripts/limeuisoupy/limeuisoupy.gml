@@ -346,8 +346,8 @@ function soupy_ui_icons() {
 		array_push(arr_, new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
 		array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
 		array_push(arr_, new LuiText({ value: "Select an icon to copy its sprite command to your clipboard.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
-		array_push(arr_, new LuiText({ value: "The command will be formatted as so:",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
-		array_push(arr_, new LuiText({ value: "[sprite name, image frame, animation speed]",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
+		array_push(arr_, new LuiText({ value: "The command will be formatted as so:",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, auto_size: false, }).setPadding(0).setHeight(5).setData("name", sort++));
+		array_push(arr_, new LuiText({ value: "[sprite name, image frame, animation speed]",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setSize(300, 5).setData("name", sort++));
 		array_push(arr_, new LuiText({ value: ".+\\/\\/\\_______________________________________________/\\/\\/+.",text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
 		array_push(arr_, new LuiText({ value: "", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10, truncate: false, }).setPadding(0).setHeight(5).setData("name", sort++));
 	#endregion
@@ -356,7 +356,7 @@ function soupy_ui_icons() {
 		repeat ( len ) {
 			var cur = icons_[i];
 			var ico_ = get_icon(cur);
-			array_push(arr_, new LuiImageButton({ value: ico_, draw_normal: true, height: sprite_get_height(ico_), }).setData("name", cur).setTooltip($"{cur}\nFrames: {sprite_get_number(ico_)}", true, fnt_abaddon)
+			array_push(arr_, new LuiImageButton({ value: ico_, draw_normal: true, height: sprite_get_height(ico_), }).setSize(sprite_get_width(ico_), sprite_get_height(ico_)).setData("name", cur).setTooltip($"{cur}\nFrames: {sprite_get_number(ico_)}", true, fnt_abaddon)
 				.addEvent(LUI_EV_MOUSE_ENTER, function(element_) { element_.imgspd = 0.30; sfx_play(snd_sel_switch); element_.main_ui.animate(element_, "xoff", 10, 0.30, global.Ease.OutBack, 0); })
 				.addEvent(LUI_EV_MOUSE_LEAVE, function(element_) { element_.imgspd = 0; element_.main_ui.animate(element_, "xoff", 0, 0.15); })
 				.addEvent(LUI_EV_CLICK, function(element_) { var name = element_.getData("name"); clipboard_set_text($"[{name},0,0]"); })
@@ -372,7 +372,7 @@ function soupy_ui_icons() {
 		});
 	#endregion
 	
-	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(arr_);
+	var maincan = new LuiScrollPanel({ sprite_panel: false, scroll_slider_width: 10, height: 390, }).addContent(new LuiRow().setFlexJustifyContent(flexpanel_justify.space_around).setFlexWrap(1).addContent(arr_));
 	var mainui = soupy_popup([ maincan, ], , "Go Back", , 460, , snd_chest, fnt_abaddon, , , 40); soup_store("mainui", mainui, , true);
 }
 	

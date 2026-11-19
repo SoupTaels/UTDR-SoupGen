@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"uifaceselector",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"uifaceselector",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

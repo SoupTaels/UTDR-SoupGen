@@ -1,5 +1,5 @@
 ///@desc 
-if ( !UI_MESSAGE ) { exit; }
+if ( !UI_MESSAGE || ( SYSTEMUI.screenshot || SYSTEMUI.record.enabled ) ) { exit; }
 soupyclipm_begin_clip();
 	draw_sprite_ext(spr_pixel, 0, 1, 1, 36, 36, 0, c_white, 1);
 soupyclipm_end_clip();

@@ -1,5 +1,5 @@
 {
-  "game_version":"1.7.3",
+  "game_version":"1.8.0",
   "game_page":"https://github.com/SoupTaels/UTDR-Textbox-Soup",
-  "changelog":"- added napstablook, monster kid, and mettaton|- added pink's ut portraits|- fixes some sprite errors with most portraits,|provided by PerseveredDT(Kaizo Knight)!",
+  "changelog":"- face selector now appear in a grid formation|instead of a long vertical line!|- Add As Macro now lets you use a highlighted portion|of text to add as a macro|- face selector now keeps your previously selected character|- added an fx command to move the dialogue box dynamically|- icon dictionary shows icons in a grid formation|- fixed hint box showing up while recording|- added a random hint for how to quickly change portraits and border",
 }

@@ -13,7 +13,7 @@
 	#macro AUTO_ASTERISK ( ( obj_system.dial_text_halign == 0 && obj_system.dial_text_valign == 0 ) && obj_system.dial_point_auto && string_trim(obj_system.dial_point_chr) != "" ) //Whether to enable auto-asterisk
 	#macro PATHSEP (( os_type == os_windows || os_type == os_xboxseriesxs || os_type == os_gdk ) ? "\\"  :  "/") //Get platform-dependant path
 	#macro PREF_SOUP $"{!is_android() ? executable_get_directory() : soup_checkout("android", false, true)}soupy_preferences.soupy" //Settings to save
-	#macro GAME_VERSION "1.7.3" //Current game version
+	#macro GAME_VERSION "1.8.0" //Current game version
 #endregion
 ///@desc Help Scribble with how to align the text
 function scribble_alignment(halign_ = 0, valign_ = 0) {
@@ -63,7 +63,11 @@ function scribble_alignment(halign_ = 0, valign_ = 0) {
 	
 	///@desc Adds textbox contents as a new macro
 	function soupy_context_macro() { 
-		var txt_ = textinput.GetValue();
+		var txt_ = textinput.GetValue(), high_ = SYSTEMUI.textinput.GetSelection();
+		if ( high_.has_selection ) { //Copy highlight text for later use
+			var txt_ = textinput.GetSelection(), result = string_copy_at(textinput.GetValue(), txt_.start + 1, txt_._end + 1);
+			soup_store("high", result, , true);
+		}
 		
 		var arr_ = [
 			new LuiText({ value: "Add textbox contents as a new macro for reuse?", text_halign: fa_center, text_valign: fa_middle, font: fnt_abaddon, color: c_white, xoff: 0, y: 10 }),
@@ -74,7 +78,8 @@ function scribble_alignment(halign_ = 0, valign_ = 0) {
 				var result = soup_checkout("label", false, true).get();
 				if ( string_trim(string_lettersdigits(result)) == "" ) { soupy_message("You cannot have a|blank or invalid label.", , 270, , , snd_error, , , true); exit; }
 				
-				var available = is_undefined(global.pref.macros[$ result]), text_ = SYSTEMUI.textinput.GetValue();
+				var available = is_undefined(global.pref.macros[$ result]), high_ = soup_checkout("high", , true), text_;
+				text_ = !is_undefined(high_) ? high_ : SYSTEMUI.textinput.GetValue(); //If we highlighted text, get it, otherwise get the whole textbox
 				if ( string_trim(string_lettersdigits(text_)) == "" ) { soupy_message("Your textbox doesn't have|any text to add!", , 270, , , snd_error, , , true); exit; }
 				
 				if ( available ) { sfx_play(snd_sparkle2); sfx_play(snd_chest); global.pref.macros[$ result] = text_; SYSTEMUI.save_pref(); soup_checkout("mainui", , true).destroy(); SYSTEMUI.ui_paused = false; }
